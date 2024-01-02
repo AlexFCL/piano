@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -89,11 +89,11 @@
             const [value1, value2, value3] = getRandomValues();
 
             const randomValuesElement = document.getElementById('random-values');
-            randomValuesElement.innerHTML = `<div class="random-value">${value1}<span class="custom2">${value2}</span>`;
+            randomValuesElement.innerHTML = `<div class="random-value">${value1}<span class="custom2">${value2}</span><span class="custom3">${value3}</span></div>`;
 
             // Met à jour l'image en fonction des valeurs générées
             const chordImage = document.getElementById('chord-image');
-            const imageName = `${list1.indexOf(value1)}-${list2.indexOf(value2)}-${list3.indexOf(value3)}`;
+            const imageName = `${list1.indexOf(value1)}-${list2.indexOf(value2)}-${list3.indexOf(value3)}.jpg`;
             chordImage.src = `images/${imageName}`;
 
             // Réappelle la fonction après le délai d'actualisation
