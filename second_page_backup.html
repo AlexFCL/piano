@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'accords pour s'entraîner au piano</title>
+    <style>
+        body {
+            font-family: Calibri, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .title {
+            font-size: 4.5vw;
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: underline;
+            color: purple;
+            margin-bottom: 20px;
+        }
+		.random-value-container {
+			padding: 10px; /* Ajuste cette valeur pour définir la marge intérieure */
+			border: 1px solid #ccc;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+			background-color: rgb(245, 245, 245);
+			border-radius: 10px;
+		}
+        .random-value {
+            font-size: 4vw;
+        }
+        .custom1 {
+            color: blue;
+            font-weight: bold;
+        }
+        .custom2 {
+            color: red;
+            font-style: italic;
+        }
+        .custom3 {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="title">Générateur d'accords pour s'entraîner au piano</h1>
+<div id="random-values" class="random-value-container">
+    <div class="random-value">Initialisation...</div>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const updateTime = urlParams.get('updateTime') || 5;
+
+    function getRandomValues() {
+        const list1 = ["C", "D", "E", "F", "G", "A", "B", "C#", "Db", "D#", "Eb", "F#", "Gb", "G#", "Ab", "A#", "Bb"];
+        const list2 = ["", " min"];
+        const list3 = [", fond.", ", 1er (tonique haut)", ", 2ème (tierce haut)"];
+
+        const randomValue1 = list1[Math.floor(Math.random() * list1.length)];
+        const randomValue2 = list2[Math.floor(Math.random() * list2.length)];
+        const randomValue3 = list3[Math.floor(Math.random() * list3.length)];
+
+        return [randomValue1, randomValue2, randomValue3];
+    }
+
+    function updateRandomValues() {
+        const [value1, value2, value3] = getRandomValues();
+
+        const randomValuesElement = document.getElementById('random-values');
+        randomValuesElement.innerHTML = `<div class="random-value">${value1}<span class="custom2">${value2}</span><span class="custom3">${value3}</span></div>`;
+    }
+
+    updateRandomValues();
+    setInterval(updateRandomValues, updateTime * 1000);
+</script>
+
+</body>
+</html>
