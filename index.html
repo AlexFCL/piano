@@ -51,7 +51,7 @@
 
     <div class="form-container">
         <label for="update-time">Temps d'actualisation entre chaque accord :</label>
-        <input type="number" id="update-time" placeholder="sec." step="1" />
+        <input type="text" id="update-time" placeholder="sec." />
         <button onclick="saveUpdateTime()">OK</button>
     </div>
 </div>
@@ -59,12 +59,12 @@
 <script>
     function saveUpdateTime() {
         const updateTimeInput = document.getElementById('update-time');
-        const updateTime = parseInt(updateTimeInput.value);
+        const updateTime = parseFloat(updateTimeInput.value.replace(',', '.'));
 
-        if (!isNaN(updateTime) && updateTime > 0) {
+        if (!isNaN(updateTime) && updateTime >= 1) {
             window.location.href = `second_page.html?updateTime=${updateTime}`;
         } else {
-            alert('Veuillez saisir un temps d\'actualisation valide (un entier supérieur à zéro).');
+            alert('Veuillez saisir un temps d\'actualisation valide (un nombre supérieur ou égal à 1).');
         }
     }
 </script>
