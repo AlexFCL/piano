@@ -1,0 +1,54 @@
+/* Fichier de style de la seconde page */
+
+body {
+    font-family: Calibri, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.title {
+    font-size: 4.5vw;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+    color: purple;
+    margin-bottom: 20px;
+}
+
+.random-value-container {
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.random-value {
+    font-size: 4vw;
+}
+
+.custom1 {
+    color: blue;
+    font-weight: bold;
+}
+
+.custom2 {
+    color: red;
+    font-style: italic;
+}
+
+.custom3 {
+    color: green;
+}
+
+#chord-image {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 5px;
+}
