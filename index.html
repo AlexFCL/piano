@@ -4,51 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page d'Accueil</title>
-    <style>
-        body {
-            font-family: Calibri, sans-serif;
-            text-align: center;
-            margin: 0;
-        }
-        header {
-            font-size: 4.5vw;
-            font-weight: bold;
-            font-style: italic;
-            text-decoration: underline;
-            color: purple;
-            margin-bottom: 2vw;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .form-container {
-            font-size: 3.5vw;
-            margin-top: 2vw;
-            text-align: center;
-        }
-        input {
-            font-size: 2.2vw;
-            padding: 1vw;
-            margin: 0.5vw 0;
-            width: 8vw;
-        }
-        button {
-            font-size: 3vw;
-            padding: 0.5vw 1vw;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Liens vers le fichier de style principal -->
 </head>
 <body>
 
 <div class="container">
+    <!-- En-tête de la page -->
     <header>
         Générateur d'accords pour s'entraîner au piano
     </header>
 
+    <!-- Formulaire pour saisir le temps d'actualisation -->
     <div class="form-container">
         <label for="update-time">Temps d'actualisation entre chaque accord :</label>
         <input type="text" id="update-time" placeholder="sec." />
@@ -56,18 +22,7 @@
     </div>
 </div>
 
-<script>
-    function saveUpdateTime() {
-        const updateTimeInput = document.getElementById('update-time');
-        const updateTime = parseFloat(updateTimeInput.value.replace(',', '.'));
-
-        if (!isNaN(updateTime) && updateTime >= 1) {
-            window.location.href = `second_page.html?updateTime=${updateTime}`;
-        } else {
-            alert('Veuillez saisir un temps d\'actualisation valide (un nombre supérieur ou égal à 1).');
-        }
-    }
-</script>
+<script src="js/main.js"></script> <!-- Lien vers le fichier JavaScript principal -->
 
 </body>
 </html>
