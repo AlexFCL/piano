@@ -40,3 +40,21 @@ button {
     font-size: 3vw;
     padding: 0.5vw 1vw;
 }
+
+.secondary-exercise-link {
+    display: inline-block;
+    margin-top: 3vw;
+    padding: 0.8vw 1.4vw;
+    border: 2px solid purple;
+    border-radius: 10px;
+    color: purple;
+    font-size: 2vw;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.secondary-exercise-link:hover,
+.secondary-exercise-link:focus-visible {
+    background-color: purple;
+    color: white;
+}

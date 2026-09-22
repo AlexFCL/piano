@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'Accueil</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Liens vers le fichier de style principal -->
+    <title>Générateur d'accords pour s'entraîner au piano</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <div class="container">
-    <!-- En-tête de la page -->
     <header>
         Générateur d'accords pour s'entraîner au piano
     </header>
 
-    <!-- Formulaire pour saisir le temps d'actualisation -->
     <div class="form-container">
         <label for="update-time">Temps d'actualisation entre chaque accord :</label>
         <input type="text" id="update-time" placeholder="sec." />
         <button onclick="saveUpdateTime()">OK</button>
     </div>
+
+    <a class="secondary-exercise-link" href="scales.html">S'entraîner aux gammes</a>
 </div>
 
-<script src="js/main.js"></script> <!-- Lien vers le fichier JavaScript principal -->
+<script src="js/main.js"></script>
 
 </body>
 </html>

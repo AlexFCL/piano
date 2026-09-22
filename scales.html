@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de gammes pour s'entraîner au piano</title>
+    <link rel="stylesheet" href="css/scales_styles.css">
+</head>
+<body class="setup-page">
+    <main class="setup-card">
+        <h1>Générateur de gammes</h1>
+        <p class="subtitle">12 gammes majeures + 12 gammes mineures naturelles</p>
+
+        <label for="scale-update-time">Temps de réponse avant affichage de la gamme :</label>
+        <div class="time-row">
+            <input type="text" inputmode="decimal" id="scale-update-time" placeholder="sec." autocomplete="off" />
+            <button id="start-scales" type="button">Démarrer</button>
+        </div>
+        <p class="hint">Minimum : 1 seconde. La réponse restera affichée 3 secondes.</p>
+
+        <a class="back-link" href="index.html">← Retour aux accords</a>
+    </main>
+
+    <script src="js/scales_main.js"></script>
+</body>
+</html>

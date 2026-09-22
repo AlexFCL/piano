@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entraînement aux gammes</title>
+    <link rel="stylesheet" href="css/scales_styles.css">
+</head>
+<body class="training-page">
+    <main class="training-shell">
+        <a class="back-link training-back" href="scales.html">← Modifier le temps de réponse</a>
+        <h1>Générateur de gammes</h1>
+
+        <section class="scale-card" aria-live="polite">
+            <div id="scale-name" class="scale-name">Initialisation…</div>
+            <div id="phase-label" class="phase-label">Préparation</div>
+        </section>
+
+        <div class="answer-area">
+            <img id="scale-image" src="" alt="" hidden />
+            <p id="image-error" class="image-error" hidden>Image indisponible pour cette gamme.</p>
+        </div>
+    </main>
+
+    <script src="js/scales_script.js"></script>
+</body>
+</html>
