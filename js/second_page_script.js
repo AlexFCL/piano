@@ -23,7 +23,7 @@ function updateRandomValues() {
 
     const chordImage = document.getElementById('chord-image');
     const imageName = `${list1.indexOf(value1)}-${list2.indexOf(value2)}-${list3.indexOf(value3)}.jpg`;
-    chordImage.src = `images/${imageName}`;
+    chordImage.src = `images/Chords/${imageName}`;
 
     setTimeout(updateRandomValues, updateTime * 1000);
 }
