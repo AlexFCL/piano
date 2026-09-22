@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices — Générateur d'accords</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <main class="exercise-setup-shell">
+        <header class="home-header">
+            <a class="brand" href="index.html">Exercices</a>
+            <a class="header-link" href="index.html">← Retour</a>
+        </header>
+
+        <section class="chord-setup-card">
+            <p class="eyebrow">Piano · entraînement</p>
+            <h1>Générateur d'accords</h1>
+
+            <label for="update-time">Temps d'actualisation entre chaque accord</label>
+            <div class="chord-time-row">
+                <div class="chord-input-wrap">
+                    <input type="text" id="update-time" placeholder="5" inputmode="decimal">
+                    <span>sec.</span>
+                </div>
+                <button onclick="saveUpdateTime()">Démarrer l'exercice</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

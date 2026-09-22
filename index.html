@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur d'accords pour s'entraîner au piano</title>
+    <title>Exercices de piano</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <main class="home-shell">
+        <header class="home-header">
+            <div class="brand">Exercices</div>
+        </header>
 
-<div class="container">
-    <header>
-        Générateur d'accords pour s'entraîner au piano
-    </header>
+        <section class="home-intro">
+            <p class="eyebrow">Piano · entraînement</p>
+            <h1>Choisis ton exercice</h1>
+            <p>Travaille les accords ou les gammes avec un temps de réponse configurable.</p>
+        </section>
 
-    <div class="form-container">
-        <label for="update-time">Temps d'actualisation entre chaque accord :</label>
-        <input type="text" id="update-time" placeholder="sec." />
-        <button onclick="saveUpdateTime()">OK</button>
-    </div>
+        <section class="exercise-grid">
+            <a class="exercise-card" href="chords.html">
+                <div class="exercise-icon">♬</div>
+                <div class="exercise-copy">
+                    <strong>Accords</strong>
+                    <span>Reconnaître et jouer les accords proposés.</span>
+                </div>
+                <div class="exercise-arrow">→</div>
+            </a>
 
-    <a class="secondary-exercise-link" href="scales.html">S'entraîner aux gammes</a>
-</div>
-
-<script src="js/main.js"></script>
-
+            <a class="exercise-card" href="scales.html">
+                <div class="exercise-icon">♩</div>
+                <div class="exercise-copy">
+                    <strong>Gammes</strong>
+                    <span>12 majeures et 12 mineures naturelles.</span>
+                </div>
+                <div class="exercise-arrow">→</div>
+            </a>
+        </section>
+    </main>
 </body>
 </html>
