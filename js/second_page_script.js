@@ -7,6 +7,11 @@ const list3 = [", fond.", ", 1er (tonique haut)", ", 2ème (tierce haut)"];
 const urlParams = new URLSearchParams(window.location.search);
 const updateTime = urlParams.get('updateTime') || 5;
 
+const responseTimeValue = document.getElementById('response-time-value');
+if (responseTimeValue) {
+    responseTimeValue.textContent = `${updateTime} s`;
+}
+
 function getRandomValues() {
     const randomValue1 = list1[Math.floor(Math.random() * list1.length)];
     const randomValue2 = list2[Math.floor(Math.random() * list2.length)];

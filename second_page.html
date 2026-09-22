@@ -3,18 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur d'accords pour s'entraîner au piano</title>
-    <link rel="stylesheet" href="css/second_page_styles.css"> <!-- Lien vers le fichier de style de la seconde page -->
+    <title>Exercices — Entraînement aux accords</title>
+    <link rel="stylesheet" href="css/second_page_styles.css">
 </head>
 <body>
+    <div class="app-shell">
+        <header class="app-header">
+            <a class="brand" href="index.html">Exercices</a>
+            <a class="header-link" href="chords.html">← Modifier le temps</a>
+        </header>
 
-    <h1 class="title">Générateur d'accords pour s'entraîner au piano</h1>
-    <div id="random-values" class="random-value-container">
-        <div class="random-value">Initialisation...</div>
+        <main class="training-layout">
+            <div class="training-heading">
+                <div>
+                    <p class="eyebrow">Générateur d'accords</p>
+                    <h1>À toi de jouer</h1>
+                </div>
+                <div class="timing-chip">Actualisation : <strong id="response-time-value">—</strong></div>
+            </div>
+
+            <section class="chord-stage">
+                <div class="question-zone">
+                    <div id="random-values" class="random-value-container">
+                        <div class="random-value">Initialisation…</div>
+                    </div>
+                </div>
+
+                <div class="answer-zone">
+                    <img id="chord-image" src="" alt="Image d'accord">
+                </div>
+            </section>
+        </main>
     </div>
-    <img id="chord-image" src="" alt="Image d'accord" />
 
-    <script src="js/second_page_script.js"></script> <!-- Lien vers le fichier JavaScript de la seconde page -->
-
+    <script src="js/second_page_script.js"></script>
 </body>
 </html>
