@@ -107,9 +107,9 @@ a {
 
 .exercise-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 22px;
-    max-width: 860px;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 18px;
+    max-width: 1060px;
     margin: 0 auto;
 }
 
@@ -240,6 +240,12 @@ button {
 button:hover,
 button:focus-visible {
     background: var(--red-dark);
+}
+
+@media (max-width: 920px) {
+    .exercise-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
 }
 
 @media (max-width: 760px) {
