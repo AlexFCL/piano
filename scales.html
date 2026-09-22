@@ -3,23 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur de gammes pour s'entraîner au piano</title>
+    <title>Exercices — Générateur de gammes</title>
     <link rel="stylesheet" href="css/scales_styles.css">
 </head>
 <body class="setup-page">
-    <main class="setup-card">
-        <h1>Générateur de gammes</h1>
-        <p class="subtitle">12 gammes majeures + 12 gammes mineures naturelles</p>
+    <div class="app-shell">
+        <header class="app-header">
+            <a class="brand" href="index.html">Exercices</a>
+            <a class="header-link" href="index.html">← Retour</a>
+        </header>
 
-        <label for="scale-update-time">Temps de réponse avant affichage de la gamme :</label>
-        <div class="time-row">
-            <input type="text" inputmode="decimal" id="scale-update-time" placeholder="sec." autocomplete="off" />
-            <button id="start-scales" type="button">Démarrer</button>
-        </div>
-        <p class="hint">Minimum : 1 seconde. La réponse restera affichée 3 secondes.</p>
+        <main class="setup-layout">
+            <section class="setup-hero">
+                <p class="eyebrow">Piano · entraînement</p>
+                <h1>Générateur de gammes</h1>
+                <p class="subtitle">12 gammes majeures + 12 gammes mineures naturelles.</p>
+            </section>
 
-        <a class="back-link" href="index.html">← Retour aux accords</a>
-    </main>
+            <section class="setup-panel">
+                <div class="setup-panel-copy">
+                    <p class="panel-kicker">Paramètre de l’exercice</p>
+                    <h2>Combien de temps veux-tu pour répondre ?</h2>
+                    <p>Le nom de la gamme apparaît d’abord. L’image-réponse s’affiche ensuite pendant 3 secondes.</p>
+                </div>
+
+                <div class="setup-controls">
+                    <label for="scale-update-time">Temps de réponse</label>
+                    <div class="time-row">
+                        <div class="input-wrap">
+                            <input type="text" inputmode="decimal" id="scale-update-time" placeholder="5" autocomplete="off" aria-describedby="time-hint">
+                            <span>sec.</span>
+                        </div>
+                        <button id="start-scales" type="button">Démarrer l’exercice</button>
+                    </div>
+                    <p id="time-hint" class="hint">Minimum : 1 seconde.</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="js/scales_main.js"></script>
 </body>

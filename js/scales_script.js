@@ -34,10 +34,13 @@ const scaleName = document.getElementById('scale-name');
 const phaseLabel = document.getElementById('phase-label');
 const scaleImage = document.getElementById('scale-image');
 const imageError = document.getElementById('image-error');
+const responseTimeValue = document.getElementById('response-time-value');
 
 let previousIndex = -1;
 let revealTimer;
 let nextTimer;
+
+responseTimeValue.textContent = `${updateTime} s`;
 
 function chooseScaleIndex() {
     if (scales.length < 2) return 0;
@@ -60,6 +63,7 @@ function startRound() {
     scaleName.textContent = scale.label;
     phaseLabel.textContent = `À toi — réponse dans ${updateTime} s`;
     scaleImage.hidden = true;
+    scaleImage.removeAttribute('src');
     scaleImage.alt = `Réponse : ${scale.label}`;
     imageError.hidden = true;
 

@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entraînement aux gammes</title>
+    <title>Exercices — Entraînement aux gammes</title>
     <link rel="stylesheet" href="css/scales_styles.css">
 </head>
 <body class="training-page">
-    <main class="training-shell">
-        <a class="back-link training-back" href="scales.html">← Modifier le temps de réponse</a>
-        <h1>Générateur de gammes</h1>
+    <div class="app-shell training-shell">
+        <header class="app-header">
+            <a class="brand" href="index.html">Exercices</a>
+            <a class="header-link" href="scales.html">← Modifier le temps</a>
+        </header>
 
-        <section class="scale-card" aria-live="polite">
-            <div id="scale-name" class="scale-name">Initialisation…</div>
-            <div id="phase-label" class="phase-label">Préparation</div>
-        </section>
+        <main class="training-layout">
+            <div class="training-heading">
+                <div>
+                    <p class="eyebrow">Générateur de gammes</p>
+                    <h1>À toi de jouer</h1>
+                </div>
+                <div class="timing-chip">Temps de réponse : <strong id="response-time-value">—</strong></div>
+            </div>
 
-        <div class="answer-area">
-            <img id="scale-image" src="" alt="" hidden />
-            <p id="image-error" class="image-error" hidden>Image indisponible pour cette gamme.</p>
-        </div>
-    </main>
+            <section class="scale-stage" aria-live="polite">
+                <div class="question-zone">
+                    <div id="scale-name" class="scale-name">Initialisation…</div>
+                    <div id="phase-label" class="phase-label">Préparation</div>
+                </div>
+
+                <div class="answer-zone">
+                    <img id="scale-image" src="" alt="" hidden>
+                    <p id="image-error" class="image-error" hidden>Image indisponible pour cette gamme.</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="js/scales_script.js"></script>
 </body>
