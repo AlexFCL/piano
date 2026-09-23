@@ -288,7 +288,7 @@ Sont désormais explicitement interdits :
 
 1. **Redessiner le clavier** au lieu d’utiliser le template.
 2. **Laisser un modèle d’image interpréter la géométrie**.
-3. **Livrer un image hors format canonique**.
+3. **Livrer une image hors format canonique**.
 4. **Colorer partiellement une touche blanche active**.
 5. **Fusionner la logique “slot physique” et la logique “libellé théorique”**.
 6. **Corriger un cas isolé sans transformer la correction en règle générale**.
