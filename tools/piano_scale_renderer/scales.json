@@ -1,0 +1,27 @@
+{
+  "C majeur": {"filename":"C-majeur.png","notes":{"C":"C","D":"D","E":"E","F":"F","G":"G","A":"A","B":"B"}},
+  "Db majeur": {"filename":"Db-majeur.png","notes":{"C":"C","C#":"Db","D#":"Eb","F":"F","F#":"Gb","G#":"Ab","A#":"Bb"}},
+  "D majeur": {"filename":"D-majeur.png","notes":{"C#":"C#","D":"D","E":"E","F#":"F#","G":"G","A":"A","B":"B"}},
+  "Eb majeur": {"filename":"Eb-majeur.png","notes":{"C":"C","D":"D","D#":"Eb","F":"F","G":"G","G#":"Ab","A#":"Bb"}},
+  "E majeur": {"filename":"E-majeur.png","notes":{"C#":"C#","D#":"D#","E":"E","F#":"F#","G#":"G#","A":"A","B":"B"}},
+  "F majeur": {"filename":"F-majeur.png","notes":{"C":"C","D":"D","E":"E","F":"F","G":"G","A":"A","A#":"Bb"}},
+  "F# majeur": {"filename":"Fd-majeur.png","notes":{"C#":"C#","D#":"D#","F":"E#","F#":"F#","G#":"G#","A#":"A#","B":"B"}},
+  "G majeur": {"filename":"G-majeur.png","notes":{"C":"C","D":"D","E":"E","F#":"F#","G":"G","A":"A","B":"B"}},
+  "Ab majeur": {"filename":"Ab-majeur.png","notes":{"C":"C","C#":"Db","D#":"Eb","F":"F","G":"G","G#":"Ab","A#":"Bb"}},
+  "A majeur": {"filename":"A-majeur.png","notes":{"C#":"C#","D":"D","E":"E","F#":"F#","G#":"G#","A":"A","B":"B"}},
+  "Bb majeur": {"filename":"Bb-majeur.png","notes":{"C":"C","D":"D","D#":"Eb","F":"F","G":"G","A":"A","A#":"Bb"}},
+  "B majeur": {"filename":"B-majeur.png","notes":{"C#":"C#","D#":"D#","E":"E","F#":"F#","G#":"G#","A#":"A#","B":"B"}},
+
+  "C mineur naturel": {"filename":"C-mineur-naturel.png","notes":{"C":"C","D":"D","D#":"Eb","F":"F","G":"G","G#":"Ab","A#":"Bb"}},
+  "C# mineur naturel": {"filename":"Cd-mineur-naturel.png","notes":{"C#":"C#","D#":"D#","E":"E","F#":"F#","G#":"G#","A":"A","B":"B"}},
+  "D mineur naturel": {"filename":"D-mineur-naturel.png","notes":{"C":"C","D":"D","E":"E","F":"F","G":"G","A":"A","A#":"Bb"}},
+  "Eb mineur naturel": {"filename":"Eb-mineur-naturel.png","notes":{"C#":"Db","D#":"Eb","F":"F","F#":"Gb","G#":"Ab","A#":"Bb","B":"Cb"}},
+  "E mineur naturel": {"filename":"E-mineur-naturel.png","notes":{"C":"C","D":"D","E":"E","F#":"F#","G":"G","A":"A","B":"B"}},
+  "F mineur naturel": {"filename":"F-mineur-naturel.png","notes":{"C":"C","C#":"Db","D#":"Eb","F":"F","G":"G","G#":"Ab","A#":"Bb"}},
+  "F# mineur naturel": {"filename":"Fd-mineur-naturel.png","notes":{"C#":"C#","D":"D","E":"E","F#":"F#","G#":"G#","A":"A","B":"B"}},
+  "G mineur naturel": {"filename":"G-mineur-naturel.png","notes":{"C":"C","D":"D","D#":"Eb","F":"F","G":"G","A":"A","A#":"Bb"}},
+  "G# mineur naturel": {"filename":"Gd-mineur-naturel.png","notes":{"C#":"C#","D#":"D#","E":"E","F#":"F#","G#":"G#","A#":"A#","B":"B"}},
+  "A mineur naturel": {"filename":"A-mineur-naturel.png","notes":{"C":"C","D":"D","E":"E","F":"F","G":"G","A":"A","B":"B"}},
+  "Bb mineur naturel": {"filename":"Bb-mineur-naturel.png","notes":{"C":"C","C#":"Db","D#":"Eb","F":"F","F#":"Gb","G#":"Ab","A#":"Bb"}},
+  "B mineur naturel": {"filename":"B-mineur-naturel.png","notes":{"C#":"C#","D":"D","E":"E","F#":"F#","G":"G","A":"A","B":"B"}}
+}
