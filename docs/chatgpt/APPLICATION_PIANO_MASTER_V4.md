@@ -1,8 +1,9 @@
+\
 # APPLICATION PIANO â€” SOURCE MAÃTRE V4
 
 **Projet :** Application piano  
 **Statut :** source maÃ®tre consolidÃ©e  
-**Date de consolidation :** 23/09/2026 â€” rÃ©vision aprÃ¨s publication du renderer dans GitHub  
+**Date de consolidation :** 23/09/2026  
 **But :** permettre Ã  ChatGPT et au propriÃ©taire du projet de comprendre, modifier et maintenir le projet sans perdre de dÃ©pendance importante ni confondre les sources.
 
 ---
@@ -35,7 +36,7 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptÃ©e au suje
 | Architecture globale | Ce document V4 | Sert de carte du projet |
 | Routage rapide ChatGPT | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | Ã€ lire en premier dans une future demande |
 | DÃ©pendances / conservation | `MANIFEST_APPLICATION_PIANO_V4.md` | DÃ©cide ce qui doit Ãªtre conservÃ© |
-| Images de gammes | GitHub `tools/piano_scale_renderer/` | **Source canonique exÃ©cutable** : doctrine + renderer + template + tests |
+| Images de gammes | `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` + `piano_corrector_v1.zip` | Doctrine + outil exÃ©cutable |
 | SpÃ©cification fonctionnelle du gÃ©nÃ©rateur de gammes | Notion `SpÃ©cifications â€“ GÃ©nÃ©rateur de gammes piano` | Intention fonctionnelle ; le code GitHub prÃ©vaut pour l'Ã©tat rÃ©el |
 | Anciennes dÃ©cisions/documentations | Archives V1/V2/V3 | Historique seulement |
 
@@ -51,11 +52,10 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptÃ©e au suje
 - **Stack :** HTML / CSS / JavaScript statique
 - **Framework :** aucun framework applicatif observÃ©
 - **GitHub Pages :** le dÃ©pÃ´t signale `has_pages: true`
-- **Renderer canonique :** `tools/piano_scale_renderer/`
-- **Documentation ChatGPT versionnÃ©e :** `docs/chatgpt/`
-- **Pointeur de dÃ©marrage :** `CHATGPT_PROJECT_POINTER.md`
+- **HEAD vÃ©rifiÃ© lors de cette consolidation :** `265115ed7c480aa2057bb703e6e6503ca9f3f4df`
+- **Dernier commit observÃ© :** `Match image exercise cards to theory quiz` du 22/09/2026
 
-Le HEAD doit toujours Ãªtre revÃ©rifiÃ© avant une Ã©criture future ; ne jamais figer un SHA comme Ã©tat courant dans la documentation.
+Le HEAD doit toujours Ãªtre revÃ©rifiÃ© avant une Ã©criture future.
 
 ### 2.2 Ce projet n'est pas le projet Â« Les perms de l'Intervalle Â»
 
@@ -104,26 +104,6 @@ AlexFCL/piano (master)
 â”œâ”€â”€ Template.png
 â”œâ”€â”€ Template.jpg
 â”œâ”€â”€ Readme.txt
-â”œâ”€â”€ CHATGPT_PROJECT_POINTER.md
-â”œâ”€â”€ tools/
-â”‚   â””â”€â”€ piano_scale_renderer/
-â”‚       â”œâ”€â”€ README.md
-â”‚       â”œâ”€â”€ SOURCE_IMAGES_GAMMES_PIANO_V1.7.md
-â”‚       â”œâ”€â”€ piano_scale_renderer.py
-â”‚       â”œâ”€â”€ requirements.txt
-â”‚       â”œâ”€â”€ scales.json
-â”‚       â”œâ”€â”€ official_template.png
-â”‚       â”œâ”€â”€ test_renderer.py
-â”‚       â””â”€â”€ golden/
-â”‚           â”œâ”€â”€ C-majeur.png
-â”‚           â””â”€â”€ E-majeur.png
-â”œâ”€â”€ docs/
-â”‚   â””â”€â”€ chatgpt/
-â”‚       â”œâ”€â”€ APPLICATION_PIANO_MASTER_V4.md
-â”‚       â”œâ”€â”€ MANIFEST_APPLICATION_PIANO_V4.md
-â”‚       â”œâ”€â”€ PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md
-â”‚       â”œâ”€â”€ ETAT_CONNU_DETTE_TECHNIQUE_APPLICATION_PIANO_V4.md
-â”‚       â””â”€â”€ INSTRUCTIONS_MISE_A_JOUR_APPLICATION_PIANO_V4.md
 â”œâ”€â”€ css/
 â”‚   â”œâ”€â”€ styles.css
 â”‚   â”œâ”€â”€ second_page_styles.css
@@ -234,7 +214,7 @@ theory.html
 Deux modes :
 
 - `scale-quiz` : reconstruire depuis la fondamentale ;
-- `scale-from-any-note` : reconstruire en commenÃ§ant depuis une note quelsonque de la gamme.
+- `scale-from-any-note` : reconstruire en commenÃ§ant depuis une note quelconque de la gamme.
 
 Le dataset de thÃ©orie contient 48 dÃ©finitions :
 
@@ -292,9 +272,9 @@ RÃ´le : mapping fonctionnel de l'entraÃ®nement visuel : libellÃ© â†’ PNG.
 
 RÃ´le : questions/rÃ©ponses de thÃ©orie. Inclut ionien, Ã©olien et pentatoniques.
 
-## 6.3 `tools/piano_scale_renderer/scales.json`
+### 6.3 `piano_corrector/scales.json`
 
-RÃ´le : vÃ©ritÃ© opÃ©rationnelle du renderer d'images, avec sÃ©paration slot physique â†’ libellÃ© thÃ©orique. **Toujours lire cette copie GitHub ; ne pas reconstruire les gammes de mÃ©moire.**
+RÃ´le : vÃ©ritÃ© opÃ©rationnelle du renderer d'images, avec sÃ©paration slot physique â†’ libellÃ© thÃ©orique.
 
 ### 6.4 Notion
 
@@ -310,20 +290,15 @@ RÃ´le : spÃ©cification fonctionnelle du gÃ©nÃ©rateur de gammes.
 
 Les images finales de gammes ne doivent **jamais** Ãªtre crÃ©Ã©es par gÃ©nÃ©ration visuelle libre. Elles sont produites par compositing dÃ©terministe sur un template verrouillÃ©.
 
-**Emplacement canonique :** `AlexFCL/piano`, branche `master`, dossier `tools/piano_scale_renderer/`.
+Sources :
 
-Contenu canonique :
-
-- `tools/piano_scale_renderer/SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` ;
-- `tools/piano_scale_renderer/piano_scale_renderer.py` ;
-- `tools/piano_scale_renderer/scales.json` ;
-- `tools/piano_scale_renderer/official_template.png` ;
-- `tools/piano_scale_renderer/test_renderer.py` ;
-- `tools/piano_scale_renderer/requirements.txt` ;
-- `tools/piano_scale_renderer/golden/C-majeur.png` ;
-- `tools/piano_scale_renderer/golden/E-majeur.png`.
-
-Le ZIP `piano_corrector_v1(1).zip` devient un **backup historique**, pas la source principale. Une future conversation doit rÃ©cupÃ©rer le moteur depuis GitHub.
+- `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` ;
+- `piano_corrector_v1.zip` ;
+- `piano_scale_renderer.py` ;
+- `scales.json` ;
+- `official_template.png` ;
+- `test_renderer.py` ;
+- golden images C majeur et E majeur.
 
 ### 7.2 Template canonique
 
@@ -358,16 +333,14 @@ Le ZIP `piano_corrector_v1(1).zip` devient un **backup historique**, pas la sour
 Commande :
 
 ```bash
-cd tools/piano_scale_renderer
 python -m unittest -v test_renderer.py
 ```
 
-Ã©rification relancÃ©e le 23/09/2026 : **8/8 tests OK**.
+VÃ©rification relancÃ©e le 23/09/2026 : **8/8 tests OK**.
 
 Commande de gÃ©nÃ©ration complÃ¨te :
 
 ```bash
-cd tools/piano_scale_renderer
 python piano_scale_renderer.py --all
 ```
 
@@ -405,7 +378,7 @@ Les deux reprÃ©sentent la mÃªme classe de hauteur mais une orthographe thÃ©oriqu
 
 ### 8.4 Fichiers legacy / rÃ´le non prouvÃ©
 
-@Ã  conserver tant que leur rÃ´le n'est pas explicitement Ã©tabli :
+Ã€ conserver tant que leur rÃ´le n'est pas explicitement Ã©tabli :
 
 - `second_page_backup.html` ;
 - `Template.png` ;
@@ -419,21 +392,6 @@ Aucune suite de tests automatisÃ©s de l'application web n'a Ã©tÃ© observÃ©e dans
 
 ---
 
-## 8.6 Bootstrap obligatoire pour une future conversation
-
-Si une future conversation reÃ§oit une demande telle que Â» gÃ©nÃ©re une gamme Â», Â« corrige une image de gamme Â¹ ou Â« ajoute un PNG de gamme Â» :
-
-1. ouvrir `CHATGPT_PROJECT_POINTER.md` si disponible ;
-2. rÃ©soudre `AlexFCL/piano` / `master` ;
-3. rÃ©cupÃ©rer **sans improvisation** `tools/piano_scale_renderer/` ;
-4. exÃ©cuter les tests du renderer avant livraison ;
-5. utiliser exclusivement la sortie du renderer ;
-6. ne jamais utiliser `image_gen` ou un dessin manuel pour lâ€™asset final.
-
-Cette rÃ¨gle prÃ©vaut sur tout souvenir de conversation.
-
----
-
 ## 9. PrioritÃ© en cas de contradiction
 
 1. **Ã‰tat courant du code** â†’ GitHub live.
@@ -442,9 +400,80 @@ Cette rÃ¨gle prÃ©vaut sur tout souvenir de conversation.
 4. **Architecture / mÃ©thode de travail** â†’ V4.
 5. **Historique** â†’ V1/V2/V3.
 
-Une source plus rÃ©cente ne peut remplacer une source d'un autre type que si son péê\š[pê™HHÛİ]œ™H^XÚ][Y[‚‚‹KKB‚ˆÈÈLˆ›ØÙ\Üİ\ÈØ›YØ]Ú\™Hİ\ˆ\È]\™\È[X[™\Â‚ˆÈÈÈLŒH]Y\İ[Ûˆİ\ˆ	ğê]]XİY[‚‹H°ê\šYšY\ˆÚ]XˆÂ‹H°ê\Û™™H\Z\È\ÈšXÚY\œÈ°êY[ÈÂ‹H][\Ù\ˆÛÛ[YHØ\K\ÈÛÛ[YH™]]™HH	ğê]]]™K‚‚ˆÈÈÈLŒˆ[ÙYšXØ][ÛˆÚ]X‚‚ŒKˆ°ê\šYšY\ˆ[^ÓÜX[›ØÂŒ‹ˆ°ê\šYšY\ˆX\İ\˜ÂŒËˆ™[]™\ˆHPQÂˆ\™H\ÈšXÚY\œÈ^XİÈÂKˆ[ÙYšY\ˆ[š\]Y[Y[ÙH]ZH\İ°êXÙ\ÜØZ\™HÂ‹ˆ°ê\šYšY\ˆ\È[\XİÈÂËˆÜ°êY\ˆHÛÛ[Z]ÂˆÛÛ™š\›Y\ˆHÒHHÛÛ[Z]ÂKˆY]™H0è›İ\ˆHØİ[Y[][ÛˆÚH	Ø\˜Ú]Xİ\™HİHHÛÛ˜]Ú[™ÙK‚‚ˆÈÈÈLŒÈ›İ]™[H[XYÙHHØ[[YHÈÛÜœ™Xİ[Û‚‚ŒKˆ™H\È][\Ù\ˆH[Ù0êH	Ú[XYÙHÂŒ‹ˆ°êXİ\0ê\™\ˆÛÛËÜX[›×ÜØØ[WÜ™[™\™\‹Ø\Z\ÈÚ]XˆÂŒËˆ\™H‘PQQK›YHŒKÈ]°ê\šYšY\ˆH0êYš[š][Ûˆ[œÈØØ[\ËšœÛÛ˜Âˆğê[°ê\™\ˆÂKˆ[˜Ù\ˆ\È\İÈÂ‹ˆ\™H˜[Y][Û‹\™\ÜšœÛÛ˜ÂËˆÛÛ\\™\ˆ]HšXÚY\ˆÚ]XˆÚH™[\XÙ[Y[ÂˆÙ][[Y[[œİZ]H[\Ü\ˆ	Ø\ÜÙ]‚‚ˆÈÈÈLİ\™\ÜÚ[ÛˆÈ™]ŞXYÙB‚]˜[H\™H0ªÈİ\š[YH0®È‚‚ŒKˆ[œÜXİ\ˆÂŒ‹ˆÛ\ÜÙ\ˆÂŒËˆÚ\˜Ú\ˆ\È0ê\[™[ÈÂˆY[YšY\ˆ[ˆ™[\péØ[ÂKˆ˜Z\™Kİ˜[Y\ˆ[ˆ˜XÚİ\Â‹ˆ›ÙZ\™H[™H™XÛÛ[X[™][Ûˆ°ê]™\œÚX›HÂËˆš]š[0êYÚY\ˆTÒU‘T˜ÚHHØZ[ˆHİ\™\ÜÚ[Ûˆ\İ˜ZX›K‚‚‹KKB‚ˆÈÈLKˆZ\ÙH0è›İ\ˆHHØİ[Y[][Û‚‚“Y]™H0è›İ\ˆ]X[™	İ[ˆHÙ\È0ê[0ê[Y[ÈÚ[™ÙH‚‚‹HİXİ\™HH0ê\0íÂ‹HZ›İ]Üİ\™\ÜÚ[Ûˆ	İ[ˆÛXZ[™H›Û˜İ[Û›™[Â‹HÛİ\˜ÙHH°ê\š]0êHÂ‹H›Ü›X]Û›ÛXœ™H\È\ÜÙ]ÈÂ‹H›Û˜İ[Û›™[Y[\Èğê[°ê\˜]]\œÈÂ‹HÛÛ™[[ÛœÈHšXÚY\œÈÂ‹H™[™\™\‹İ[\]Kİ\İÈÂ‹H[ÙH	Ú0êX™\™Ù[Y[Â‹H0ê\[™[˜ÙH^\›™HÂ‹H0êXÚ\Ú[ÛˆH°ê\ÛİY™H[™H[˜ÛÚ0ê\™[˜ÙHØİ[Y[0êYK‚‚•[™HÚ[\H[ÙYšXØ][ÛˆÛÜÛpê]\]YHØØ[H‰Ú[\ÜÙH\È›Ü˜ğê[Y[H°êpêXÜš\™HØ]YˆÚH[HÚ[™ÙH[™H°êÛH°ê]][\ØX›K‚‚‹KKB‚ˆÈÈL‹ˆ°ê\İ[pêHH°êY°ê\™[˜ÙB‚ˆ
-Š\XØ][ÛˆX[›ÈHÚ]Xˆ[^ÓÜX[›Øœ˜[˜ÚHX\İ\˜\XØ][Ûˆİ]\]YHSĞÔÔËÒ”ËŠŠ‚‚ˆ
-Š“HÛÙHÚ]XˆÛ›™H	ğê]]°êY[ˆHÛ›™HHØ\H]Hpê]ÙKŠŠ‚‚ˆ
-Š”™[™\™\ˆØ[›Ûš\]YH\ÈØ[[Y\Èˆ[^ÓÜX[›ØÈX\İ\˜ÈÛÛËÜX[›×ÜØØ[WÜ™[™\™\‹ØˆİZ›İ\œÈ8 &]][\Ù\ˆİ\ˆğê[°ê\™\ˆİHÛÜœšYÙ\ˆ[ˆ‘ÈÈ˜[XZ\ÈHğê[°ê\˜][Ûˆ8 &Z[XYÙHXœ™KŠŠ‚‚ˆ
-Š“H’T\İÜš\]YH™\İH[ˆ˜XÚİ\H°êXİ\0ê\˜][Û‹XZ\ÈÚ]Xˆ\İ0ê\ÛÜ›XZ\ÈHÛİ\˜ÙHØ[›Ûš\]YHH[İ]\‹H[\]H]\È\İËŠŠ‚‚ˆ
-Š]Xİ[™Hİ\™\ÜÚ[ÛˆØ[œÈ[™[Z\™K0ê\[™[˜Ù\Ë™[\péØ[]˜XÚİ\ŠŠ‚
+Une source plus rÃ©cente ne peut remplacer une source d'un autre type que si son pÃ©rimÃ¨tre le couvre explicitement.
+
+---
+
+## 10. Processus obligatoire pour les futures demandes
+
+### 10.1 Question sur l'Ã©tat actuel
+
+- vÃ©rifier GitHub ;
+- rÃ©pondre depuis les fichiers rÃ©els ;
+- utiliser V4 comme carte, pas comme preuve de l'Ã©tat live.
+
+### 10.2 Modification GitHub
+
+1. vÃ©rifier `AlexFCL/piano` ;
+2. vÃ©rifier `master` ;
+3. relever le HEAD ;
+4. lire les fichiers exacts ;
+5. modifier uniquement ce qui est nÃ©cessaire ;
+6. vÃ©rifier les impacts ;
+7. crÃ©er le commit ;
+8. confirmer le SHA du commit ;
+9. mettre Ã  jour la documentation si l'architecture ou le contrat change.
+
+### 10.3 Nouvelle image de gamme / correction
+
+1. ne pas utiliser de modÃ¨le d'image ;
+2. ouvrir le correcteur ;
+3. vÃ©rifier la dÃ©finition dans `scales.json` ;
+4. gÃ©nÃ©rer ;
+5. lancer les tests ;
+6. lire `validation-report.json` ;
+7. comparer au fichier GitHub si remplacement ;
+8. seulement ensuite importer l'asset.
+
+### 10.4 Suppression / nettoyage
+
+Avant de dire Â« supprime Â» :
+
+1. inspecter ;
+2. classer ;
+3. chercher les dÃ©pendants ;
+4. identifier un remplaÃ§ant ;
+5. faire/valider un backup ;
+6. produire une recommandation rÃ©versible ;
+7. privilÃ©gier `ARCHIVER` si le gain de suppression est faible.
+
+---
+
+## 11. Mise Ã  jour de la documentation
+
+Mettre Ã  jour V4 quand l'un de ces Ã©lÃ©ments change :
+
+- structure du dÃ©pÃ´t ;
+- ajout/suppression d'un domaine fonctionnel ;
+- source de vÃ©ritÃ© ;
+- format/nombre des assets ;
+- fonctionnement des gÃ©nÃ©rateurs ;
+- conventions de fichiers ;
+- renderer/template/tests ;
+- mode d'hÃ©bergement ;
+- dÃ©pendance externe ;
+- dÃ©cision de rÃ©soudre une incohÃ©rence documentÃ©e.
+
+Une simple modification cosmÃ©tique locale n'impose pas forcÃ©ment de rÃ©Ã©crire V4, sauf si elle change une rÃ¨gle rÃ©utilisable.
+
+---
+
+## 12. RÃ©sumÃ© de rÃ©fÃ©rence
+
+> **Application piano = GitHub `AlexFCL/piano`, branche `master`, application statique HTML/CSS/JS.**
+
+> **Le code GitHub donne l'Ã©tat rÃ©el. La V4 donne la carte et la mÃ©thode.**
+
+> **Les images de gammes dÃ©pendent de V1.7 + `piano_corrector_v1.zip` + template canonique 365Ã—254. Le ZIP est une dÃ©pendance opÃ©rationnelle, pas une archive jetable.**
+
+> **Aucune suppression sans inventaire, dÃ©pendances, remplaÃ§ant et backup.**
