@@ -1,9 +1,8 @@
-\
 # APPLICATION PIANO — SOURCE MAÎTRE V4
 
 **Projet :** Application piano  
 **Statut :** source maître consolidée  
-**Date de consolidation :** 23/09/2026  
+**Date de consolidation :** 23/09/2026 — révision après publication du renderer dans GitHub  
 **But :** permettre à ChatGPT et au propriétaire du projet de comprendre, modifier et maintenir le projet sans perdre de dépendance importante ni confondre les sources.
 
 ---
@@ -36,7 +35,7 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 | Architecture globale | Ce document V4 | Sert de carte du projet |
 | Routage rapide ChatGPT | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | À lire en premier dans une future demande |
 | Dépendances / conservation | `MANIFEST_APPLICATION_PIANO_V4.md` | Décide ce qui doit être conservé |
-| Images de gammes | `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` + `piano_corrector_v1.zip` | Doctrine + outil exécutable |
+| Images de gammes | GitHub `tools/piano_scale_renderer/` | **Source canonique exécutable** : doctrine + renderer + template + tests |
 | Spécification fonctionnelle du générateur de gammes | Notion `Spécifications – Générateur de gammes piano` | Intention fonctionnelle ; le code GitHub prévaut pour l'état réel |
 | Anciennes décisions/documentations | Archives V1/V2/V3 | Historique seulement |
 
@@ -52,10 +51,11 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 - **Stack :** HTML / CSS / JavaScript statique
 - **Framework :** aucun framework applicatif observé
 - **GitHub Pages :** le dépôt signale `has_pages: true`
-- **HEAD vérifié lors de cette consolidation :** `265115ed7c480aa2057bb703e6e6503ca9f3f4df`
-- **Dernier commit observé :** `Match image exercise cards to theory quiz` du 22/09/2026
+- **Renderer canonique :** `tools/piano_scale_renderer/`
+- **Documentation ChatGPT versionnée :** `docs/chatgpt/`
+- **Pointeur de démarrage :** `CHATGPT_PROJECT_POINTER.md`
 
-Le HEAD doit toujours être revérifié avant une écriture future.
+Le HEAD doit toujours être revérifié avant une écriture future ; ne jamais figer un SHA comme état courant dans la documentation.
 
 ### 2.2 Ce projet n'est pas le projet « Les perms de l'Intervalle »
 
@@ -104,6 +104,26 @@ AlexFCL/piano (master)
 ├── Template.png
 ├── Template.jpg
 ├── Readme.txt
+├── CHATGPT_PROJECT_POINTER.md
+├── tools/
+│   └── piano_scale_renderer/
+│       ├── README.md
+│       ├── SOURCE_IMAGES_GAMMES_PIANO_V1.7.md
+│       ├── piano_scale_renderer.py
+│       ├── requirements.txt
+│       ├── scales.json
+│       ├── official_template.png
+│       ├── test_renderer.py
+│       └── golden/
+│           ├── C-majeur.png
+│           └── E-majeur.png
+├── docs/
+│   └── chatgpt/
+│       ├── APPLICATION_PIANO_MASTER_V4.md
+│       ├── MANIFEST_APPLICATION_PIANO_V4.md
+│       ├── PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md
+│       ├── ETAT_CONNU_DETTE_TECHNIQUE_APPLICATION_PIANO_V4.md
+│       └── INSTRUCTIONS_MISE_A_JOUR_APPLICATION_PIANO_V4.md
 ├── css/
 │   ├── styles.css
 │   ├── second_page_styles.css
@@ -272,9 +292,9 @@ Rôle : mapping fonctionnel de l'entraînement visuel : libellé → PNG.
 
 Rôle : questions/réponses de théorie. Inclut ionien, éolien et pentatoniques.
 
-### 6.3 `piano_corrector/scales.json`
+### 6.3 `tools/piano_scale_renderer/scales.json`
 
-Rôle : vérité opérationnelle du renderer d'images, avec séparation slot physique → libellé théorique.
+Rôle : vérité opérationnelle du renderer d'images, avec séparation slot physique → libellé théorique. **Toujours lire cette copie GitHub ; ne pas reconstruire les gammes de mémoire.**
 
 ### 6.4 Notion
 
@@ -290,15 +310,20 @@ Rôle : spécification fonctionnelle du générateur de gammes.
 
 Les images finales de gammes ne doivent **jamais** être créées par génération visuelle libre. Elles sont produites par compositing déterministe sur un template verrouillé.
 
-Sources :
+**Emplacement canonique :** `AlexFCL/piano`, branche `master`, dossier `tools/piano_scale_renderer/`.
 
-- `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` ;
-- `piano_corrector_v1.zip` ;
-- `piano_scale_renderer.py` ;
-- `scales.json` ;
-- `official_template.png` ;
-- `test_renderer.py` ;
-- golden images C majeur et E majeur.
+Contenu canonique :
+
+- `tools/piano_scale_renderer/SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` ;
+- `tools/piano_scale_renderer/piano_scale_renderer.py` ;
+- `tools/piano_scale_renderer/scales.json` ;
+- `tools/piano_scale_renderer/official_template.png` ;
+- `tools/piano_scale_renderer/test_renderer.py` ;
+- `tools/piano_scale_renderer/requirements.txt` ;
+- `tools/piano_scale_renderer/golden/C-majeur.png` ;
+- `tools/piano_scale_renderer/golden/E-majeur.png`.
+
+Le ZIP `piano_corrector_v1(1).zip` devient un **backup historique**, pas la source principale. Une future conversation doit récupérer le moteur depuis GitHub.
 
 ### 7.2 Template canonique
 
@@ -333,6 +358,7 @@ Sources :
 Commande :
 
 ```bash
+cd tools/piano_scale_renderer
 python -m unittest -v test_renderer.py
 ```
 
@@ -341,6 +367,7 @@ Vérification relancée le 23/09/2026 : **8/8 tests OK**.
 Commande de génération complète :
 
 ```bash
+cd tools/piano_scale_renderer
 python piano_scale_renderer.py --all
 ```
 
@@ -392,6 +419,21 @@ Aucune suite de tests automatisés de l'application web n'a été observée dans
 
 ---
 
+## 8.6 Bootstrap obligatoire pour une future conversation
+
+Si une future conversation reçoit une demande telle que « génère une gamme », « corrige une image de gamme » ou « ajoute un PNG de gamme » :
+
+1. ouvrir `CHATGPT_PROJECT_POINTER.md` si disponible ;
+2. résoudre `AlexFCL/piano` / `master` ;
+3. récupérer **sans improvisation** `tools/piano_scale_renderer/` ;
+4. exécuter les tests du renderer avant livraison ;
+5. utiliser exclusivement la sortie du renderer ;
+6. ne jamais utiliser `image_gen` ou un dessin manuel pour l’asset final.
+
+Cette règle prévaut sur tout souvenir de conversation.
+
+---
+
 ## 9. Priorité en cas de contradiction
 
 1. **État courant du code** → GitHub live.
@@ -427,8 +469,8 @@ Une source plus récente ne peut remplacer une source d'un autre type que si son
 ### 10.3 Nouvelle image de gamme / correction
 
 1. ne pas utiliser de modèle d'image ;
-2. ouvrir le correcteur ;
-3. vérifier la définition dans `scales.json` ;
+2. récupérer `tools/piano_scale_renderer/` depuis GitHub ;
+3. lire `README.md`, la V1.7 et vérifier la définition dans `scales.json` ;
 4. générer ;
 5. lancer les tests ;
 6. lire `validation-report.json` ;
@@ -474,6 +516,8 @@ Une simple modification cosmétique locale n'impose pas forcément de réécrire
 
 > **Le code GitHub donne l'état réel. La V4 donne la carte et la méthode.**
 
-> **Les images de gammes dépendent de V1.7 + `piano_corrector_v1.zip` + template canonique 365×254. Le ZIP est une dépendance opérationnelle, pas une archive jetable.**
+> **Renderer canonique des gammes : `AlexFCL/piano` / `master` / `tools/piano_scale_renderer/`. Toujours l’utiliser pour générer ou corriger un PNG ; jamais de génération d’image libre.**
+
+> **Le ZIP historique reste un backup de récupération, mais GitHub est désormais la source canonique du moteur, du template et des tests.**
 
 > **Aucune suppression sans inventaire, dépendances, remplaçant et backup.**
