@@ -20,21 +20,19 @@ Ajouter :
 2. `MANIFEST_APPLICATION_PIANO_V4.md`
 3. `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md`
 
-## Étape 3 — renderer désormais versionné dans GitHub
+## Étape 3 — renderer versionné dans GitHub
 
-Le renderer canonique doit être présent dans :
+Le renderer canonique est :
 
 `AlexFCL/piano` → `master` → `tools/piano_scale_renderer/`
 
 Le dossier contient la V1.7, le script, `scales.json`, le template, les tests et les golden images.
 
-Le ZIP `piano_corrector_v1(1).zip` devient une **sauvegarde historique** : garde-le localement, mais une future conversation ne doit plus en dépendre pour travailler.
+Le ZIP `piano_corrector_v1(1).zip` est une **sauvegarde historique**. Une future conversation ne doit plus en dépendre pour travailler.
 
 ## Étape 4 — ne rien supprimer pour le moment
 
-Laisser en place les anciennes V1/V2/V3 pendant la transition.
-
-Raison : la V4 doit d'abord être testée dans une nouvelle conversation du projet avant tout nettoyage du contexte actif.
+Laisser en place les anciennes V1/V2/V3 pendant la transition. Une nouvelle version documentaire ne remplace jamais automatiquement un script, un asset, un template, un test ou un historique.
 
 ## Étape 5 — test de récupération
 
@@ -46,9 +44,10 @@ La réponse correcte doit notamment identifier :
 
 - `AlexFCL/piano` / `master` ;
 - MASTER V4 / MANIFEST V4 / PLAYBOOK V4 ;
-- V1.7 pour la doctrine d'images ;
-- `piano_corrector_v1.zip` comme dépendance opérationnelle ;
-- le template 365×254 verrouillé.
+- `tools/piano_scale_renderer/` comme **source canonique exécutable** ;
+- `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` dans ce dossier pour la doctrine ;
+- le template 365×254 verrouillé ;
+- le ZIP historique uniquement comme backup.
 
 Si ce test échoue, **ne retirer aucune ancienne source**.
 
@@ -58,13 +57,13 @@ Optionnel. Si tu veux réduire les contradictions dans le contexte actif :
 
 - conserver le backup ZIP local ;
 - regrouper les anciennes V1/V2/V3 dans une archive historique ;
-- retirer seulement leurs copies individuelles du projet ChatGPT après avoir vérifié que V4 fonctionne.
+- retirer seulement leurs copies individuelles du projet ChatGPT après vérification.
 
-Ce n'est pas obligatoire. Ne rien supprimer est une option valide.
+Ne rien supprimer est une option valide.
 
 ## Étape 7 — vérifier le pointeur GitHub
 
-Le dépôt doit aussi contenir :
+Le dépôt doit contenir :
 
 - `CHATGPT_PROJECT_POINTER.md` à la racine ;
 - `docs/chatgpt/` avec les documents V4 ;
@@ -72,21 +71,9 @@ Le dépôt doit aussi contenir :
 
 Dans une future conversation, si ChatGPT hésite sur la méthode de génération, la réponse correcte est **d’ouvrir ce pointeur et le dossier GitHub**, pas de reconstruire la méthode de mémoire.
 
-## Étape 8 — mettre Notion à jour
+## Étape 8 — Notion
 
-La page `Spécifications – Générateur de gammes piano` parle encore de création future alors que la fonction est implémentée.
-
-Modification recommandée en haut de la page :
-
-```text
-Statut : IMPLÉMENTÉ
-Implémentation actuelle : AlexFCL/piano / master
-Pages : scales.html → scale_training.html
-Scripts : js/scales_main.js + js/scales_script.js
-Note : cette page décrit le contrat fonctionnel ; GitHub reste la source de vérité de l'état réel.
-```
-
-Ne pas réécrire le reste de la spécification sauf si le contrat fonctionnel change.
+La page `Spécifications – Générateur de gammes piano` reste une référence fonctionnelle. GitHub reste la source de vérité de l’état réel. Sa mise à jour de statut est recommandée mais distincte de la publication du renderer.
 
 ## Quand mettre la V4 à jour ensuite ?
 
