@@ -41,6 +41,12 @@ Règle courte : tonique = famille de couleur ; majeur = variante majeure ; mineu
 Chemin : `tools/piano_chord_renderer/`.
 Il utilise le template 711×254 et `data/music-theory/tonality-colors.json`. Les touches actives, blanches ou noires, reçoivent la même couleur tonique/mode et les notes sont libellées en blanc. Les assets runtime sont dans `images/Chords/` avec le nommage `<tonique>-<majeur|mineur>-<fond|1er|2eme>.png`.
 
+## Transferts binaires GitHub ↔ ChatGPT
+Pour tout transfert de PNG/JPG/ZIP entre l'environnement local ChatGPT et GitHub, lire :
+`docs/chatgpt/TRANSFERT_BINAIRES_GITHUB_CHATGPT_V1.md`.
+
+Règle courte : texte = actions GitHub directes ; binaire = vérifier d'abord si une action accepte réellement le contenu binaire. Ne pas faire transiter par défaut un gros base64 dans un appel unique et ne jamais annoncer un upload avant vérification du blob/commit.
+
 ## Sources fonctionnelles
 - Application live : GitHub
 - Intentions / spécifications fonctionnelles des gammes : Notion, page « Spécifications – Générateur de gammes piano »
