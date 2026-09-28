@@ -12,9 +12,9 @@ Ne jamais produire l'asset final par génération d'image libre, redessin manuel
 1. Charger `official_template.png`.
 2. Lire la définition de gamme dans `scales.json`.
 3. Mapper notes théoriques → slots physiques → libellés affichés.
-4. Remplir les touches blanches actives en `#C53650`.
-5. Restaurer les touches noires depuis le template.
-6. Remplir les touches noires actives en `#F68C1F`.
+4. Résoudre la couleur de la gamme depuis `data/music-theory/tonality-colors.json` selon sa tonique et son mode.
+5. Remplir toutes les touches actives avec cette même couleur.
+6. Restaurer les éléments structurels du template.
 7. Poser les libellés.
 8. Exécuter les validations.
 9. Exporter uniquement si tous les contrôles passent.
@@ -25,7 +25,10 @@ Ne jamais produire l'asset final par génération d'image libre, redessin manuel
 - 7 slots actifs par gamme.
 - Séparer slot physique et libellé théorique : un slot D# peut afficher Eb.
 - Toute régression découverte doit devenir un test générique, pas un patch local.
-- Les golden images C majeur et E majeur doivent rester pixel-identiques.
+- La couleur d'une gamme vient uniquement de la paire tonique/mode.
+- Une touche active blanche et une touche active noire utilisent la même couleur de gamme.
+- La référence fonctionnelle est `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` et la source runtime est `data/music-theory/tonality-colors.json`.
+- Les anciens snapshots `golden/` ne sont pas une référence colorimétrique tant qu'ils n'ont pas été régénérés avec la palette actuelle.
 
 ## Procédure future ChatGPT
 Pour une demande du type « génère/corrige telle gamme » :
