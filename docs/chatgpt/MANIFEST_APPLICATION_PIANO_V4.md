@@ -31,7 +31,7 @@ Les trois V4 constituent le **socle actif ChatGPT**. Le renderer n’est plus d�
 | Source | Statut | Rôle | Règle |
 |---|---|---|---|
 | GitHub `AlexFCL/piano` / `master` | LIVE + CANONIQUE | État courant de l'application | Relire avant toute mutation ou réponse “actuelle” |
-| GitHub `tools/piano_scale_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer, template, définitions, tests et doctrine des PNG de gammes | Utiliser pour les gammes tant que sa migration de palette n'est pas traitée séparément |
+| GitHub `tools/piano_scale_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer, template, définitions, tests et doctrine des PNG de gammes | Consommer obligatoirement `data/music-theory/tonality-colors.json` ; aucune couleur fixe par type de touche |
 | GitHub `tools/piano_chord_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer déterministe des accords sur template 711×254 | Toujours utiliser pour produire/corriger une image d'accord |
 | GitHub `data/music-theory/tonality-colors.json` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Source runtime unique des couleurs Base/Majeur/Mineur | Consommer depuis les renderers/interfaces, ne pas dupliquer |
 | GitHub `docs/chatgpt/` | CANONIQUE | Copie durable des documents V4 | Utiliser si les pièces jointes ChatGPT sont absentes |
