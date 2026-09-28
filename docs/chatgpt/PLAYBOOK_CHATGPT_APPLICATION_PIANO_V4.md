@@ -41,6 +41,15 @@ Lire :
 
 Attention : le comportement des accords n'est pas le même que celui des gammes.
 
+### Palette accords + gammes
+
+- Référence : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
+- Tonique = famille chromatique.
+- Majeur = variante `major`.
+- Mineur = variante `minor`.
+- `base` = couleur neutre conservée pour les usages sans mode / futurs.
+- Ne pas confondre avec le rouge/orange du renderer des touches de piano.
+
 ### Gammes — comportement
 Lire :
 - `scales.html`
