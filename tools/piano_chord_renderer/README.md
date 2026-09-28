@@ -15,7 +15,7 @@ La couleur dépend de la tonique et du mode. Par exemple :
 - C majeur → `#B51B1B` ;
 - C mineur → `#EB8080`.
 
-Les touches blanches et noires actives utilisent la **même couleur tonique/mode**. Ce renderer n'utilise pas l'ancienne convention rouge/orange par type de touche.
+Les touches blanches et noires actives utilisent la **même couleur tonique/mode**. Ce renderer n'utilise aucune couleur dépendant du type physique de touche : seule la paire tonique/mode détermine la couleur.
 
 ## Labels
 

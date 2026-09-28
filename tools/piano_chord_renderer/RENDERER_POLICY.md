@@ -24,4 +24,4 @@ Toute image d'accord doit dériver du template officiel 711×254, par compositin
 - même couleur sur les touches blanches et noires actives ;
 - libellé théorique distinct du slot physique ;
 - aucune génération visuelle libre ;
-- aucune réintroduction de l'ancienne règle rouge/orange.
+- aucune couleur ne doit être dérivée du fait qu'une touche soit blanche ou noire.

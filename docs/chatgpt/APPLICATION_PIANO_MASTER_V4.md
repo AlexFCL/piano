@@ -35,7 +35,9 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 | Architecture globale | Ce document V4 | Sert de carte du projet |
 | Routage rapide ChatGPT | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | À lire en premier dans une future demande |
 | Dépendances / conservation | `MANIFEST_APPLICATION_PIANO_V4.md` | Décide ce qui doit être conservé |
-| Images de gammes | GitHub `tools/piano_scale_renderer/` | **Source canonique exécutable** : doctrine + renderer + template + tests |
+| Images de gammes | GitHub `tools/piano_scale_renderer/` | Renderer historique des gammes ; sa migration vers la palette tonique/mode doit être traitée explicitement |
+| Images d'accords | GitHub `tools/piano_chord_renderer/` | **Source canonique exécutable** : renderer + template + tests |
+| Palette tonique/mode | `data/music-theory/tonality-colors.json` | **Source runtime canonique** des couleurs Base/Majeur/Mineur |
 | Spécification fonctionnelle du générateur de gammes | Notion `Spécifications – Générateur de gammes piano` | Intention fonctionnelle ; le code GitHub prévaut pour l'état réel |
 | Anciennes décisions/documentations | Archives V1/V2/V3 | Historique seulement |
 
@@ -51,7 +53,9 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 - **Stack :** HTML / CSS / JavaScript statique
 - **Framework :** aucun framework applicatif observé
 - **GitHub Pages :** le dépôt signale `has_pages: true`
-- **Renderer canonique :** `tools/piano_scale_renderer/`
+- **Renderer accords canonique :** `tools/piano_chord_renderer/`
+- **Renderer gammes historique :** `tools/piano_scale_renderer/`
+- **Palette runtime tonique/mode :** `data/music-theory/tonality-colors.json`
 - **Documentation ChatGPT versionnée :** `docs/chatgpt/`
 - **Pointeur de démarrage :** `CHATGPT_PROJECT_POINTER.md`
 
@@ -114,7 +118,7 @@ AlexFCL/piano (master)
 │   ├── test_scale_consistency.py
 │   └── test_categories.py
 ├── tools/
-│   └── piano_scale_renderer/
+│   ├── piano_scale_renderer/
 │       ├── README.md
 │       ├── SOURCE_IMAGES_GAMMES_PIANO_V1.7.md
 │       ├── piano_scale_renderer.py
@@ -125,6 +129,13 @@ AlexFCL/piano (master)
 │       └── golden/
 │           ├── C-majeur.png
 │           └── E-majeur.png
+│   └── piano_chord_renderer/
+│       ├── README.md
+│       ├── RENDERER_POLICY.md
+│       ├── piano_chord_renderer.py
+│       ├── official_template.png
+│       ├── test_renderer.py
+│       └── requirements.txt
 ├── docs/
 │   └── chatgpt/
 │       ├── APPLICATION_PIANO_MASTER_V4.md
@@ -155,7 +166,8 @@ AlexFCL/piano (master)
 │   │   ├── rythme.json
 │   │   └── theorie.json
 │   └── music-theory/
-│       └── scales.json
+│       ├── scales.json
+│       └── tonality-colors.json
 └── images/
     ├── Chords/   # 102 JPG
     └── Scales/   # 24 PNG
@@ -214,6 +226,8 @@ Comportement observé :
 
 Décision du 28/09/2026 : le renversement doit être visible dans la question afin que la consigne corresponde exactement à l'image attendue.
 
+Renderer canonique des accords : `tools/piano_chord_renderer/`. Il utilise le template 711×254, la logique des trois positions existantes, des libellés théoriques sur les touches et la palette runtime `data/music-theory/tonality-colors.json`.
+
 ### 4.3 Gammes — entraînement visuel
 
 Flux :
@@ -252,11 +266,12 @@ Elle présente actuellement les mêmes 24 gammes sous forme de bibliothèque con
 
 ### 4.3.1 Palette transversale tonique / mode — accords + gammes
 
-Référence canonique : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
+Référence fonctionnelle : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.  
+Source runtime canonique : `data/music-theory/tonality-colors.json`.
 
 Règle : la **tonique** choisit la famille de couleur ; le **mode** choisit la variante. Un accord ou une gamme majeur(e) utilise la couleur **Majeur** correspondante, un accord ou une gamme mineur(e) utilise la couleur **Mineur** correspondante. La couleur **Base** est conservée comme identité neutre / réserve pour les usages futurs.
 
-Cette palette d’interface est distincte de la palette rouge/orange du renderer des touches de piano décrite au § 7.3.
+Le renderer d'accords consomme directement cette source et applique une couleur unique tonique/mode à toutes les touches actives, blanches ou noires.
 
 ### 4.4 Théorie musicale
 
@@ -397,12 +412,11 @@ Le ZIP `piano_corrector_v1(1).zip` devient un **backup historique**, pas la sour
 - `Template2(1).png` = `official_template.png` octet pour octet ;
 - `Template(1).png` = 711 × 254 : ne pas l'utiliser comme template du renderer de gammes.
 
-### 7.3 Palette canonique
+### 7.3 État de la palette du renderer de gammes
 
-- blanc actif : rouge `#C53650` ;
-- noir actif : orange `#F68C1F` ;
-- texte : blanc ;
-- structure : template original.
+Le renderer de gammes actuellement versionné conserve encore une ancienne convention de couleur par type de touche. Cette convention est **legacy** et ne doit pas être réutilisée pour le nouveau renderer d'accords.
+
+La palette tonique/mode canonique du projet est désormais structurée dans `data/music-theory/tonality-colors.json`. Toute migration du renderer de gammes vers cette palette doit être faite explicitement avec régénération et validation de ses assets/tests.
 
 ### 7.4 Pipeline
 
@@ -498,6 +512,7 @@ La duplication des titres/descriptions/routes entre `index.html` et le JSON a do
 Trois ensembles de tests automatisés existent désormais :
 
 - renderer de gammes : 8 tests dédiés au rendu déterministe ;
+- renderer d'accords : tests couvrant les 102 combinaisons, la palette tonique/mode, les trois positions de Do majeur et les orthographes enharmoniques ;
 - cohérence applicative des gammes : 5 tests dans `tests/test_scale_consistency.py`, exécutés par GitHub Actions ;
 - cohérence des catégories : 3 tests dans `tests/test_categories.py`, exécutés par GitHub Actions.
 
