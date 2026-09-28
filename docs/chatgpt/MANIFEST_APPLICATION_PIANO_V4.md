@@ -35,6 +35,9 @@ Les trois V4 constituent le **socle actif ChatGPT**. Le renderer n’est plus d�
 | GitHub `CHATGPT_PROJECT_POINTER.md` | CANONIQUE | Pointeur minimal de bootstrap | Lire en premier si le contexte projet est incomplet |
 | GitHub `tests/test_scale_consistency.py` | DÉPENDANCE OPÉRATIONNELLE | Détecte les divergences entre renderer, entraînement, bibliothèque, théorie et assets de gammes | Conserver et exécuter après modification des sources concernées |
 | GitHub `.github/workflows/scale-consistency.yml` | DÉPENDANCE OPÉRATIONNELLE | Exécute automatiquement le contrôle de cohérence sur push/PR | Conserver avec le test |
+| GitHub `data/categories.json` | CANONIQUE SUR SON PÉRIMÈTRE | Métadonnées et routes des 5 cartes d'accueil ; liens vers les fichiers d'exercices des catégories génériques | Ne pas dupliquer ces métadonnées dans `index.html` |
+| GitHub `tests/test_categories.py` | DÉPENDANCE OPÉRATIONNELLE | Vérifie structure, ordre, routes et fichiers d'exercices des catégories | Conserver et exécuter après modification des catégories/routes |
+| GitHub `.github/workflows/category-consistency.yml` | DÉPENDANCE OPÉRATIONNELLE | Exécute automatiquement le contrôle des catégories sur push/PR | Conserver avec le test |
 | Notion `Spécifications – Générateur de gammes piano` | RÉFÉRENCE | Intention fonctionnelle détaillée | Consulter si comportement fonctionnel concerné |
 
 ## 3. Fichiers fournis / sauvegardés
