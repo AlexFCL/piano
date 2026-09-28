@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices — Toutes les gammes</title>
+    <link rel="stylesheet" href="css/scale_library.css">
+</head>
+<body>
+    <div class="library-shell">
+        <header class="library-header">
+            <a class="back-link" href="scales.html" aria-label="Retour au générateur de gammes">← Retour</a>
+            <a class="training-link" href="scales.html">Entraînement aléatoire</a>
+        </header>
+
+        <main class="library-main">
+            <section class="library-intro">
+                <p class="eyebrow">Piano · référence</p>
+                <h1>Gammes</h1>
+                <p>Choisis un type de gamme pour afficher toutes les gammes correspondantes.</p>
+            </section>
+
+            <nav class="scale-tabs" aria-label="Types de gammes">
+                <button class="scale-tab is-active" type="button" data-scale-type="major" aria-pressed="true">Majeures</button>
+                <button class="scale-tab" type="button" data-scale-type="naturalMinor" aria-pressed="false">Mineures naturelles</button>
+                <button class="scale-tab scale-tab--disabled" type="button" disabled aria-disabled="true">
+                    <span aria-hidden="true">🔒</span>
+                    <span>Pentatoniques <small>Bientôt disponible</small></span>
+                </button>
+            </nav>
+
+            <section>
+                <h2 id="scale-grid-title" class="sr-only">Gammes majeures</h2>
+                <div id="scale-grid" class="scale-grid" aria-live="polite"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/scale_library.js"></script>
+</body>
+</html>
