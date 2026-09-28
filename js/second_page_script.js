@@ -2,7 +2,7 @@
 
 const list1 = ["C", "D", "E", "F", "G", "A", "B", "C#", "Db", "D#", "Eb", "F#", "Gb", "G#", "Ab", "A#", "Bb"];
 const list2 = ["", " min"];
-const list3 = [", fond.", ", 1er (tonique haut)", ", 2ème (tierce haut)"];
+const list3 = ["fond.", "1er (tonique haut)", "2ème (tierce haut)"];
 
 const urlParams = new URLSearchParams(window.location.search);
 const updateTime = urlParams.get('updateTime') || 5;
@@ -24,7 +24,7 @@ function updateRandomValues() {
     const [value1, value2, value3] = getRandomValues();
 
     const randomValuesElement = document.getElementById('random-values');
-    randomValuesElement.innerHTML = `<div class="random-value">${value1}<span class="custom2">${value2}</span></div>`;
+    randomValuesElement.innerHTML = `<div class="random-value">${value1}<span class="custom2">${value2}</span><span class="custom3">${value3}</span></div>`;
 
     const chordImage = document.getElementById('chord-image');
     const imageName = `${list1.indexOf(value1)}-${list2.indexOf(value2)}-${list3.indexOf(value3)}.jpg`;
