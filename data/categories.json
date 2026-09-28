@@ -1,17 +1,39 @@
 [
   {
-    "id": "basse",
-    "title": "Basse",
-    "description": "Technique, grooves et endurance"
+    "id": "accords",
+    "title": "Accords",
+    "description": "Reconnaître et jouer les accords proposés.",
+    "icon": "♬",
+    "href": "chords.html"
   },
   {
-    "id": "rythme",
-    "title": "Rythme",
-    "description": "Placement, lecture rythmique et précision"
+    "id": "gammes",
+    "title": "Gammes",
+    "description": "Consulter les gammes ou lancer l’entraînement aléatoire.",
+    "icon": "♩",
+    "href": "scale_library.html"
   },
   {
     "id": "theorie",
     "title": "Théorie musicale",
-    "description": "Gammes, notes et repères harmoniques"
+    "description": "Retrouver les notes des gammes.",
+    "icon": "𝄞",
+    "href": "theory.html"
+  },
+  {
+    "id": "rythme",
+    "title": "Rythme",
+    "description": "Placement, lecture rythmique et précision.",
+    "icon": "♫",
+    "href": "category.html?category=rythme",
+    "exerciseFile": "data/exercises/rythme.json"
+  },
+  {
+    "id": "basse",
+    "title": "Basse",
+    "description": "Technique, grooves et endurance.",
+    "icon": "♪",
+    "href": "category.html?category=basse",
+    "exerciseFile": "data/exercises/basse.json"
   }
 ]
