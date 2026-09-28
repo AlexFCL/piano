@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercices — Entraînement aux gammes</title>
-    <link rel="stylesheet" href="css/scales_styles.css">
+    <link rel="stylesheet" href="css/scales_styles.css?v=20260928-2353">
 </head>
 <body class="training-page">
     <div class="app-shell training-shell">
         <header class="app-header">
             <a class="brand" href="index.html">Exercices</a>
-            <a class="header-link" href="scales.html">← Modifier le temps</a>
+            <div class="header-actions">
+                <a class="header-link" href="scale_library.html">Toutes les gammes</a>
+                <a class="header-link" href="index.html">← Retour</a>
+            </div>
         </header>
 
         <main class="training-layout">
@@ -19,8 +22,27 @@
                     <p class="eyebrow">Générateur de gammes</p>
                     <h1>À toi de jouer</h1>
                 </div>
-                <div class="timing-chip">Temps de réponse : <strong id="response-time-value">—</strong></div>
+
+                <label class="time-control" for="scale-update-time">
+                    <span>Temps de réponse</span>
+                    <span class="time-input">
+                        <input id="scale-update-time" type="number" min="1" step="0.5" value="5" inputmode="decimal" aria-describedby="scale-controls-hint">
+                        <span aria-hidden="true">s</span>
+                    </span>
+                </label>
             </div>
+
+            <section class="filter-panel" aria-label="Sélection des gammes">
+                <div class="filter-group">
+                    <span class="filter-label">Type de gamme</span>
+                    <div class="filter-buttons" role="group" aria-label="Types de gammes">
+                        <button class="filter-button is-active" type="button" data-scale-filter="major" aria-pressed="true">Majeur</button>
+                        <button class="filter-button is-active" type="button" data-scale-filter="minor" aria-pressed="true">Mineur</button>
+                    </div>
+                </div>
+
+                <p id="scale-controls-hint" class="controls-hint" aria-live="polite">Les changements s'appliquent à la prochaine gamme.</p>
+            </section>
 
             <section class="scale-stage" aria-live="polite">
                 <div class="question-card">
@@ -40,6 +62,6 @@
         </main>
     </div>
 
-    <script src="js/scales_script.js"></script>
+    <script src="js/scales_script.js?v=20260928-2353"></script>
 </body>
 </html>
