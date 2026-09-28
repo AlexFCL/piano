@@ -19,12 +19,15 @@ Chemin obligatoire :
 `tools/piano_scale_renderer/`
 
 Pour toute génération, correction ou remplacement d'un PNG de gamme :
-1. lire `tools/piano_scale_renderer/README.md`;
-2. lire `tools/piano_scale_renderer/RENDERER_POLICY.md`;
-3. récupérer le renderer, le template, les définitions et les tests depuis ce dossier;
-4. exécuter les tests;
-5. exécuter `piano_scale_renderer.py`;
-6. utiliser uniquement la sortie validée.
+1. lire d'abord `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`;
+2. utiliser `data/music-theory/tonality-colors.json` comme source runtime des couleurs ;
+3. lire `tools/piano_scale_renderer/README.md` et `tools/piano_scale_renderer/RENDERER_POLICY.md`;
+4. récupérer le renderer, le template, les définitions et les tests depuis ce dossier ;
+5. exécuter les tests ;
+6. exécuter `piano_scale_renderer.py` ;
+7. utiliser uniquement la sortie validée.
+
+Règle verrouillée : toutes les touches actives d'une même gamme utilisent la même couleur tonique/mode. Une ancienne règle de couleur dépendant du type physique de touche est obsolète et ne doit jamais être réintroduite.
 
 Ne jamais improviser une image de gamme avec un générateur visuel libre ou un redessin approximatif.
 
