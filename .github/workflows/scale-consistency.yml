@@ -1,0 +1,41 @@
+name: Scale source consistency
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "tools/piano_scale_renderer/scales.json"
+      - "js/scales_script.js"
+      - "js/scale_library.js"
+      - "data/music-theory/scales.json"
+      - "images/Scales/**"
+      - "tests/test_scale_consistency.py"
+      - ".github/workflows/scale-consistency.yml"
+  pull_request:
+    paths:
+      - "tools/piano_scale_renderer/scales.json"
+      - "js/scales_script.js"
+      - "js/scale_library.js"
+      - "data/music-theory/scales.json"
+      - "images/Scales/**"
+      - "tests/test_scale_consistency.py"
+      - ".github/workflows/scale-consistency.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run scale consistency tests
+        run: python -m unittest -v tests/test_scale_consistency.py
