@@ -55,17 +55,20 @@ Les trois V4 constituent le **socle actif ChatGPT**. Le renderer n’est plus d�
 
 ## 4. Contenu indispensable du renderer canonique
 
-Le dossier GitHub `tools/piano_scale_renderer/` doit contenir au minimum :
+Le système canonique de rendu des gammes doit contenir au minimum :
 
 - `piano_scale_renderer.py` ;
 - `scales.json` ;
 - `official_template.png` ;
 - `test_renderer.py` ;
 - `requirements.txt` ;
-- `golden/C-majeur.png` ;
-- `golden/E-majeur.png` ;
+- `data/music-theory/tonality-colors.json` ;
+- la référence `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` ;
 - la capacité à générer les 24 sorties ;
-- la capacité à régénérer `validation-report.json`.
+- la capacité à régénérer `validation-report.json` ;
+- une lecture directe de la palette runtime tonique/mode.
+
+Les fichiers déjà présents dans `golden/` sont des snapshots historiques et ne doivent pas servir de source colorimétrique tant qu'ils n'ont pas été régénérés avec la palette actuelle.
 
 `output/`, `last-run.log`, `test-results.txt` et `__pycache__/` ne sont pas canoniques et ne doivent pas être versionnés.
 
