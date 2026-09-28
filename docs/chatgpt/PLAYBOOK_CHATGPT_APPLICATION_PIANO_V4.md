@@ -79,7 +79,7 @@ Lire/récupérer :
 - `scales.json`
 - `official_template.png`
 - `test_renderer.py`
-- `golden/`
+- `golden/` uniquement comme historique, jamais comme source colorimétrique
 
 Procédure obligatoire : récupérer depuis GitHub → exécuter les tests → générer avec le script → lire la validation → comparer si remplacement → livrer/importer.
 
@@ -142,7 +142,7 @@ Avant de proposer de retirer quoi que ce soit :
 
 ## 5. Alertes mémorisées
 
-- 4 PNG de gammes GitHub ne correspondent pas au renderer : D, E, Eb, F majeurs.
+- Ne pas utiliser les anciennes comparaisons blob/golden pour conclure sur la conformité des PNG de gammes ; la conformité actuelle doit être vérifiée contre la palette tonique/mode et le renderer courant.
 - Convention alignée : renderer/entraînement = Eb mineur naturel ; théorie = Eb éolien (notes Eb, F, Gb, Ab, Bb, Cb, Db).
 - accueil data-driven : `data/categories.json` pilote les 5 cartes via `js/home.js` ; conserver la CI `category-consistency.yml` verte.
 - le renversement des accords est affiché dans la consigne et doit rester synchronisé avec l'index d'image correspondant.
