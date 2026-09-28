@@ -1,24 +1,18 @@
 # PALETTE TONALITÉS — ACCORDS ET GAMMES — V1
 
 **Projet :** Application piano  
-**Statut :** référence canonique pour la couleur associée à une tonique et à son mode  
-**Périmètre :** éléments d’interface représentant un accord ou une gamme
+**Statut :** référence fonctionnelle canonique  
+**Source de données runtime :** `data/music-theory/tonality-colors.json`  
+**Périmètre :** accords, gammes et renderers pédagogiques utilisant l'identité tonique/mode
 
 ## 1. Règle fonctionnelle
 
-La couleur d’un accord ou d’une gamme dépend de deux informations :
+La couleur dépend de la **tonique** et du **mode** :
 
-1. sa **tonique** ;
-2. son **mode**.
-
-Règle d’application :
-
-- si l’accord ou la gamme est **majeur(e)**, utiliser la colonne **Majeur** de la tonique ;
-- si l’accord ou la gamme est **mineur(e)**, utiliser la colonne **Mineur** de la tonique ;
-- la colonne **Base** conserve la couleur d’identité de la tonique pour un usage neutre, un état sans mode ou un besoin futur ;
-- les graphies enharmoniques indiquées sur une même ligne utilisent exactement la même famille de couleurs : Do# / Réb, Ré# / Mib, Fa# / Solb, Sol# / Lab, La# / Sib.
-
-La couleur **Base** ne doit donc pas remplacer les variantes Majeur/Mineur lorsqu’un mode est connu.
+- majeur → colonne **Majeur** ;
+- mineur → colonne **Mineur** ;
+- **Base** → identité neutre de la tonique pour un usage sans mode ou futur ;
+- les graphies enharmoniques d'une même ligne partagent la même famille.
 
 ## 2. Table canonique
 
@@ -35,9 +29,9 @@ La couleur **Base** ne doit donc pas remplacer les variantes Majeur/Mineur lorsq
 | **Sol# / Lab** | `#26428B` | `#1D3370` | `#6F8FD6` |
 | **La** | `#E83E8C` | `#C72D74` | `#F19BC2` |
 | **La# / Sib** | `#86B817` | `#6E9612` | `#B8DB67` |
-| **Si** | `#8F244D` | `#731E3E` | `#CC6F8F` |
+| **Si** | `#8E244D` | `#731E3E` | `#CC6F8F` |
 
-## 3. Exemples d’application
+## 3. Exemples
 
 - **Do majeur** → `#B51B1B`
 - **Do mineur** → `#EB8080`
@@ -46,30 +40,13 @@ La couleur **Base** ne doit donc pas remplacer les variantes Majeur/Mineur lorsq
 - **Fa# majeur** → `#1976D2`
 - **Solb mineur** → `#7EC3F9`
 
-## 4. Portée dans l’application
+## 4. Source unique
 
-Cette palette est **transversale aux accords et aux gammes**. Elle sert à colorer les éléments d’interface associés au nom ou à l’identité harmonique d’un accord/d’une gamme.
+Ne pas recopier ces couleurs dans plusieurs scripts. La table structurée dans
+`data/music-theory/tonality-colors.json` est la source runtime à consommer.
 
-Pour les gammes, le périmètre actuel de l’application comprend 12 majeures et 12 mineures naturelles. La règle « Mineur » reste la règle par défaut pour toute future famille explicitement mineure, sauf décision fonctionnelle ultérieure contraire.
+Le renderer d'accords `tools/piano_chord_renderer/` utilise directement cette source.
 
-## 5. Ne pas confondre avec la palette du renderer piano
+## 5. Règle de rendu
 
-Cette palette **ne remplace pas** la palette technique du renderer des PNG de gammes.
-
-Le renderer conserve sa propre convention pour les touches du clavier :
-
-- touche blanche active : `#C53650` ;
-- touche noire active : `#F68C1F` ;
-- texte : blanc ;
-- structure : template original.
-
-Les deux systèmes répondent à des fonctions différentes :
-
-- **palette tonalité/mode** = identité visuelle de l’accord ou de la gamme dans l’interface ;
-- **palette renderer** = remplissage des touches actives dans les images pédagogiques.
-
-## 6. Règle d’implémentation future
-
-Lors d’une future implémentation, éviter de recopier ces couleurs manuellement dans plusieurs scripts/pages. Préférer une **source de données unique** contenant, pour chaque tonique, les trois valeurs `base`, `major` et `minor`, puis faire consommer cette source par les interfaces concernées.
-
-Cette documentation est la source fonctionnelle de référence tant que cette palette n’a pas été déplacée vers une source runtime unique explicitement documentée.
+Lorsqu'un renderer adopte cette palette, toutes les touches actives d'un même accord ou d'une même gamme utilisent la **même couleur tonique/mode**, quelle que soit la nature blanche ou noire de la touche. Les libellés de notes restent blancs.

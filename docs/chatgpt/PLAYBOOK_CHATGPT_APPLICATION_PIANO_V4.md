@@ -40,6 +40,7 @@ Lire :
 - `css/second_page_styles.css`
 
 Attention : le comportement des accords n'est pas le même que celui des gammes.
+Pour produire/corriger une image d'accord, utiliser `tools/piano_chord_renderer/`.
 
 ### Palette accords + gammes
 
@@ -48,7 +49,8 @@ Attention : le comportement des accords n'est pas le même que celui des gammes.
 - Majeur = variante `major`.
 - Mineur = variante `minor`.
 - `base` = couleur neutre conservée pour les usages sans mode / futurs.
-- Ne pas confondre avec le rouge/orange du renderer des touches de piano.
+- Source runtime : `data/music-theory/tonality-colors.json`.
+- Le renderer d'accords `tools/piano_chord_renderer/` consomme cette palette : même couleur tonique/mode pour toutes les touches actives.
 
 ### Gammes — comportement
 Lire :

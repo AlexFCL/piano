@@ -32,7 +32,11 @@ Ne jamais improviser une image de gamme avec un générateur visuel libre ou un 
 Référence canonique :
 `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
 
-Règle courte : tonique = famille de couleur ; majeur = variante majeure ; mineur = variante mineure ; base = variante neutre/réserve future. Cette palette d’interface ne remplace pas la palette du renderer des touches.
+Règle courte : tonique = famille de couleur ; majeur = variante majeure ; mineur = variante mineure ; base = variante neutre/réserve future. La source runtime structurée est `data/music-theory/tonality-colors.json`.
+
+## Renderer canonique des images d'accords
+Chemin : `tools/piano_chord_renderer/`.
+Il utilise le template 711×254 et `data/music-theory/tonality-colors.json`. Les touches actives, blanches ou noires, reçoivent la même couleur tonique/mode et les notes sont libellées en blanc.
 
 ## Sources fonctionnelles
 - Application live : GitHub

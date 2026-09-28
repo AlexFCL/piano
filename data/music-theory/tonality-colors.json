@@ -1,0 +1,14 @@
+{
+  "C": {"aliases": ["C", "Do"], "base": "#D62828", "major": "#B51B1B", "minor": "#EB8080"},
+  "C#/Db": {"aliases": ["C#", "Db", "Do#", "Réb"], "base": "#00A6A6", "major": "#008F8F", "minor": "#66CCCC"},
+  "D": {"aliases": ["D", "Ré"], "base": "#E6A700", "major": "#C48F00", "minor": "#F1CC66"},
+  "D#/Eb": {"aliases": ["D#", "Eb", "Ré#", "Mib"], "base": "#7B2CBF", "major": "#5E1F99", "minor": "#B883E3"},
+  "E": {"aliases": ["E", "Mi"], "base": "#2E9B45", "major": "#228037", "minor": "#7CC88B"},
+  "F": {"aliases": ["F", "Fa"], "base": "#8B5A2B", "major": "#6F4622", "minor": "#C9A27E"},
+  "F#/Gb": {"aliases": ["F#", "Gb", "Fa#", "Solb"], "base": "#2196F3", "major": "#1976D2", "minor": "#7EC3F9"},
+  "G": {"aliases": ["G", "Sol"], "base": "#F26B21", "major": "#D35415", "minor": "#F8A67E"},
+  "G#/Ab": {"aliases": ["G#", "Ab", "Sol#", "Lab"], "base": "#26428B", "major": "#1D3370", "minor": "#6F8FD6"},
+  "A": {"aliases": ["A", "La"], "base": "#E83E8C", "major": "#C72D74", "minor": "#F19BC2"},
+  "A#/Bb": {"aliases": ["A#", "Bb", "La#", "Sib"], "base": "#86B817", "major": "#6E9612", "minor": "#B8DB67"},
+  "B": {"aliases": ["B", "Si"], "base": "#8E244D", "major": "#731E3E", "minor": "#CC6F8F"}
+}

@@ -20,7 +20,7 @@
 | `APPLICATION_PIANO_MASTER_V4.md` | CANONIQUE | Architecture + règles globales | Déposer / garder |
 | `MANIFEST_APPLICATION_PIANO_V4.md` | CANONIQUE | Conservation + dépendances | Déposer / garder |
 | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | CANONIQUE | Routage rapide | Déposer / garder |
-| `PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` | CANONIQUE | Palette tonique + variantes Base/Majeur/Mineur pour accords et gammes | Déposer / garder |
+| `PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` | CANONIQUE | Référence fonctionnelle de la palette tonique/mode | Déposer / garder |
 | `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` | RÉFÉRENCE LOCALE | Copie de la doctrine ; la copie GitHub du renderer est canonique | Garder pendant la transition |
 | `piano_corrector_v1.zip` | BACKUP | Snapshot historique du renderer | Garder hors GitHub comme récupération |
 
@@ -31,7 +31,9 @@ Les trois V4 constituent le **socle actif ChatGPT**. Le renderer n’est plus d�
 | Source | Statut | Rôle | Règle |
 |---|---|---|---|
 | GitHub `AlexFCL/piano` / `master` | LIVE + CANONIQUE | État courant de l'application | Relire avant toute mutation ou réponse “actuelle” |
-| GitHub `tools/piano_scale_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer, template, définitions, tests et doctrine des PNG | **Toujours utiliser pour produire/corriger une gamme** |
+| GitHub `tools/piano_scale_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer, template, définitions, tests et doctrine des PNG de gammes | Utiliser pour les gammes tant que sa migration de palette n'est pas traitée séparément |
+| GitHub `tools/piano_chord_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer déterministe des accords sur template 711×254 | Toujours utiliser pour produire/corriger une image d'accord |
+| GitHub `data/music-theory/tonality-colors.json` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Source runtime unique des couleurs Base/Majeur/Mineur | Consommer depuis les renderers/interfaces, ne pas dupliquer |
 | GitHub `docs/chatgpt/` | CANONIQUE | Copie durable des documents V4 | Utiliser si les pièces jointes ChatGPT sont absentes |
 | GitHub `CHATGPT_PROJECT_POINTER.md` | CANONIQUE | Pointeur minimal de bootstrap | Lire en premier si le contexte projet est incomplet |
 | GitHub `tests/test_scale_consistency.py` | DÉPENDANCE OPÉRATIONNELLE | Détecte les divergences entre renderer, entraînement, bibliothèque, théorie et assets de gammes | Conserver et exécuter après modification des sources concernées |
