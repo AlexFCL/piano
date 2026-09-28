@@ -25,11 +25,16 @@ Décision du 28/09/2026 :
 
 L'ancienne entrée `D#` éolien du dataset de théorie a été remplacée. L'incohérence est considérée comme résolue pour le mode éolien.
 
-## OBSERVÉ — accords / renversement
+## RÉSOLU — accords / renversement
 
-Dans `js/second_page_script.js`, le renversement/fondamentale est tiré et sélectionne l'image, mais le texte affiché ne contient pas cette troisième valeur.
+Décision du 28/09/2026 :
 
-**NON DÉTERMINABLE :** bug ou comportement voulu.
+- le renversement/fondamentale reste tiré parmi 3 positions ;
+- il sélectionne toujours l'image correspondante ;
+- il est désormais affiché dans la consigne sous le nom de l'accord ;
+- libellés : `fond.`, `1er (tonique haut)`, `2ème (tierce haut)`.
+
+Les 102 fichiers `images/Chords/*.jpg` couvrent toujours exactement les combinaisons `17 × 2 × 3`.
 
 ## OBSERVÉ — catégories
 
