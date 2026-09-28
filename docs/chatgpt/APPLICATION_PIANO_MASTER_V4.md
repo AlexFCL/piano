@@ -2,7 +2,7 @@
 
 **Projet :** Application piano  
 **Statut :** source maître consolidée  
-**Date de consolidation :** 28/09/2026 — convention Eb éolien alignée dans le quiz de théorie  
+**Date de consolidation :** 28/09/2026 — convention Eb éolien alignée + contrôle CI de cohérence des gammes  
 **But :** permettre à ChatGPT et au propriétaire du projet de comprendre, modifier et maintenir le projet sans perdre de dépendance importante ni confondre les sources.
 
 ---
@@ -80,9 +80,9 @@ GitHub Pages est activé au niveau du dépôt. Le **mode exact de publication** 
 
 Le dépôt contient actuellement :
 
-- 9 pages HTML ;
-- 4 fichiers CSS ;
-- 7 scripts JavaScript ;
+- 10 pages HTML ;
+- 5 fichiers CSS ;
+- 8 scripts JavaScript ;
 - 5 fichiers JSON de données ;
 - 102 images d'accords ;
 - 24 images de gammes ;
@@ -98,6 +98,7 @@ AlexFCL/piano (master)
 ├── second_page_backup.html
 ├── scales.html
 ├── scale_training.html
+├── scale_library.html
 ├── theory.html
 ├── theory_quiz.html
 ├── category.html
@@ -105,6 +106,11 @@ AlexFCL/piano (master)
 ├── Template.jpg
 ├── Readme.txt
 ├── CHATGPT_PROJECT_POINTER.md
+├── .github/
+│   └── workflows/
+│       └── scale-consistency.yml
+├── tests/
+│   └── test_scale_consistency.py
 ├── tools/
 │   └── piano_scale_renderer/
 │       ├── README.md
@@ -128,12 +134,14 @@ AlexFCL/piano (master)
 │   ├── styles.css
 │   ├── second_page_styles.css
 │   ├── scales_styles.css
+│   ├── scale_library.css
 │   └── library_styles.css
 ├── js/
 │   ├── main.js
 │   ├── second_page_script.js
 │   ├── scales_main.js
 │   ├── scales_script.js
+│   ├── scale_library.js
 │   ├── theory_page.js
 │   ├── theory_quiz.js
 │   └── category_page.js
@@ -218,6 +226,16 @@ Comportement observé :
 
 Pool : 12 majeures + 12 mineures naturelles.
 
+Bibliothèque visuelle complémentaire :
+
+```text
+scale_library.html
+→ js/scale_library.js
+→ images/Scales/*.png
+```
+
+Elle présente actuellement les mêmes 24 gammes sous forme de bibliothèque consultable : 12 majeures + 12 mineures naturelles.
+
 ### 4.4 Théorie musicale
 
 Flux :
@@ -274,6 +292,7 @@ Répartition :
 - `css/styles.css` : accueil + paramétrage accords ;
 - `css/second_page_styles.css` : entraînement accords ;
 - `css/scales_styles.css` : paramétrage + entraînement gammes ;
+- `css/scale_library.css` : bibliothèque visuelle des gammes ;
 - `css/library_styles.css` : théorie + catégories basse/rythme.
 
 **Dépendance externe observée :** Google Fonts pour Inter. Si le réseau bloque cette ressource, la pile système prend le relais.
@@ -288,17 +307,35 @@ Les définitions musicales sont réparties dans plusieurs sources qui n'ont pas 
 
 Rôle : mapping fonctionnel de l'entraînement visuel : libellé → PNG.
 
-### 6.2 `data/music-theory/scales.json`
+### 6.2 `js/scale_library.js`
+
+Rôle : mapping d'affichage de la bibliothèque visuelle : libellé français → PNG.
+
+### 6.3 `data/music-theory/scales.json`
 
 Rôle : questions/réponses de théorie. Inclut ionien, éolien et pentatoniques.
 
-### 6.3 `tools/piano_scale_renderer/scales.json`
+### 6.4 `tools/piano_scale_renderer/scales.json`
 
 Rôle : vérité opérationnelle du renderer d'images, avec séparation slot physique → libellé théorique. **Toujours lire cette copie GitHub ; ne pas reconstruire les gammes de mémoire.**
 
-### 6.4 Notion
+### 6.5 Notion
 
 Rôle : spécification fonctionnelle du générateur de gammes.
+
+### 6.6 Contrôle automatique de cohérence
+
+`tests/test_scale_consistency.py` contrôle automatiquement la zone de recouvrement entre :
+
+- `tools/piano_scale_renderer/scales.json` ;
+- `js/scales_script.js` ;
+- `js/scale_library.js` ;
+- `data/music-theory/scales.json` ;
+- les PNG attendus dans `images/Scales/`.
+
+Le test vérifie notamment les 12 majeures + 12 mineures naturelles, l'unicité des mappings, les noms de fichiers, les libellés de la bibliothèque et la concordance des orthographes ioniennes/éoliennes avec le renderer.
+
+La CI `.github/workflows/scale-consistency.yml` exécute ce test sur `master` et sur les pull requests quand l'une de ces sources change. Notion reste hors CI car il s'agit d'une spécification fonctionnelle externe, pas d'une source runtime.
 
 **Règle : ne jamais modifier une source par analogie avec une autre. Identifier d'abord le domaine.**
 
@@ -418,7 +455,12 @@ La précédente entrée **D# éolien** a été remplacée afin d'aligner le quiz
 
 ### 8.5 Tests applicatifs
 
-Aucune suite de tests automatisés de l'application web n'a été observée dans le dépôt actuel. Les tests automatisés existants concernent le renderer de gammes.
+Deux niveaux de tests automatisés existent désormais :
+
+- renderer de gammes : 8 tests dédiés au rendu déterministe ;
+- cohérence applicative des gammes : `tests/test_scale_consistency.py`, exécuté automatiquement par GitHub Actions.
+
+Le contrôle de cohérence ne remplace pas une recette navigateur : aucune suite E2E/UI automatisée n'est actuellement documentée.
 
 ---
 
