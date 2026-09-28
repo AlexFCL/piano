@@ -75,3 +75,20 @@ Ce contrôle empêche une divergence silencieuse entre les sources qui décriven
 - CI : `.github/workflows/category-consistency.yml`
 
 Ne pas recopier manuellement dans `index.html` les titres, descriptions, icônes ou routes des catégories : l'accueil est rendu depuis `data/categories.json`.
+
+## Générateur d'accords — architecture actuelle
+- Page unique de l'exercice : `chords.html`
+- Logique runtime : `js/chords_script.js`
+- Style dédié : `css/chords_styles.css`
+- Assets : `images/Chords/<tonique>-<majeur|mineur>-<fond|1er|2eme>.png`
+- `second_page.html` est conservée uniquement comme route de compatibilité et redirige vers `chords.html`.
+
+Comportement fonctionnel :
+1. l'utilisateur peut modifier le temps de réponse directement sur la page d'exercice ;
+2. les filtres `Majeur` / `Mineur` sont multi-sélectionnables, avec au moins une option active ;
+3. les filtres `Fondamental` / `1er renversement` / `2e renversement` sont multi-sélectionnables, avec au moins une option active ;
+4. une modification de filtre ou de durée s'applique au tirage suivant et ne coupe pas le tour en cours ;
+5. chaque tour affiche d'abord la consigne seule pendant le délai choisi ;
+6. l'image-réponse est ensuite affichée pendant 3 secondes ;
+7. un nouveau tirage est lancé automatiquement en évitant, lorsque plusieurs choix sont disponibles, de répéter immédiatement exactement le même accord.
+
