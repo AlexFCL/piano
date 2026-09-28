@@ -12,8 +12,6 @@ from PIL import Image, ImageDraw, ImageFont
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (197, 54, 80)      # #C53650
-ORANGE = (246, 140, 31)  # #F68C1F
 TEXT = (255, 255, 255)
 
 WHITE_SLOTS = ("C", "D", "E", "F", "G", "A", "B")
@@ -77,6 +75,32 @@ def verify_template_file(path: Path) -> None:
         raise ValueError(
             f"Template officiel modifié ou remplacé: sha256={digest}, attendu={EXPECTED_TEMPLATE_SHA256}"
         )
+
+
+def load_tonality_colors(path: Path) -> dict:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    aliases = {}
+    for family, cfg in data.items():
+        for alias in cfg["aliases"]:
+            aliases[alias] = {"family": family, **cfg}
+    return aliases
+
+
+def hex_to_rgb(value: str) -> tuple[int, int, int]:
+    value = value.lstrip("#")
+    return tuple(int(value[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def scale_identity(scale_name: str) -> tuple[str, str]:
+    root = scale_name.split()[0]
+    lower = scale_name.lower()
+    if "mineur" in lower:
+        quality = "minor"
+    elif "majeur" in lower:
+        quality = "major"
+    else:
+        raise ValueError(f"Mode majeur/mineur introuvable dans: {scale_name}")
+    return root, quality
 
 
 def detect_geometry(template: Image.Image) -> Geometry:
@@ -188,6 +212,8 @@ def render_scale(
     template_path: Path,
     notes: Dict[str, str],
     output_path: Path,
+    scale_name: str,
+    colors_path: Path,
     font_path: Path | None = None,
     validate: bool = True,
 ) -> dict:
@@ -196,6 +222,13 @@ def render_scale(
         raise ValueError(f"Slots inconnus: {sorted(unknown)}")
     if len(notes) != 7:
         raise ValueError(f"Une gamme doit activer exactement 7 slots, reçu: {len(notes)}")
+
+    colors = load_tonality_colors(colors_path)
+    root, quality = scale_identity(scale_name)
+    if root not in colors:
+        raise ValueError(f"Tonique absente de la palette: {root}")
+    fill_hex = colors[root][quality]
+    fill = hex_to_rgb(fill_hex)
 
     verify_template_file(template_path)
     template = Image.open(template_path).convert("RGB")
@@ -208,7 +241,7 @@ def render_scale(
 
     # 1) Fill whole white-key interiors from top to bottom.
     for slot in active_white:
-        draw.rectangle(geom.white_boxes[slot], fill=RED)
+        draw.rectangle(geom.white_boxes[slot], fill=fill)
 
     # 2) Restore the exact original black-key rectangles from the immutable template.
     for slot, (x1, y1, x2, y2) in geom.black_boxes.items():
@@ -217,15 +250,14 @@ def render_scale(
 
     draw = ImageDraw.Draw(image)
 
-    # 3) Fill the locked color mask of active black keys.
+    # 3) Fill active black keys with the same tonic/mode color.
     # Canonical template rule: keep the original outline and side margins visible.
-    # Example C#: physical box x=42..77, orange fill x=45..74, y=8..155.
     for slot in active_black:
         x1, y1, x2, y2 = geom.black_boxes[slot]
-        draw.rectangle((x1 + 3, y1 + 1, x2 - 3, y2 - 2), fill=ORANGE)
+        draw.rectangle((x1 + 3, y1 + 1, x2 - 3, y2 - 2), fill=fill)
 
     # 4) Validate fills BEFORE adding text so labels cannot mask missing color.
-    fill_report = validate_fills(image, template, geom, notes) if validate else {"ok": True, "errors": []}
+    fill_report = validate_fills(image, template, geom, notes, fill) if validate else {"ok": True, "errors": []}
     if validate and not fill_report["ok"]:
         raise AssertionError("Validation des aplats échouée: " + "; ".join(fill_report["errors"]))
 
@@ -243,7 +275,7 @@ def render_scale(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     image.save(output_path, format="PNG", optimize=False)
 
-    final_report = validate_final(image, template, geom, notes, fill_report)
+    final_report = validate_final(image, template, geom, notes, fill_report, fill_hex)
     if validate and not final_report["ok"]:
         output_path.unlink(missing_ok=True)
         raise AssertionError("Validation finale échouée: " + "; ".join(final_report["errors"]))
@@ -257,20 +289,20 @@ def _point_in_black_box(x: int, y: int, geom: Geometry) -> bool:
     return False
 
 
-def validate_fills(image: Image.Image, template: Image.Image, geom: Geometry, notes: Dict[str, str]) -> dict:
+def validate_fills(image: Image.Image, template: Image.Image, geom: Geometry, notes: Dict[str, str], fill: tuple[int, int, int]) -> dict:
     errors = []
     rgb = image.convert("RGB")
     active_white = {slot for slot in notes if slot in WHITE_SLOTS}
     active_black = {slot for slot in notes if slot in BLACK_SLOTS}
 
-    # Every visible interior pixel of an active white key must be exactly red before text.
+    # Every visible interior pixel of an active white key must match the scale color before text.
     for slot, (x1, y1, x2, y2) in geom.white_boxes.items():
         for y in range(y1, y2 + 1):
             for x in range(x1, x2 + 1):
                 if _point_in_black_box(x, y, geom):
                     continue
                 pixel = rgb.getpixel((x, y))
-                expected = RED if slot in active_white else WHITE
+                expected = fill if slot in active_white else WHITE
                 if pixel != expected:
                     errors.append(f"{slot}: pixel {(x,y)}={pixel}, attendu {expected}")
                     break
@@ -282,8 +314,8 @@ def validate_fills(image: Image.Image, template: Image.Image, geom: Geometry, no
         if slot in active_black:
             for y in range(y1 + 1, y2 - 1):
                 for x in range(x1 + 3, x2 - 2):
-                    if rgb.getpixel((x, y)) != ORANGE:
-                        errors.append(f"{slot}: remplissage orange incomplet à {(x,y)}")
+                    if rgb.getpixel((x, y)) != fill:
+                        errors.append(f"{slot}: remplissage couleur incomplet à {(x,y)}")
                         break
                 if errors and errors[-1].startswith(slot + ":"):
                     break
@@ -332,7 +364,7 @@ def validate_fills(image: Image.Image, template: Image.Image, geom: Geometry, no
     return {"ok": not errors, "errors": errors}
 
 
-def validate_final(image: Image.Image, template: Image.Image, geom: Geometry, notes: Dict[str, str], fill_report: dict) -> dict:
+def validate_final(image: Image.Image, template: Image.Image, geom: Geometry, notes: Dict[str, str], fill_report: dict, fill_hex: str) -> dict:
     errors = list(fill_report.get("errors", []))
     if image.size != (365, 254):
         errors.append(f"Dimensions finales incorrectes: {image.size}")
@@ -352,7 +384,8 @@ def validate_final(image: Image.Image, template: Image.Image, geom: Geometry, no
         "size": list(image.size),
         "active_slots": [slot for slot in ALL_SLOTS if slot in notes],
         "labels_by_slot": {slot: notes[slot] for slot in ALL_SLOTS if slot in notes},
-        "colors": {"white_active": "#C53650", "black_active": "#F68C1F", "text": "#FFFFFF"},
+        "color": fill_hex,
+        "colors": {"active": fill_hex, "text": "#FFFFFF"},
         "template_locked": True,
     }
 
@@ -368,6 +401,7 @@ def main() -> None:
     parser.add_argument("--all", action="store_true", help="Générer toutes les gammes")
     parser.add_argument("--template", type=Path, default=Path(__file__).with_name("official_template.png"))
     parser.add_argument("--scales", type=Path, default=Path(__file__).with_name("scales.json"))
+    parser.add_argument("--colors", type=Path, default=Path(__file__).parents[1] / ".." / "data" / "music-theory" / "tonality-colors.json")
     parser.add_argument("--output-dir", type=Path, default=Path(__file__).with_name("output"))
     parser.add_argument("--font", type=Path, default=None)
     args = parser.parse_args()
@@ -386,7 +420,7 @@ def main() -> None:
     for name in names:
         cfg = scales[name]
         output = args.output_dir / cfg["filename"]
-        reports[name] = render_scale(args.template, cfg["notes"], output, args.font, validate=True)
+        reports[name] = render_scale(args.template, cfg["notes"], output, name, args.colors.resolve(), args.font, validate=True)
         print(f"OK  {name} -> {output}")
 
     report_path = args.output_dir / "validation-report.json"
