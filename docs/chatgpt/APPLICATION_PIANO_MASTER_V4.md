@@ -35,7 +35,7 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 | Architecture globale | Ce document V4 | Sert de carte du projet |
 | Routage rapide ChatGPT | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | À lire en premier dans une future demande |
 | Dépendances / conservation | `MANIFEST_APPLICATION_PIANO_V4.md` | Décide ce qui doit être conservé |
-| Images de gammes | GitHub `tools/piano_scale_renderer/` | Renderer historique des gammes ; sa migration vers la palette tonique/mode doit être traitée explicitement |
+| Images de gammes | GitHub `tools/piano_scale_renderer/` + `data/music-theory/tonality-colors.json` | Renderer déterministe ; la couleur doit provenir exclusivement de la paire tonique/mode |
 | Images d'accords | GitHub `tools/piano_chord_renderer/` | **Source canonique exécutable** : renderer + template + tests |
 | Palette tonique/mode | `data/music-theory/tonality-colors.json` | **Source runtime canonique** des couleurs Base/Majeur/Mineur |
 | Spécification fonctionnelle du générateur de gammes | Notion `Spécifications – Générateur de gammes piano` | Intention fonctionnelle ; le code GitHub prévaut pour l'état réel |
@@ -54,7 +54,7 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 - **Framework :** aucun framework applicatif observé
 - **GitHub Pages :** le dépôt signale `has_pages: true`
 - **Renderer accords canonique :** `tools/piano_chord_renderer/`
-- **Renderer gammes historique :** `tools/piano_scale_renderer/`
+- **Renderer gammes canonique :** `tools/piano_scale_renderer/`
 - **Palette runtime tonique/mode :** `data/music-theory/tonality-colors.json`
 - **Documentation ChatGPT versionnée :** `docs/chatgpt/`
 - **Pointeur de démarrage :** `CHATGPT_PROJECT_POINTER.md`
@@ -274,7 +274,7 @@ Source runtime canonique : `data/music-theory/tonality-colors.json`.
 
 Règle : la **tonique** choisit la famille de couleur ; le **mode** choisit la variante. Un accord ou une gamme majeur(e) utilise la couleur **Majeur** correspondante, un accord ou une gamme mineur(e) utilise la couleur **Mineur** correspondante. La couleur **Base** est conservée comme identité neutre / réserve pour les usages futurs.
 
-Le renderer d'accords consomme directement cette source et applique une couleur unique tonique/mode à toutes les touches actives, blanches ou noires.
+Les renderers d'accords et de gammes doivent consommer cette source et appliquer une couleur unique tonique/mode à toutes les touches actives, blanches ou noires. Aucune couleur fixe ne doit être choisie selon le type physique de touche.
 
 ### 4.4 Théorie musicale
 
