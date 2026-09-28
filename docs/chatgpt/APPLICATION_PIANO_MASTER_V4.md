@@ -2,7 +2,7 @@
 
 **Projet :** Application piano  
 **Statut :** source maître consolidée  
-**Date de consolidation :** 23/09/2026 — révision après publication du renderer dans GitHub  
+**Date de consolidation :** 28/09/2026 — convention Eb éolien alignée dans le quiz de théorie  
 **But :** permettre à ChatGPT et au propriétaire du projet de comprendre, modifier et maintenir le projet sans perdre de dépendance importante ni confondre les sources.
 
 ---
@@ -392,12 +392,15 @@ Divergences actuelles :
 
 Ne pas remplacer automatiquement ces quatre fichiers sans demande explicite. Mais ne jamais dire que les 24 assets sont synchronisés tant que cet écart existe.
 
-### 8.2 `Eb mineur` vs `D# éolien`
+### 8.2 Convention enharmonique mineure — résolue
+
+Décision du 28/09/2026 :
 
 - entraînement visuel/renderer : **Eb mineur naturel** ;
-- dataset théorie : **D# éolien**.
+- dataset théorie, mode éolien : **Eb éolien** ;
+- notes attendues dans le quiz : **Eb, F, Gb, Ab, Bb, Cb, Db**.
 
-Les deux représentent la même classe de hauteur mais une orthographe théorique différente. **Aucune harmonisation automatique.**
+La précédente entrée **D# éolien** a été remplacée afin d'aligner le quiz de théorie avec la convention pédagogique déjà utilisée par le renderer et l'entraînement visuel. Cette décision concerne l'éolien ; elle ne renomme pas automatiquement les autres familles de gammes enharmoniques.
 
 ### 8.3 Catégories
 
