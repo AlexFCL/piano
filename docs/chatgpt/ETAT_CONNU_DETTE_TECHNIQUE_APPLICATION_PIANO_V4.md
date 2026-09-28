@@ -37,20 +37,24 @@ Dans `js/second_page_script.js`, le renversement/fondamentale est tiré et séle
 
 Risque : double maintenance.
 
-## OBSERVÉ — duplication des gammes
+## MITIGÉ — duplication des gammes
 
-Définitions présentes dans :
-- renderer `scales.json`
-- `js/scales_script.js`
+Définitions / mappings présents dans :
+- renderer `tools/piano_scale_renderer/scales.json`
+- entraînement `js/scales_script.js`
+- bibliothèque `js/scale_library.js`
 - théorie `data/music-theory/scales.json`
 - Notion
 
-Risque : divergence silencieuse.
+Le risque de divergence runtime est désormais couvert par `tests/test_scale_consistency.py` et la CI `.github/workflows/scale-consistency.yml`. Le test vérifie les 24 gammes visuelles, leurs mappings vers les PNG et la concordance des orthographes ioniennes/éoliennes avec le renderer.
+
+Notion reste volontairement hors de cette CI : c'est une spécification fonctionnelle externe et sa cohérence documentaire reste à vérifier lors d'un changement de contrat.
 
 ## OBSERVÉ — tests
 
-- renderer : 8 tests automatisés, actuellement OK ;
-- application web : aucune suite automatisée observée.
+- renderer : 8 tests automatisés ;
+- cohérence des sources de gammes : 5 tests automatisés, exécutés par GitHub Actions ;
+- navigateur / E2E : aucune suite automatisée documentée.
 
 ## OBSERVÉ — fichiers legacy
 
