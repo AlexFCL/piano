@@ -3,48 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices — Générateur de gammes</title>
-    <link rel="stylesheet" href="css/scales_styles.css">
+    <title>Redirection — Générateur de gammes</title>
 </head>
-<body class="setup-page">
-    <div class="app-shell">
-        <header class="app-header">
-            <a class="brand" href="index.html">Exercices</a>
-            <div class="header-actions">
-                <a class="header-link" href="scale_library.html">Toutes les gammes</a>
-                <a class="header-link" href="index.html">← Retour</a>
-            </div>
-        </header>
-
-        <main class="setup-layout">
-            <section class="setup-hero">
-                <p class="eyebrow">Piano · entraînement</p>
-                <h1>Générateur de gammes</h1>
-                <p class="subtitle">12 gammes majeures + 12 gammes mineures naturelles.</p>
-            </section>
-
-            <section class="setup-panel">
-                <div class="setup-panel-copy">
-                    <p class="panel-kicker">Paramètre de l’exercice</p>
-                    <h2>Combien de temps veux-tu pour répondre ?</h2>
-                    <p>Le nom de la gamme apparaît d’abord. L’image-réponse s’affiche ensuite pendant 3 secondes.</p>
-                </div>
-
-                <div class="setup-controls">
-                    <label for="scale-update-time">Temps de réponse</label>
-                    <div class="time-row">
-                        <div class="input-wrap">
-                            <input type="text" inputmode="decimal" id="scale-update-time" placeholder="5" autocomplete="off" aria-describedby="time-hint">
-                            <span>sec.</span>
-                        </div>
-                        <button id="start-scales" type="button">Démarrer l’exercice</button>
-                    </div>
-                    <p id="time-hint" class="hint">Minimum : 1 seconde.</p>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script src="js/scales_main.js"></script>
+<body>
+    <p>Redirection vers le générateur de gammes…</p>
+    <script>
+        window.location.replace(`scale_training.html${window.location.search}`);
+    </script>
 </body>
 </html>
