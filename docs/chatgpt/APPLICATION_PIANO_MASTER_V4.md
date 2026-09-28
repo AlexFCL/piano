@@ -194,11 +194,13 @@ Comportement observé :
 - une note est tirée parmi 17 graphies ;
 - majeur/mineur est tiré ;
 - une position/fondamentale-renversement est tirée ;
+- cette position est affichée dans la consigne sous le nom de l'accord ;
+- les libellés sont `fond.`, `1er (tonique haut)` et `2ème (tierce haut)` ;
 - le nom de l'image est calculé par index `note-type-position.jpg` ;
 - 102 images correspondent à `17 × 2 × 3` combinaisons ;
 - un nouveau tirage est fait toutes les `updateTime` secondes.
 
-**Point à surveiller :** la troisième valeur (fondamentale / 1er / 2e renversement) influence l'image, mais n'est pas affichée dans le texte de la question dans le code actuel. L'intention fonctionnelle n'est pas déterminable à partir du code seul. Ne pas modifier sans décision explicite.
+Décision du 28/09/2026 : le renversement doit être visible dans la question afin que la consigne corresponde exactement à l'image attendue.
 
 ### 4.3 Gammes — entraînement visuel
 
@@ -439,11 +441,15 @@ Décision du 28/09/2026 :
 
 La précédente entrée **D# éolien** a été remplacée afin d'aligner le quiz de théorie avec la convention pédagogique déjà utilisée par le renderer et l'entraînement visuel. Cette décision concerne l'éolien ; elle ne renomme pas automatiquement les autres familles de gammes enharmoniques.
 
-### 8.3 Catégories
+### 8.3 Accords / renversement — résolu
+
+Décision du 28/09/2026 : le renversement/fondamentale tiré est désormais affiché dans la consigne. Le mapping vers les 102 images reste inchangé.
+
+### 8.4 Catégories
 
 `data/categories.json` existe mais l'accueil est hardcodé dans `index.html`.
 
-### 8.4 Fichiers legacy / rôle non prouvé
+### 8.5 Fichiers legacy / rôle non prouvé
 
 À conserver tant que leur rôle n'est pas explicitement établi :
 
@@ -453,7 +459,7 @@ La précédente entrée **D# éolien** a été remplacée afin d'aligner le quiz
 - `Readme.txt` même s'il est vide ;
 - anciens documents V1/V2/V3 hors contexte actif si archivés.
 
-### 8.5 Tests applicatifs
+### 8.6 Tests applicatifs
 
 Deux niveaux de tests automatisés existent désormais :
 
@@ -464,7 +470,7 @@ Le contrôle de cohérence ne remplace pas une recette navigateur : aucune suite
 
 ---
 
-## 8.6 Bootstrap obligatoire pour une future conversation
+## 8.7 Bootstrap obligatoire pour une future conversation
 
 Si une future conversation reçoit une demande telle que « génère une gamme », « corrige une image de gamme » ou « ajoute un PNG de gamme » :
 
