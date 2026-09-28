@@ -3,41 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices — Entraînement aux accords</title>
-    <link rel="stylesheet" href="css/second_page_styles.css">
+    <title>Redirection — Générateur d'accords</title>
 </head>
 <body>
-    <div class="app-shell">
-        <header class="app-header">
-            <a class="brand" href="index.html">Exercices</a>
-            <a class="header-link" href="chords.html">← Modifier le temps</a>
-        </header>
-
-        <main class="training-layout">
-            <div class="training-heading">
-                <div>
-                    <p class="eyebrow">Générateur d'accords</p>
-                    <h1>À toi de jouer</h1>
-                </div>
-                <div class="timing-chip">Actualisation : <strong id="response-time-value">—</strong></div>
-            </div>
-
-            <section class="chord-stage">
-                <div class="question-card">
-                    <span class="treble-clef" aria-hidden="true">𝄞</span>
-                    <div id="random-values" class="random-value-container">
-                        <div class="random-value">Initialisation…</div>
-                    </div>
-                    <span class="question-balance" aria-hidden="true"></span>
-                </div>
-
-                <div class="answer-zone">
-                    <img id="chord-image" src="" alt="Image d'accord">
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script src="js/second_page_script.js"></script>
+    <p>Redirection vers le générateur d'accords…</p>
+    <script>
+        window.location.replace(`chords.html${window.location.search}`);
+    </script>
 </body>
 </html>
