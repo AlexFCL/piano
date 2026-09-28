@@ -100,7 +100,7 @@ Avant de proposer de retirer quoi que ce soit :
 ## 5. Alertes mémorisées
 
 - 4 PNG de gammes GitHub ne correspondent pas au renderer : D, E, Eb, F majeurs.
-- Renderer/entraînement : Eb mineur naturel ; théorie : D# éolien.
+- Convention alignée : renderer/entraînement = Eb mineur naturel ; théorie = Eb éolien (notes Eb, F, Gb, Ab, Bb, Cb, Db).
 - `data/categories.json` n'alimente pas l'accueil.
 - le renversement des accords influence l'image mais n'est pas affiché dans le texte actuel.
 - `second_page_backup.html` et templates racine : ne pas supprimer par le nom seul.
