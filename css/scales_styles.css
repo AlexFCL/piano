@@ -304,7 +304,7 @@ button:focus-visible {
 
 .scale-name {
     max-width: 100%;
-    font-size: clamp(2.5rem, 4vw, 3.9rem);
+    font-size: clamp(1.65rem, 2.7vw, 2.35rem);
     line-height: 1;
     letter-spacing: -.04em;
     font-weight: 800;
@@ -458,7 +458,7 @@ button:focus-visible {
     }
 
     .scale-name {
-        font-size: clamp(2.35rem, 12vw, 3.6rem);
+        font-size: clamp(1.55rem, 7.5vw, 2.15rem);
     }
 
     #scale-image {
