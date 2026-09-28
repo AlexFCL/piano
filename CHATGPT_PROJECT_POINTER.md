@@ -28,6 +28,12 @@ Pour toute génération, correction ou remplacement d'un PNG de gamme :
 
 Ne jamais improviser une image de gamme avec un générateur visuel libre ou un redessin approximatif.
 
+## Palette tonique / mode — accords et gammes
+Référence canonique :
+`docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
+
+Règle courte : tonique = famille de couleur ; majeur = variante majeure ; mineur = variante mineure ; base = variante neutre/réserve future. Cette palette d’interface ne remplace pas la palette du renderer des touches.
+
 ## Sources fonctionnelles
 - Application live : GitHub
 - Intentions / spécifications fonctionnelles des gammes : Notion, page « Spécifications – Générateur de gammes piano »
