@@ -35,3 +35,14 @@ Ne jamais improviser une image de gamme avec un générateur visuel libre ou un 
 
 ## Règle de conservation
 Ne jamais conseiller la suppression d'une source, d'un script, d'un asset, d'un template, d'un test ou d'une archive sans avoir vérifié son contenu, ses dépendances, son remplaçant et l'existence d'un backup. En cas de doute : conserver.
+
+
+## Pages gammes
+- Bibliothèque visuelle / point d’entrée depuis l’accueil : `scale_library.html`
+- Générateur aléatoire / réglage du temps : `scales.html`
+- Exercice en cours : `scale_training.html`
+- Images validées : `images/Scales/`
+- Logique d’affichage de la bibliothèque : `js/scale_library.js`
+- Style de la bibliothèque : `css/scale_library.css`
+
+La bibliothèque affiche actuellement 12 gammes majeures et 12 gammes mineures naturelles. Les familles futures (ex. pentatoniques) doivent s’ajouter comme nouveaux types sans remplacer les PNG canoniques existants.
