@@ -49,10 +49,12 @@ Ne jamais conseiller la suppression d'une source, d'un script, d'un asset, d'un 
 
 ## Pages gammes
 - Bibliothèque visuelle / point d’entrée depuis l’accueil : `scale_library.html`
-- Générateur aléatoire / réglage du temps : `scales.html`
-- Exercice en cours : `scale_training.html`
+- Générateur aléatoire / page unique d’exercice : `scale_training.html`
+- Ancienne page `scales.html` : route de compatibilité qui redirige vers `scale_training.html`
 - Images validées : `images/Scales/`
+- Logique d’entraînement : `js/scales_script.js`
 - Logique d’affichage de la bibliothèque : `js/scale_library.js`
+- Style d’entraînement : `css/scales_styles.css`
 - Style de la bibliothèque : `css/scale_library.css`
 
 La bibliothèque affiche actuellement 12 gammes majeures et 12 gammes mineures naturelles. Les familles futures (ex. pentatoniques) doivent s’ajouter comme nouveaux types sans remplacer les PNG canoniques existants.
@@ -94,3 +96,14 @@ Comportement fonctionnel :
 8. l'image-réponse est ensuite affichée pendant 3 secondes ;
 9. un nouveau tirage est lancé automatiquement en évitant, lorsque plusieurs choix sont disponibles, de répéter immédiatement exactement le même accord.
 
+
+
+### Générateur aléatoire de gammes — comportement
+1. le lien `Entraînement aléatoire` de la bibliothèque ouvre directement `scale_training.html`, sans page de réglage intermédiaire ;
+2. le temps de réponse est modifiable directement sur la page d’exercice ;
+3. les boutons `Majeur` et `Mineur` sont multi-sélectionnables, avec au moins un type actif ;
+4. une modification de type ou de durée s’applique au tirage suivant et ne coupe pas le tour en cours ;
+5. le pool majeur contient les 12 gammes majeures et le pool mineur les 12 gammes mineures naturelles ;
+6. chaque tour affiche d’abord le nom de la gamme pendant le délai choisi ;
+7. l’image-réponse est ensuite affichée pendant 3 secondes ;
+8. lorsque plusieurs gammes sont disponibles, le générateur évite de répéter immédiatement la même gamme.
