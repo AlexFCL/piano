@@ -46,3 +46,12 @@ Ne jamais conseiller la suppression d'une source, d'un script, d'un asset, d'un 
 - Style de la bibliothèque : `css/scale_library.css`
 
 La bibliothèque affiche actuellement 12 gammes majeures et 12 gammes mineures naturelles. Les familles futures (ex. pentatoniques) doivent s’ajouter comme nouveaux types sans remplacer les PNG canoniques existants.
+
+
+## Contrôle automatique de cohérence des gammes
+- Test : `tests/test_scale_consistency.py`
+- CI : `.github/workflows/scale-consistency.yml`
+- Commande locale : `python -m unittest -v tests/test_scale_consistency.py`
+- Sources contrôlées : renderer `scales.json`, entraînement `js/scales_script.js`, bibliothèque `js/scale_library.js`, théorie `data/music-theory/scales.json` et existence des PNG référencés.
+
+Ce contrôle empêche une divergence silencieuse entre les sources qui décrivent les 24 gammes visuelles. Notion reste une spécification fonctionnelle et n'est pas une source runtime testée par cette CI.
