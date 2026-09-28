@@ -1,0 +1,49 @@
+name: Category metadata consistency
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "data/categories.json"
+      - "data/exercises/**"
+      - "index.html"
+      - "category.html"
+      - "chords.html"
+      - "scale_library.html"
+      - "theory.html"
+      - "js/home.js"
+      - "js/category_page.js"
+      - "tests/test_categories.py"
+      - ".github/workflows/category-consistency.yml"
+  pull_request:
+    paths:
+      - "data/categories.json"
+      - "data/exercises/**"
+      - "index.html"
+      - "category.html"
+      - "chords.html"
+      - "scale_library.html"
+      - "theory.html"
+      - "js/home.js"
+      - "js/category_page.js"
+      - "tests/test_categories.py"
+      - ".github/workflows/category-consistency.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run category metadata tests
+        run: python -m unittest -v tests/test_categories.py
