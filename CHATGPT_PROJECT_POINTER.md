@@ -55,3 +55,13 @@ La bibliothèque affiche actuellement 12 gammes majeures et 12 gammes mineures n
 - Sources contrôlées : renderer `scales.json`, entraînement `js/scales_script.js`, bibliothèque `js/scale_library.js`, théorie `data/music-theory/scales.json` et existence des PNG référencés.
 
 Ce contrôle empêche une divergence silencieuse entre les sources qui décrivent les 24 gammes visuelles. Notion reste une spécification fonctionnelle et n'est pas une source runtime testée par cette CI.
+
+
+## Accueil et catégories
+- Métadonnées des 5 cartes d'accueil : `data/categories.json`
+- Rendu de l'accueil : `js/home.js`
+- Pages génériques Basse/Rythme : `category.html` + `js/category_page.js`
+- Test : `tests/test_categories.py`
+- CI : `.github/workflows/category-consistency.yml`
+
+Ne pas recopier manuellement dans `index.html` les titres, descriptions, icônes ou routes des catégories : l'accueil est rendu depuis `data/categories.json`.
