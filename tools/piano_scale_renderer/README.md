@@ -8,14 +8,24 @@ Le programme ne redessine jamais un clavier. Il :
 
 1. charge `official_template.png` (365×254 px) ;
 2. détecte et verrouille sa géométrie canonique ;
-3. remplit les **masques fixes** des touches blanches actives en `#C53650` ;
-4. restaure les touches noires depuis le template original ;
-5. remplit l'intérieur des touches noires actives en `#F68C1F` ;
+3. lit la couleur de la gamme dans `../../data/music-theory/tonality-colors.json` à partir de sa **tonique** et de son **mode** ;
+4. remplit toutes les touches actives, blanches ou noires, avec cette **même couleur tonique/mode** ;
+5. restaure les éléments structurels du template ;
 6. valide les aplats **avant** de poser le texte ;
 7. place les libellés avec Roboto Condensed Bold ;
 8. rejette l'image si une validation échoue.
 
 Aucun modèle d'image n'est utilisé pour les assets finaux.
+
+## Palette canonique
+
+La source de vérité des couleurs est `../../data/music-theory/tonality-colors.json`, documentée dans `../../docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
+
+- une gamme majeure utilise la variante `major` de sa tonique ;
+- une gamme mineure utilise la variante `minor` de sa tonique ;
+- toutes les touches actives utilisent la même couleur, indépendamment du fait qu'elles soient blanches ou noires ;
+- les libellés restent blancs ;
+- aucune couleur statique dépendant du type physique de touche ne doit être utilisée.
 
 ## Séparation fondamentale
 
@@ -75,4 +85,4 @@ Les tests couvrent notamment :
 
 Le renderer vérifie aussi le **SHA-256 exact du template officiel** avant toute génération. Si le template est remplacé ou modifié, la génération s'arrête.
 
-Deux images approuvées (`golden/C-majeur.png` et `golden/E-majeur.png`) servent de références de non-régression : le renderer doit les reproduire **pixel pour pixel**.
+Les anciens fichiers du dossier `golden/` sont des snapshots historiques. Ils ne constituent plus une référence colorimétrique tant qu'ils n'ont pas été régénérés depuis la palette tonique/mode actuelle.
