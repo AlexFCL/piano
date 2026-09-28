@@ -35,17 +35,21 @@ Le passage d'un gros base64 entre l'environnement local de ChatGPT et le connect
 
 ## 3. Méthode autorisée si le binaire est petit
 
-La méthode Git object est acceptable uniquement si la charge utile reste raisonnable et peut être transmise intégralement :
+La méthode Git object est acceptable uniquement si la charge utile reste raisonnable et peut être transmise intégralement.
 
-1. encoder le fichier en base64 ;
-2. `create_blob(encoding="base64")` ;
-3. `create_tree` avec le blob ;
-4. `create_commit` ;
-5. revérifier le HEAD ;
-6. `update_ref` en fast-forward ;
-7. relire le fichier ou son blob pour vérifier le SHA.
+Procédure obligatoire dans ChatGPT :
+1. vérifier la taille réelle du fichier local ;
+2. encoder **un seul fichier binaire par appel** en base64 ;
+3. appeler `create_blob(encoding="base64")` pour ce seul fichier ;
+4. noter immédiatement le SHA du blob ;
+5. répéter fichier par fichier ; ne jamais regrouper plusieurs gros base64 dans le même appel ;
+6. une fois tous les blobs créés, créer **un seul tree** contenant l'ensemble des chemins ;
+7. créer **un seul commit** ;
+8. revérifier le HEAD juste avant `update_ref` ;
+9. déplacer `master` uniquement en fast-forward ;
+10. relire plusieurs fichiers créés et vérifier leurs blob SHA.
 
-Pour une série de fichiers, créer de préférence **un seul tree et un seul commit**.
+Retour d'expérience validé le 28/09/2026 : des PNG d'environ 4–5 Ko passent correctement avec cette granularité. Le regroupement de plusieurs base64 dans un seul appel est à éviter même si la somme paraît petite.
 
 ## 4. Cas où il faut s'arrêter
 
