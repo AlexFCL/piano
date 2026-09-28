@@ -15,12 +15,15 @@ Non identiques :
 
 **Décision requise avant action :** faut-il remplacer les quatre assets GitHub par les sorties canoniques actuelles ?
 
-## OBSERVÉ — nomenclature mineure
+## RÉSOLU — nomenclature mineure
+
+Décision du 28/09/2026 :
 
 - entraînement/renderer : `Eb mineur naturel`
-- théorie : `D#` éolien
+- théorie : `Eb` éolien
+- notes attendues : `Eb, F, Gb, Ab, Bb, Cb, Db`
 
-**Décision requise :** conserver les deux orthographes selon le contexte ou harmoniser explicitement.
+L'ancienne entrée `D#` éolien du dataset de théorie a été remplacée. L'incohérence est considérée comme résolue pour le mode éolien.
 
 ## OBSERVÉ — accords / renversement
 
