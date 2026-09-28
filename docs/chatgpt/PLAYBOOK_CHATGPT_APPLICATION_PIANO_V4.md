@@ -16,7 +16,19 @@ Si le contexte est incomplet, lire d’abord `AlexFCL/piano/CHATGPT_PROJECT_POIN
 ## 2. Routage par domaine
 
 ### UI / accueil / CSS
-Lire seulement les HTML/CSS concernés dans GitHub.
+Pour l'accueil, lire :
+- `index.html`
+- `js/home.js`
+- `data/categories.json`
+- `css/styles.css`
+
+Les 5 cartes d'accueil sont pilotées par `data/categories.json`. Ne pas les recopier en dur dans `index.html`.
+
+Contrôle :
+`python -m unittest -v tests/test_categories.py`
+
+CI :
+`.github/workflows/category-consistency.yml`
 
 ### Accords
 Lire :
@@ -83,9 +95,10 @@ Lire :
 
 ### Basse / rythme
 Lire :
+- `data/categories.json`
 - `category.html`
 - `js/category_page.js`
-- JSON de la catégorie
+- JSON d'exercices indiqué par `exerciseFile`
 - `css/library_styles.css` si UI concernée
 
 ## 3. Procédure GitHub avant mutation
@@ -117,7 +130,7 @@ Avant de proposer de retirer quoi que ce soit :
 
 - 4 PNG de gammes GitHub ne correspondent pas au renderer : D, E, Eb, F majeurs.
 - Convention alignée : renderer/entraînement = Eb mineur naturel ; théorie = Eb éolien (notes Eb, F, Gb, Ab, Bb, Cb, Db).
-- `data/categories.json` n'alimente pas l'accueil.
+- accueil data-driven : `data/categories.json` pilote les 5 cartes via `js/home.js` ; conserver la CI `category-consistency.yml` verte.
 - le renversement des accords est affiché dans la consigne et doit rester synchronisé avec l'index d'image correspondant.
 - `second_page_backup.html` et templates racine : ne pas supprimer par le nom seul.
 - contrôle inter-sources automatisé actif via `tests/test_scale_consistency.py` + GitHub Actions ; pas de suite navigateur/E2E documentée.
