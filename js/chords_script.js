@@ -6,22 +6,22 @@ const qualities = {
         imageSlug: "majeur"
     },
     mineur: {
-        displaySuffix: " min",
+        displaySuffix: " mineur",
         imageSlug: "mineur"
     }
 };
 
 const inversions = {
     fond: {
-        label: "fond.",
+        label: "fondamental",
         imageSlug: "fond"
     },
     "1er": {
-        label: "1er (tonique haut)",
+        label: "1er renversement",
         imageSlug: "1er"
     },
     "2eme": {
-        label: "2ème (tierce haut)",
+        label: "2e renversement",
         imageSlug: "2eme"
     }
 };
@@ -146,8 +146,7 @@ function renderQuestion(chord) {
 
     randomValuesElement.innerHTML = `
         <div class="random-value">
-            ${chord.root}<span class="custom2">${quality.displaySuffix}</span>
-            <span class="custom3">${inversion.label}</span>
+            ${chord.root}<span class="custom2">${quality.displaySuffix}</span>, ${inversion.label}
         </div>
     `;
 }
