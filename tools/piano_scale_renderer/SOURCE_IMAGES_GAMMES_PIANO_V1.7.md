@@ -18,7 +18,7 @@ L’objectif de cette V1.7 est donc :
 Les incidents observés n’étaient **pas** des erreurs théoriques de gamme.
 Ils provenaient d’un **écart de méthode de rendu** :
 - certaines touches blanches actives étaient correctement identifiées comme actives ;
-- mais leur **remplissage rouge n’occupait pas toute la surface attendue de la touche** ;
+- mais leur **remplissage coloré n’occupait pas toute la surface attendue de la touche** ;
 - une zone blanche parasite restait visible dans la partie haute de la touche, autour des touches noires.
 
 ### 1.2 Pourquoi ce problème est grave
@@ -128,17 +128,19 @@ Le rendu final doit dériver du **template officiel immuable**.
 La structure du clavier ne doit jamais être reconstruite librement.
 
 ### 4.3 Invariant de palette
-Seules les couleurs officielles sont autorisées :
-- rouge des touches blanches actives : `#C53650`
-- orange des touches noires actives : `#F68C1F`
-- blanc
-- noir
+La couleur des touches actives est déterminée par la **tonique** et le **mode** de la gamme.
 
-Toute teinte parasite ou approximation colorimétrique est non conforme.
+Sources canoniques :
+- référence fonctionnelle : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` ;
+- source runtime : `data/music-theory/tonality-colors.json`.
+
+Toutes les touches actives d'une même gamme utilisent la **même couleur tonique/mode**, qu'elles soient blanches ou noires. Les libellés restent blancs et la structure du clavier reste celle du template officiel.
+
+Toute couleur statique choisie en fonction du type physique de touche est non conforme.
 
 ### 4.4 Invariant de remplissage des touches blanches actives
 Pour **toute touche blanche active** :
-- le rouge doit remplir **100 % du masque officiel de la touche blanche** ;
+- la couleur active doit remplir **100 % du masque officiel de la touche blanche** ;
 - cela inclut la partie haute de la touche, derrière les zones occupées visuellement par les touches noires ;
 - les touches noires sont ensuite redessinées/restaurées par-dessus selon le template.
 
@@ -146,7 +148,7 @@ Aucune zone blanche parasite ne doit subsister dans une touche blanche active.
 
 ### 4.5 Invariant de remplissage des touches noires actives
 Pour **toute touche noire active** :
-- l’orange doit remplir **100 % du masque officiel de la touche noire** ;
+- la couleur active doit remplir **100 % du masque officiel de la touche noire** ;
 - le remplissage doit être exact ;
 - aucun décalage, tronquage ou approximation n’est toléré.
 
@@ -223,7 +225,7 @@ Pour chaque touche blanche active, vérifier que :
 
 ### 6.6 Contrôle de remplissage des noires actives
 Pour chaque touche noire active, vérifier que :
-- le masque complet est coloré en orange.
+- le masque complet est coloré avec la couleur active attendue.
 
 ### 6.7 Contrôle des labels
 Vérifier :
