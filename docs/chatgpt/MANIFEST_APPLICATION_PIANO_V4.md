@@ -1,7 +1,7 @@
 # MANIFEST APPLICATION PIANO — V4
 
 **Objet :** savoir exactement quoi conserver, où chercher et ce qui peut ou non être considéré comme remplaçable.  
-**Date :** 23/09/2026.
+**Date :** 28/09/2026.
 
 ## Légende de statut
 
@@ -33,6 +33,8 @@ Les trois V4 constituent le **socle actif ChatGPT**. Le renderer n’est plus d�
 | GitHub `tools/piano_scale_renderer/` | CANONIQUE + DÉPENDANCE OPÉRATIONNELLE | Renderer, template, définitions, tests et doctrine des PNG | **Toujours utiliser pour produire/corriger une gamme** |
 | GitHub `docs/chatgpt/` | CANONIQUE | Copie durable des documents V4 | Utiliser si les pièces jointes ChatGPT sont absentes |
 | GitHub `CHATGPT_PROJECT_POINTER.md` | CANONIQUE | Pointeur minimal de bootstrap | Lire en premier si le contexte projet est incomplet |
+| GitHub `tests/test_scale_consistency.py` | DÉPENDANCE OPÉRATIONNELLE | Détecte les divergences entre renderer, entraînement, bibliothèque, théorie et assets de gammes | Conserver et exécuter après modification des sources concernées |
+| GitHub `.github/workflows/scale-consistency.yml` | DÉPENDANCE OPÉRATIONNELLE | Exécute automatiquement le contrôle de cohérence sur push/PR | Conserver avec le test |
 | Notion `Spécifications – Générateur de gammes piano` | RÉFÉRENCE | Intention fonctionnelle détaillée | Consulter si comportement fonctionnel concerné |
 
 ## 3. Fichiers fournis / sauvegardés
@@ -62,6 +64,8 @@ Le dossier GitHub `tools/piano_scale_renderer/` doit contenir au minimum :
 `output/`, `last-run.log`, `test-results.txt` et `__pycache__/` ne sont pas canoniques et ne doivent pas être versionnés.
 
 Si le renderer change, les tests doivent passer avant toute mise à jour des assets ou de la documentation.
+
+Le test applicatif `tests/test_scale_consistency.py` est distinct des tests du renderer : il protège la cohérence entre les différentes sources qui réutilisent les définitions ou les PNG de gammes. Sa CI doit également rester opérationnelle.
 
 ## 5. Documentation historique
 
