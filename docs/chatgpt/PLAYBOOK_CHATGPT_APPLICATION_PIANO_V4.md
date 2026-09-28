@@ -33,9 +33,12 @@ Attention : le comportement des accords n'est pas le même que celui des gammes.
 Lire :
 - `scales.html`
 - `scale_training.html`
+- `scale_library.html` si bibliothèque concernée
 - `js/scales_main.js`
 - `js/scales_script.js`
+- `js/scale_library.js` si bibliothèque concernée
 - `css/scales_styles.css`
+- `css/scale_library.css` si bibliothèque concernée
 
 Consulter Notion si l'intention fonctionnelle doit être arbitrée.
 
@@ -55,6 +58,19 @@ Lire/récupérer :
 Procédure obligatoire : récupérer depuis GitHub → exécuter les tests → générer avec le script → lire la validation → comparer si remplacement → livrer/importer.
 
 **Ne pas chercher une autre méthode. Ne pas redessiner le clavier. Ne pas utiliser de génération d’image libre pour l’asset final.**
+
+### Gammes — cohérence inter-sources
+
+Test :
+`tests/test_scale_consistency.py`
+
+Commande locale :
+
+```bash
+python -m unittest -v tests/test_scale_consistency.py
+```
+
+La CI correspondante est `.github/workflows/scale-consistency.yml`. Elle doit rester verte lorsque le renderer, l'entraînement, la bibliothèque, la théorie ou les PNG de gammes sont modifiés.
 
 ### Théorie
 Lire :
@@ -104,7 +120,7 @@ Avant de proposer de retirer quoi que ce soit :
 - `data/categories.json` n'alimente pas l'accueil.
 - le renversement des accords influence l'image mais n'est pas affiché dans le texte actuel.
 - `second_page_backup.html` et templates racine : ne pas supprimer par le nom seul.
-- aucune suite de tests web automatisés observée ; les tests solides concernent le renderer.
+- contrôle inter-sources automatisé actif via `tests/test_scale_consistency.py` + GitHub Actions ; pas de suite navigateur/E2E documentée.
 
 ## 6. Source de vérité courte
 
