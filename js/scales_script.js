@@ -1,28 +1,28 @@
 const scales = [
-    { label: 'C majeur', image: 'images/Scales/C-majeur.png', type: 'major' },
-    { label: 'Db majeur', image: 'images/Scales/Db-majeur.png', type: 'major' },
-    { label: 'D majeur', image: 'images/Scales/D-majeur.png', type: 'major' },
-    { label: 'Eb majeur', image: 'images/Scales/Eb-majeur.png', type: 'major' },
-    { label: 'E majeur', image: 'images/Scales/E-majeur.png', type: 'major' },
-    { label: 'F majeur', image: 'images/Scales/F-majeur.png', type: 'major' },
-    { label: 'F# majeur', image: 'images/Scales/Fd-majeur.png', type: 'major' },
-    { label: 'G majeur', image: 'images/Scales/G-majeur.png', type: 'major' },
-    { label: 'Ab majeur', image: 'images/Scales/Ab-majeur.png', type: 'major' },
-    { label: 'A majeur', image: 'images/Scales/A-majeur.png', type: 'major' },
-    { label: 'Bb majeur', image: 'images/Scales/Bb-majeur.png', type: 'major' },
-    { label: 'B majeur', image: 'images/Scales/B-majeur.png', type: 'major' },
-    { label: 'C mineure naturelle', image: 'images/Scales/C-mineur-naturel.png', type: 'minor' },
-    { label: 'C# mineure naturelle', image: 'images/Scales/Cd-mineur-naturel.png', type: 'minor' },
-    { label: 'D mineure naturelle', image: 'images/Scales/D-mineur-naturel.png', type: 'minor' },
-    { label: 'Eb mineure naturelle', image: 'images/Scales/Eb-mineur-naturel.png', type: 'minor' },
-    { label: 'E mineure naturelle', image: 'images/Scales/E-mineur-naturel.png', type: 'minor' },
-    { label: 'F mineure naturelle', image: 'images/Scales/F-mineur-naturel.png', type: 'minor' },
-    { label: 'F# mineure naturelle', image: 'images/Scales/Fd-mineur-naturel.png', type: 'minor' },
-    { label: 'G mineure naturelle', image: 'images/Scales/G-mineur-naturel.png', type: 'minor' },
-    { label: 'G# mineure naturelle', image: 'images/Scales/Gd-mineur-naturel.png', type: 'minor' },
-    { label: 'A mineure naturelle', image: 'images/Scales/A-mineur-naturel.png', type: 'minor' },
-    { label: 'Bb mineure naturelle', image: 'images/Scales/Bb-mineur-naturel.png', type: 'minor' },
-    { label: 'B mineure naturelle', image: 'images/Scales/B-mineur-naturel.png', type: 'minor' }
+    { label: 'C majeur', image: 'images/Scales/C-majeur.png' },
+    { label: 'Db majeur', image: 'images/Scales/Db-majeur.png' },
+    { label: 'D majeur', image: 'images/Scales/D-majeur.png' },
+    { label: 'Eb majeur', image: 'images/Scales/Eb-majeur.png' },
+    { label: 'E majeur', image: 'images/Scales/E-majeur.png' },
+    { label: 'F majeur', image: 'images/Scales/F-majeur.png' },
+    { label: 'F# majeur', image: 'images/Scales/Fd-majeur.png' },
+    { label: 'G majeur', image: 'images/Scales/G-majeur.png' },
+    { label: 'Ab majeur', image: 'images/Scales/Ab-majeur.png' },
+    { label: 'A majeur', image: 'images/Scales/A-majeur.png' },
+    { label: 'Bb majeur', image: 'images/Scales/Bb-majeur.png' },
+    { label: 'B majeur', image: 'images/Scales/B-majeur.png' },
+    { label: 'C mineure naturelle', image: 'images/Scales/C-mineur-naturel.png' },
+    { label: 'C# mineure naturelle', image: 'images/Scales/Cd-mineur-naturel.png' },
+    { label: 'D mineure naturelle', image: 'images/Scales/D-mineur-naturel.png' },
+    { label: 'Eb mineure naturelle', image: 'images/Scales/Eb-mineur-naturel.png' },
+    { label: 'E mineure naturelle', image: 'images/Scales/E-mineur-naturel.png' },
+    { label: 'F mineure naturelle', image: 'images/Scales/F-mineur-naturel.png' },
+    { label: 'F# mineure naturelle', image: 'images/Scales/Fd-mineur-naturel.png' },
+    { label: 'G mineure naturelle', image: 'images/Scales/G-mineur-naturel.png' },
+    { label: 'G# mineure naturelle', image: 'images/Scales/Gd-mineur-naturel.png' },
+    { label: 'A mineure naturelle', image: 'images/Scales/A-mineur-naturel.png' },
+    { label: 'Bb mineure naturelle', image: 'images/Scales/Bb-mineur-naturel.png' },
+    { label: 'B mineure naturelle', image: 'images/Scales/B-mineur-naturel.png' }
 ];
 
 const answerDuration = 3000;
@@ -91,9 +91,13 @@ function getActiveTypes() {
         .map((button) => button.dataset.scaleFilter);
 }
 
+function getScaleType(scale) {
+    return scale.label.includes('mineure naturelle') ? 'minor' : 'major';
+}
+
 function buildPool() {
     const activeTypes = getActiveTypes();
-    return scales.filter((scale) => activeTypes.includes(scale.type));
+    return scales.filter((scale) => activeTypes.includes(getScaleType(scale)));
 }
 
 function chooseScale() {
