@@ -2,7 +2,7 @@
 
 **Projet :** Application piano  
 **Statut :** source maître consolidée  
-**Date de consolidation :** 28/09/2026 — convention Eb éolien alignée + contrôle CI de cohérence des gammes  
+**Date de consolidation :** 28/09/2026 — accueil piloté par categories.json + contrôles CI de cohérence  
 **But :** permettre à ChatGPT et au propriétaire du projet de comprendre, modifier et maintenir le projet sans perdre de dépendance importante ni confondre les sources.
 
 ---
@@ -82,7 +82,7 @@ Le dépôt contient actuellement :
 
 - 10 pages HTML ;
 - 5 fichiers CSS ;
-- 8 scripts JavaScript ;
+- 9 scripts JavaScript ;
 - 5 fichiers JSON de données ;
 - 102 images d'accords ;
 - 24 images de gammes ;
@@ -108,9 +108,11 @@ AlexFCL/piano (master)
 ├── CHATGPT_PROJECT_POINTER.md
 ├── .github/
 │   └── workflows/
-│       └── scale-consistency.yml
+│       ├── scale-consistency.yml
+│       └── category-consistency.yml
 ├── tests/
-│   └── test_scale_consistency.py
+│   ├── test_scale_consistency.py
+│   └── test_categories.py
 ├── tools/
 │   └── piano_scale_renderer/
 │       ├── README.md
@@ -137,6 +139,7 @@ AlexFCL/piano (master)
 │   ├── scale_library.css
 │   └── library_styles.css
 ├── js/
+│   ├── home.js
 │   ├── main.js
 │   ├── second_page_script.js
 │   ├── scales_main.js
@@ -164,9 +167,18 @@ AlexFCL/piano (master)
 
 ### 4.1 Accueil
 
-**Entrée :** `index.html`
+Flux :
 
-L'accueil affiche cinq cartes codées directement dans le HTML :
+```text
+index.html
+→ js/home.js
+→ data/categories.json
+→ route propre à chaque catégorie
+```
+
+`data/categories.json` est la source des métadonnées des cinq cartes d'accueil : identifiant, titre, description, icône et route.
+
+Ordre actuel :
 
 1. Accords
 2. Gammes
@@ -174,7 +186,7 @@ L'accueil affiche cinq cartes codées directement dans le HTML :
 4. Rythme
 5. Basse
 
-`data/categories.json` existe, mais **n'alimente pas actuellement la page d'accueil**.
+`index.html` ne duplique plus ces métadonnées : `js/home.js` construit les cartes à partir du JSON. Les catégories génériques Rythme et Basse utilisent en plus le champ `exerciseFile` pour pointer vers leur fichier d'exercices.
 
 ### 4.2 Accords
 
@@ -269,10 +281,16 @@ Flux :
 
 ```text
 index.html
+→ js/home.js
+→ data/categories.json
 → category.html?category=basse|rythme
 → js/category_page.js
+→ data/categories.json
+→ exerciseFile
 → data/exercises/basse.json ou rythme.json
 ```
+
+`js/category_page.js` ne recopie plus les titres/descriptions de Basse et Rythme : il relit la même entrée de `data/categories.json` que l'accueil.
 
 Les exercices sont actuellement des cartes de consignes JSON, sans moteur d'exercice spécialisé.
 
@@ -445,9 +463,17 @@ La précédente entrée **D# éolien** a été remplacée afin d'aligner le quiz
 
 Décision du 28/09/2026 : le renversement/fondamentale tiré est désormais affiché dans la consigne. Le mapping vers les 102 images reste inchangé.
 
-### 8.4 Catégories
+### 8.4 Catégories — résolu
 
-`data/categories.json` existe mais l'accueil est hardcodé dans `index.html`.
+Décision du 28/09/2026 :
+
+- `data/categories.json` contient les métadonnées des 5 cartes d'accueil ;
+- `js/home.js` génère l'accueil depuis ce fichier ;
+- `js/category_page.js` réutilise ces métadonnées pour Basse et Rythme ;
+- `tests/test_categories.py` vérifie l'ordre, les champs obligatoires, les routes et les fichiers d'exercices ;
+- `.github/workflows/category-consistency.yml` exécute ce contrôle automatiquement.
+
+La duplication des titres/descriptions/routes entre `index.html` et le JSON a donc été supprimée.
 
 ### 8.5 Fichiers legacy / rôle non prouvé
 
@@ -461,12 +487,13 @@ Décision du 28/09/2026 : le renversement/fondamentale tiré est désormais affi
 
 ### 8.6 Tests applicatifs
 
-Deux niveaux de tests automatisés existent désormais :
+Trois ensembles de tests automatisés existent désormais :
 
 - renderer de gammes : 8 tests dédiés au rendu déterministe ;
-- cohérence applicative des gammes : `tests/test_scale_consistency.py`, exécuté automatiquement par GitHub Actions.
+- cohérence applicative des gammes : 5 tests dans `tests/test_scale_consistency.py`, exécutés par GitHub Actions ;
+- cohérence des catégories : 3 tests dans `tests/test_categories.py`, exécutés par GitHub Actions.
 
-Le contrôle de cohérence ne remplace pas une recette navigateur : aucune suite E2E/UI automatisée n'est actuellement documentée.
+Ces contrôles ne remplacent pas une recette navigateur : aucune suite E2E/UI automatisée n'est actuellement documentée.
 
 ---
 
