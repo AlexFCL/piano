@@ -85,6 +85,13 @@ a {
     background: var(--paper);
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 .eyebrow,
 .panel-kicker {
     margin: 0 0 9px;
@@ -390,9 +397,13 @@ button:focus-visible {
         font-size: 1.12rem;
     }
 
+    .header-actions {
+        gap: 6px;
+    }
+
     .header-link {
-        font-size: .8rem;
-        padding: 8px 10px;
+        font-size: .76rem;
+        padding: 8px 9px;
     }
 
     .setup-layout {
