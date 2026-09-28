@@ -84,11 +84,13 @@ Ne pas recopier manuellement dans `index.html` les titres, descriptions, icônes
 - `second_page.html` est conservée uniquement comme route de compatibilité et redirige vers `chords.html`.
 
 Comportement fonctionnel :
-1. l'utilisateur peut modifier le temps de réponse directement sur la page d'exercice ;
-2. les filtres `Majeur` / `Mineur` sont multi-sélectionnables, avec au moins une option active ;
-3. les filtres `Fondamental` / `1er renversement` / `2e renversement` sont multi-sélectionnables, avec au moins une option active ;
-4. une modification de filtre ou de durée s'applique au tirage suivant et ne coupe pas le tour en cours ;
-5. chaque tour affiche d'abord la consigne seule pendant le délai choisi ;
-6. l'image-réponse est ensuite affichée pendant 3 secondes ;
-7. un nouveau tirage est lancé automatiquement en évitant, lorsque plusieurs choix sont disponibles, de répéter immédiatement exactement le même accord.
+1. l'entrée Accords depuis l'accueil ouvre directement la page d'exercice `chords.html`, sans page de réglage intermédiaire ;
+2. l'utilisateur peut modifier le temps de réponse directement sur cette page ;
+3. les filtres `Majeur` / `Mineur` sont multi-sélectionnables, avec au moins une option active ;
+4. les filtres `Fondamental` / `1er renversement` / `2e renversement` sont multi-sélectionnables, avec au moins une option active ;
+5. une modification de filtre ou de durée s'applique au tirage suivant et ne coupe pas le tour en cours ;
+6. la consigne affiche l'accord et le renversement sur une seule ligne, par exemple `Eb, 2e renversement` ou `G#, fondamental`; pour un mineur, le mode reste explicite, par exemple `Eb mineur, 2e renversement` ;
+7. chaque tour affiche d'abord la consigne seule pendant le délai choisi ;
+8. l'image-réponse est ensuite affichée pendant 3 secondes ;
+9. un nouveau tirage est lancé automatiquement en évitant, lorsque plusieurs choix sont disponibles, de répéter immédiatement exactement le même accord.
 
