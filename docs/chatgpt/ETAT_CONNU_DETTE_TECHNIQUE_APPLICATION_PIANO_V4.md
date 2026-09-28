@@ -36,11 +36,16 @@ Décision du 28/09/2026 :
 
 Les 102 fichiers `images/Chords/*.jpg` couvrent toujours exactement les combinaisons `17 × 2 × 3`.
 
-## OBSERVÉ — catégories
+## RÉSOLU — catégories
 
-`data/categories.json` existe mais l'accueil est écrit directement dans `index.html`.
+Décision du 28/09/2026 :
 
-Risque : double maintenance.
+- les 5 cartes de l'accueil sont décrites dans `data/categories.json` ;
+- `js/home.js` génère les cartes depuis cette source ;
+- `js/category_page.js` réutilise la même source pour les métadonnées Basse/Rythme ;
+- `tests/test_categories.py` + `.github/workflows/category-consistency.yml` contrôlent la structure, l'ordre, les routes et les fichiers d'exercices.
+
+Le risque de double maintenance des métadonnées d'accueil est considéré comme résolu.
 
 ## MITIGÉ — duplication des gammes
 
@@ -59,6 +64,7 @@ Notion reste volontairement hors de cette CI : c'est une spécification fonction
 
 - renderer : 8 tests automatisés ;
 - cohérence des sources de gammes : 5 tests automatisés, exécutés par GitHub Actions ;
+- cohérence des catégories : 3 tests automatisés, exécutés par GitHub Actions ;
 - navigateur / E2E : aucune suite automatisée documentée.
 
 ## OBSERVÉ — fichiers legacy
