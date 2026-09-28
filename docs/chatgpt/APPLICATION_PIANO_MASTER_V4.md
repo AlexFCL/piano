@@ -250,6 +250,14 @@ scale_library.html
 
 Elle présente actuellement les mêmes 24 gammes sous forme de bibliothèque consultable : 12 majeures + 12 mineures naturelles.
 
+### 4.3.1 Palette transversale tonique / mode — accords + gammes
+
+Référence canonique : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
+
+Règle : la **tonique** choisit la famille de couleur ; le **mode** choisit la variante. Un accord ou une gamme majeur(e) utilise la couleur **Majeur** correspondante, un accord ou une gamme mineur(e) utilise la couleur **Mineur** correspondante. La couleur **Base** est conservée comme identité neutre / réserve pour les usages futurs.
+
+Cette palette d’interface est distincte de la palette rouge/orange du renderer des touches de piano décrite au § 7.3.
+
 ### 4.4 Théorie musicale
 
 Flux :
