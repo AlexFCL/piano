@@ -50,7 +50,8 @@ Pour produire/corriger une image d'accord, utiliser `tools/piano_chord_renderer/
 - Mineur = variante `minor`.
 - `base` = couleur neutre conservée pour les usages sans mode / futurs.
 - Source runtime : `data/music-theory/tonality-colors.json`.
-- Le renderer d'accords `tools/piano_chord_renderer/` consomme cette palette : même couleur tonique/mode pour toutes les touches actives.
+- Les renderers pédagogiques doivent consommer cette palette : même couleur tonique/mode pour toutes les touches actives, blanches ou noires.
+- Toute documentation ou implémentation qui réintroduit une couleur fixe dépendant du type physique de touche est obsolète.
 
 ### Gammes — comportement
 Lire :
@@ -70,6 +71,8 @@ Consulter Notion si l'intention fonctionnelle doit être arbitrée.
 **Chemin canonique obligatoire :** `AlexFCL/piano` → `master` → `tools/piano_scale_renderer/`.
 
 Lire/récupérer :
+- `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
+- `data/music-theory/tonality-colors.json`
 - `README.md`
 - `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md`
 - `piano_scale_renderer.py`
