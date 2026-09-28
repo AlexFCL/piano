@@ -113,7 +113,8 @@ AlexFCL/piano (master)
 ├── .github/
 │   └── workflows/
 │       ├── scale-consistency.yml
-│       └── category-consistency.yml
+│       ├── category-consistency.yml
+│       └── chord-assets.yml
 ├── tests/
 │   ├── test_scale_consistency.py
 │   └── test_categories.py
@@ -209,7 +210,7 @@ chords.html
 → js/main.js
 → second_page.html?updateTime=X
 → js/second_page_script.js
-→ images/Chords/*.jpg
+→ images/Chords/*-majeur-*.png / *-mineur-*.png
 ```
 
 Comportement observé :
@@ -220,8 +221,10 @@ Comportement observé :
 - une position/fondamentale-renversement est tirée ;
 - cette position est affichée dans la consigne sous le nom de l'accord ;
 - les libellés sont `fond.`, `1er (tonique haut)` et `2ème (tierce haut)` ;
-- le nom de l'image est calculé par index `note-type-position.jpg` ;
-- 102 images correspondent à `17 × 2 × 3` combinaisons ;
+- le nom de l'image suit la convention lisible `<tonique>-<majeur|mineur>-<fond|1er|2eme>.png` ;
+- exemples : `C-majeur-fond.png`, `Eb-mineur-1er.png`, `F#-majeur-2eme.png` ;
+- `#` est encodé dans l'URL côté navigateur afin que les fichiers diésés restent adressables ;
+- 102 PNG générés correspondent à `17 × 2 × 3` combinaisons ;
 - un nouveau tirage est fait toutes les `updateTime` secondes.
 
 Décision du 28/09/2026 : le renversement doit être visible dans la question afin que la consigne corresponde exactement à l'image attendue.
@@ -483,7 +486,7 @@ La précédente entrée **D# éolien** a été remplacée afin d'aligner le quiz
 
 ### 8.3 Accords / renversement — résolu
 
-Décision du 28/09/2026 : le renversement/fondamentale tiré est désormais affiché dans la consigne. Le mapping vers les 102 images reste inchangé.
+Décision du 28/09/2026 : le renversement/fondamentale tiré est affiché dans la consigne. Les assets canoniques d'accords utilisent désormais un nommage descriptif PNG (`C-majeur-fond.png`, `C-mineur-1er.png`, etc.) généré par `tools/piano_chord_renderer/`. Les anciens JPG indexés peuvent rester comme legacy tant qu'aucun nettoyage explicite n'est décidé.
 
 ### 8.4 Catégories — résolu
 

@@ -36,7 +36,7 @@ Règle courte : tonique = famille de couleur ; majeur = variante majeure ; mineu
 
 ## Renderer canonique des images d'accords
 Chemin : `tools/piano_chord_renderer/`.
-Il utilise le template 711×254 et `data/music-theory/tonality-colors.json`. Les touches actives, blanches ou noires, reçoivent la même couleur tonique/mode et les notes sont libellées en blanc.
+Il utilise le template 711×254 et `data/music-theory/tonality-colors.json`. Les touches actives, blanches ou noires, reçoivent la même couleur tonique/mode et les notes sont libellées en blanc. Les assets runtime sont dans `images/Chords/` avec le nommage `<tonique>-<majeur|mineur>-<fond|1er|2eme>.png`.
 
 ## Sources fonctionnelles
 - Application live : GitHub
