@@ -403,8 +403,10 @@ Contenu canonique :
 - `tools/piano_scale_renderer/official_template.png` ;
 - `tools/piano_scale_renderer/test_renderer.py` ;
 - `tools/piano_scale_renderer/requirements.txt` ;
-- `tools/piano_scale_renderer/golden/C-majeur.png` ;
-- `tools/piano_scale_renderer/golden/E-majeur.png`.
+- `data/music-theory/tonality-colors.json` ;
+- `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
+
+Le dossier `golden/` contient des snapshots historiques et n'est pas une source colorimétrique canonique tant qu'il n'a pas été régénéré avec la palette actuelle.
 
 Le ZIP `piano_corrector_v1(1).zip` devient un **backup historique**, pas la source principale. Une future conversation doit récupérer le moteur depuis GitHub.
 
@@ -415,20 +417,28 @@ Le ZIP `piano_corrector_v1(1).zip` devient un **backup historique**, pas la sour
 - `Template2(1).png` = `official_template.png` octet pour octet ;
 - `Template(1).png` = 711 × 254 : ne pas l'utiliser comme template du renderer de gammes.
 
-### 7.3 État de la palette du renderer de gammes
+### 7.3 Palette du renderer de gammes
 
-Le renderer de gammes actuellement versionné conserve encore une ancienne convention de couleur par type de touche. Cette convention est **legacy** et ne doit pas être réutilisée pour le nouveau renderer d'accords.
+Le renderer de gammes consomme la palette tonique/mode canonique structurée dans `data/music-theory/tonality-colors.json`.
 
-La palette tonique/mode canonique du projet est désormais structurée dans `data/music-theory/tonality-colors.json`. Toute migration du renderer de gammes vers cette palette doit être faite explicitement avec régénération et validation de ses assets/tests.
+Règle verrouillée :
+- la tonique choisit la famille ;
+- un mode majeur utilise la variante `major` ;
+- un mode mineur utilise la variante `minor` ;
+- toutes les touches actives d'une même gamme utilisent la même couleur, qu'elles soient blanches ou noires ;
+- les libellés restent blancs ;
+- aucune couleur fixe ne doit dépendre du type physique de touche.
+
+Référence fonctionnelle : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
 
 ### 7.4 Pipeline
 
 1. vérifier le hash du template ;
 2. détecter/verrouiller la géométrie ;
-3. activer exactement 7 slots ;
-4. remplir les touches blanches actives sur le masque complet ;
-5. restaurer les touches noires du template ;
-6. remplir les touches noires actives ;
+3. lire la définition de gamme et activer exactement 7 slots pour les gammes classiques ;
+4. résoudre la couleur tonique/mode depuis `data/music-theory/tonality-colors.json` ;
+5. remplir toutes les touches actives avec cette même couleur ;
+6. restaurer les éléments structurels du template ;
 7. valider les aplats avant texte ;
 8. placer les labels avec Roboto Condensed Bold ;
 9. valider le rendu final ;
@@ -444,7 +454,7 @@ cd tools/piano_scale_renderer
 python -m unittest -v test_renderer.py
 ```
 
-Vérification relancée le 23/09/2026 : **8/8 tests OK**.
+Le nombre exact de tests ne doit pas être figé dans cette documentation. Exécuter la suite actuelle et vérifier qu'elle passe avant toute livraison.
 
 Commande de génération complète :
 
@@ -463,16 +473,9 @@ Le renderer dépend de **Roboto Condensed Bold**, non incluse dans l'archive. La
 
 ### 8.1 PNG GitHub vs renderer
 
-Comparaison par Git blob SHA : **20/24 images GitHub correspondent exactement aux sorties du renderer fourni**.
+Les anciennes comparaisons par blob SHA contre le renderer historique ou les snapshots `golden/` ne constituent plus une preuve de conformité colorimétrique depuis l'adoption de la palette tonique/mode.
 
-Divergences actuelles :
-
-- `D-majeur.png` ;
-- `E-majeur.png` ;
-- `Eb-majeur.png` ;
-- `F-majeur.png`.
-
-Ne pas remplacer automatiquement ces quatre fichiers sans demande explicite. Mais ne jamais dire que les 24 assets sont synchronisés tant que cet écart existe.
+Avant d'affirmer que les assets de `images/Scales/` sont synchronisés, il faut les régénérer avec le renderer courant, vérifier la palette tonique/mode, puis comparer explicitement les sorties attendues aux PNG live.
 
 ### 8.2 Convention enharmonique mineure — résolue
 
@@ -514,7 +517,7 @@ La duplication des titres/descriptions/routes entre `index.html` et le JSON a do
 
 Trois ensembles de tests automatisés existent désormais :
 
-- renderer de gammes : 8 tests dédiés au rendu déterministe ;
+- renderer de gammes : tests dédiés au rendu déterministe, à la géométrie et à la palette tonique/mode ;
 - renderer d'accords : tests couvrant les 102 combinaisons, la palette tonique/mode, les trois positions de Do majeur et les orthographes enharmoniques ;
 - cohérence applicative des gammes : 5 tests dans `tests/test_scale_consistency.py`, exécutés par GitHub Actions ;
 - cohérence des catégories : 3 tests dans `tests/test_categories.py`, exécutés par GitHub Actions.
@@ -541,7 +544,7 @@ Cette règle prévaut sur tout souvenir de conversation.
 ## 9. Priorité en cas de contradiction
 
 1. **État courant du code** → GitHub live.
-2. **Règles de rendu des PNG** → V1.7 + renderer/tests.
+2. **Règles de rendu des PNG** → palette `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` + source runtime `data/music-theory/tonality-colors.json` + renderer/tests.
 3. **Intention fonctionnelle** → spécification Notion la plus récente.
 4. **Architecture / méthode de travail** → V4.
 5. **Historique** → V1/V2/V3.
