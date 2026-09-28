@@ -20,6 +20,7 @@
 | `APPLICATION_PIANO_MASTER_V4.md` | CANONIQUE | Architecture + règles globales | Déposer / garder |
 | `MANIFEST_APPLICATION_PIANO_V4.md` | CANONIQUE | Conservation + dépendances | Déposer / garder |
 | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | CANONIQUE | Routage rapide | Déposer / garder |
+| `PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` | CANONIQUE | Palette tonique + variantes Base/Majeur/Mineur pour accords et gammes | Déposer / garder |
 | `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` | RÉFÉRENCE LOCALE | Copie de la doctrine ; la copie GitHub du renderer est canonique | Garder pendant la transition |
 | `piano_corrector_v1.zip` | BACKUP | Snapshot historique du renderer | Garder hors GitHub comme récupération |
 
