@@ -44,6 +44,7 @@ Pour produire/corriger une image d'accord, utiliser `tools/piano_chord_renderer/
 
 ### Palette accords + gammes
 
+- Hiérarchie obligatoire : `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`
 - Référence : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
 - Tonique = famille chromatique.
 - Majeur = variante `major`.
