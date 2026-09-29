@@ -54,7 +54,16 @@ Les pentatoniques ne disposent pas d'un moteur colorimétrique séparé : elles 
 8. Vérifier que la couleur réellement utilisée correspond à la paire tonique/mode du JSON.
 9. Livrer uniquement les sorties validées.
 
-## 5. Règle anti-régression
+## 5. Règle pour les tests
+
+Les tests font partie du système de vérité et ne doivent pas devenir une seconde palette.
+
+- Toute valeur attendue de couleur doit être résolue depuis `data/music-theory/tonality-colors.json`.
+- Il est interdit de figer une valeur hexadécimale de couleur active dans un test de renderer.
+- Chaque renderer doit vérifier que toutes ses sorties utilisent exactement la variante `major` ou `minor` du JSON canonique pour la tonique concernée.
+- Une évolution volontaire de `tonality-colors.json` doit donc se propager automatiquement aux tests sans nécessiter de recopier les couleurs.
+
+## 6. Règle anti-régression
 
 Une archive, un ZIP, un snapshot `golden/`, une pièce jointe de projet ou un ancien document peut être utile pour l'historique ou la géométrie, mais **ne doit jamais remplacer la palette runtime courante**.
 
