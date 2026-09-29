@@ -17,6 +17,15 @@ Le programme ne redessine jamais un clavier. Il :
 
 Aucun modèle d'image n'est utilisé pour les assets finaux.
 
+## Familles prises en charge
+
+Un **seul moteur de rendu** est utilisé pour toutes les familles afin d'éviter les divergences de géométrie, de palette et de validation.
+
+- `scales.json` : 12 gammes majeures + 12 gammes mineures naturelles, **7 notes actives** ;
+- `pentatonic_scales.json` : 12 pentatoniques majeures + 12 pentatoniques mineures, **5 notes actives**.
+
+Le nombre de notes attendu est déterminé par la famille de la gamme. Les pentatoniques ne possèdent pas de renderer séparé.
+
 ## Palette canonique
 
 La source de vérité des couleurs est `../../data/music-theory/tonality-colors.json`, documentée dans `../../docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
@@ -57,6 +66,11 @@ python piano_scale_renderer.py "Db majeur"
 python piano_scale_renderer.py "D majeur"
 python piano_scale_renderer.py "Eb majeur"
 python piano_scale_renderer.py --all
+
+# Pentatoniques
+python piano_scale_renderer.py --scales pentatonic_scales.json "C pentatonique majeure"
+python piano_scale_renderer.py --scales pentatonic_scales.json "Eb pentatonique mineure"
+python piano_scale_renderer.py --scales pentatonic_scales.json --all
 ```
 
 Les PNG sont écrits dans `output/`. Un `validation-report.json` est créé à chaque exécution.
@@ -65,6 +79,7 @@ Les PNG sont écrits dans `output/`. Un `validation-report.json` est créé à c
 
 ```bash
 python -m unittest -v test_renderer.py
+python -m unittest -v test_pentatonic_renderer.py
 ```
 
 Les tests couvrent notamment :
@@ -73,7 +88,10 @@ Les tests couvrent notamment :
 - D de Eb majeur rempli jusqu'en haut ;
 - mapping Db majeur verrouillé : `Db→C#`, `Eb→D#`, `Gb→F#`, `Ab→G#`, `Bb→A#` ;
 - touches blanches inactives de Db majeur restant blanches ;
-- 24 gammes ayant exactement 7 slots actifs.
+- 24 gammes classiques ayant exactement 7 slots actifs ;
+- 24 pentatoniques ayant exactement 5 slots actifs ;
+- même palette tonique/mode pour les gammes classiques et pentatoniques ;
+- correspondances enharmoniques des pentatoniques verrouillées par tests.
 
 ## Dépendance
 
