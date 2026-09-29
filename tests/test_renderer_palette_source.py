@@ -57,6 +57,24 @@ class RendererPaletteSourceTests(unittest.TestCase):
         for renderer in RENDERERS:
             self.assertIn(renderer.name, text)
 
+    def test_no_legacy_red_orange_references_in_renderers(self):
+        forbidden = ("#c53650", "#f68c1f", "rouge", "orange")
+        for renderer in RENDERERS:
+            for path in renderer.rglob("*"):
+                if not path.is_file() or path.suffix.lower() not in {".py", ".md", ".json", ".txt"}:
+                    continue
+                text = path.read_text(encoding="utf-8").lower()
+                for token in forbidden:
+                    self.assertNotIn(token, text, f"{token} found in {path.relative_to(ROOT)}")
+
+    def test_renderer_unit_tests_resolve_expected_colors_from_runtime_palette(self):
+        chord_tests = (ROOT / "tools" / "piano_chord_renderer" / "test_renderer.py").read_text(encoding="utf-8")
+        scale_tests = (ROOT / "tools" / "piano_scale_renderer" / "test_renderer.py").read_text(encoding="utf-8")
+        pentatonic_tests = (ROOT / "tools" / "piano_scale_renderer" / "test_pentatonic_renderer.py").read_text(encoding="utf-8")
+        for text in (chord_tests, scale_tests, pentatonic_tests):
+            self.assertIn("tonality-colors.json", text)
+            self.assertIn("load_tonality_colors", text)
+
 
 if __name__ == "__main__":
     unittest.main()
