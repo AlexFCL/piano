@@ -5,6 +5,14 @@
 **Source de données runtime :** `data/music-theory/tonality-colors.json`  
 **Périmètre :** accords, gammes et renderers pédagogiques utilisant l'identité tonique/mode
 
+## 0. Autorité et priorité
+
+La **source runtime absolue** des couleurs est `data/music-theory/tonality-colors.json`.
+
+Le présent document explique la règle fonctionnelle, mais ne doit jamais être utilisé comme copie autonome de la palette. En cas d'écart entre ce document et le JSON, **le JSON l'emporte**.
+
+Avant toute tâche sur un renderer, lire aussi `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`. Si le JSON n'est pas accessible, aucune couleur ne doit être substituée ou déduite.
+
 ## 1. Règle fonctionnelle
 
 La couleur dépend de la **tonique** et du **mode** :
