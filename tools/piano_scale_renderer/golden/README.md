@@ -1,12 +1,11 @@
-# Golden — statut historique
+# Golden — répertoire volontairement sans snapshot binaire
 
-Les PNG présents dans ce dossier sont des snapshots historiques issus d'une ancienne convention colorimétrique.
+Les anciens snapshots binaires ont été retirés pour qu'aucun asset historique ne puisse être pris par erreur comme référence colorimétrique.
 
-Ils ne sont **pas** une source de vérité pour la couleur des gammes.
+Pour toute non-régression de rendu :
+- source runtime des couleurs : `../../../data/music-theory/tonality-colors.json` ;
+- hiérarchie commune : `../../../docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` ;
+- renderer courant : `../piano_scale_renderer.py` ;
+- tests courants : `../test_renderer.py` et `../test_pentatonic_renderer.py`.
 
-Sources canoniques actuelles :
-- `../../../docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` ;
-- `../../../data/music-theory/tonality-colors.json` ;
-- le renderer courant `../piano_scale_renderer.py` et ses tests.
-
-Ne pas remettre en place une couleur fixe en se basant sur ces images. Si des golden images redeviennent des références de non-régression, elles doivent d'abord être régénérées et validées avec la palette tonique/mode actuelle.
+Si des snapshots binaires sont réintroduits un jour, ils doivent être générés par le renderer courant et validés contre la palette runtime du même commit.
