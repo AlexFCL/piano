@@ -1,0 +1,33 @@
+name: Renderer palette source
+
+on:
+  push:
+    paths:
+      - "CHATGPT_PROJECT_POINTER.md"
+      - "data/music-theory/tonality-colors.json"
+      - "docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md"
+      - "docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md"
+      - "tools/piano_chord_renderer/**"
+      - "tools/piano_scale_renderer/**"
+      - "tests/test_renderer_palette_source.py"
+      - ".github/workflows/renderer-palette-source.yml"
+  pull_request:
+    paths:
+      - "CHATGPT_PROJECT_POINTER.md"
+      - "data/music-theory/tonality-colors.json"
+      - "docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md"
+      - "docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md"
+      - "tools/piano_chord_renderer/**"
+      - "tools/piano_scale_renderer/**"
+      - "tests/test_renderer_palette_source.py"
+      - ".github/workflows/renderer-palette-source.yml"
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: python -m unittest -v tests/test_renderer_palette_source.py
