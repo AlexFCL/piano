@@ -4,7 +4,14 @@ from pathlib import Path
 
 from PIL import Image
 
-from piano_chord_renderer import ROOT_ORDER, detect_geometry, load_tonality_colors, render_chord, triad_labels
+from piano_chord_renderer import (
+    ROOT_ORDER,
+    detect_geometry,
+    hex_to_rgb,
+    load_tonality_colors,
+    render_chord,
+    triad_labels,
+)
 
 ROOT = Path(__file__).parent
 TEMPLATE = ROOT / "official_template.png"
@@ -29,7 +36,7 @@ class ChordRendererTests(unittest.TestCase):
         for root in ROOT_ORDER:
             self.assertIn(root, self.colors)
 
-    def test_all_102_chords_render(self):
+    def test_all_102_chords_render_with_runtime_palette(self):
         for root in ROOT_ORDER:
             for quality in ("major", "minor"):
                 for inversion in (0, 1, 2):
@@ -37,12 +44,14 @@ class ChordRendererTests(unittest.TestCase):
                         _, report = self.render(root, quality, inversion)
                         self.assertTrue(report["ok"])
                         self.assertEqual(len(report["active_slots"]), 3)
+                        self.assertEqual(report["color"], self.colors[root][quality])
 
-    def test_c_major_uses_documented_major_color(self):
+    def test_c_major_uses_runtime_major_color(self):
         image, report = self.render("C", "major", 0)
-        self.assertEqual(report["color"], "#B51B1B")
+        expected_hex = self.colors["C"]["major"]
+        self.assertEqual(report["color"], expected_hex)
         self.assertEqual(report["labels_by_slot"], {"C2": "C", "E2": "E", "G2": "G"})
-        self.assertEqual(image.getpixel((365, 180)), (181, 27, 27))
+        self.assertEqual(image.getpixel((365, 180)), hex_to_rgb(expected_hex))
 
     def test_c_major_inversions_match_existing_chord_logic(self):
         _, first = self.render("C", "major", 1)
