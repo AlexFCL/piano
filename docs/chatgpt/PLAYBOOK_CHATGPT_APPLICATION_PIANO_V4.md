@@ -82,7 +82,7 @@ Lire/récupérer dans cet ordre :
 - `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`
 - `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
 - `README.md`
-- `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md`
+- `SOURCE_IMAGES_GAMMES_PIANO_V1.8.md`
 - `piano_scale_renderer.py`
 - `scales.json`
 - `official_template.png`
