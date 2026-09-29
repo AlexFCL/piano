@@ -1,71 +1,111 @@
-# TRANSFERT DE FICHIERS BINAIRES GITHUB ↔ CHATGPT — V1
+# TRANSFERT DE FICHIERS BINAIRES GITHUB ↔ CHATGPT — V2
 
 **Projet :** Application piano  
 **Statut :** procédure opérationnelle ChatGPT  
 **Périmètre :** PNG, JPG, ZIP et autres fichiers binaires du dépôt `AlexFCL/piano`
 
-## 1. Problème récurrent
+## 1. Cause racine des échecs répétés
 
-Le connecteur GitHub utilisé par ChatGPT sait manipuler directement les fichiers texte, mais il ne dispose pas d'une action prenant un chemin local `/mnt/data/...` pour téléverser un fichier binaire tel quel.
+Le problème n'est pas GitHub et ce n'est pas non plus le format PNG.
 
-Pour un binaire, l'API Git sous-jacente exige généralement :
-1. lire les octets du fichier local ;
-2. les encoder en base64 ;
-3. créer un blob Git ;
-4. ajouter le blob à un tree ;
-5. créer le commit ;
-6. déplacer la branche.
+Le problème vient de l'architecture des outils utilisés par ChatGPT :
 
-Le passage d'un gros base64 entre l'environnement local de ChatGPT et le connecteur GitHub est fragile : taille de charge utile, troncature et limites de sérialisation peuvent faire échouer l'opération.
+- l'environnement local / container peut lire et écrire les fichiers de `/mnt/data` ;
+- le connecteur GitHub authentifié peut lire et écrire dans GitHub ;
+- **ces deux environnements ne partagent pas directement leur système de fichiers** ;
+- l'action GitHub `create_blob` accepte une chaîne de caractères (`utf-8` ou `base64`), **pas un chemin local ni une référence de fichier du container** ;
+- réciproquement, les lectures GitHub de fichiers binaires ne déposent pas automatiquement les octets dans `/mnt/data`.
 
-## 2. Règle obligatoire
+Il n'existe donc pas, dans ce mode de chat, de canal natif du type :
 
-### GitHub → ChatGPT / environnement local
+`/mnt/data/image.png` → GitHub
 
-- Pour du texte : utiliser les actions GitHub de lecture de fichier.
-- Pour un binaire : récupérer d'abord son SHA puis utiliser l'action blob adaptée si elle renvoie le contenu binaire/base64 exploitable.
-- Ne jamais interpréter un aperçu textuel ou un SHA seul comme si le fichier binaire avait réellement été rapatrié.
+ou :
 
-### ChatGPT / environnement local → GitHub
+GitHub → `/mnt/data/image.png`
 
-- Pour du texte : utiliser les actions GitHub `create_file` / `update_file`.
-- Pour un binaire : **ne pas utiliser `create_file` / `update_file`**, réservées au texte.
-- Ne pas tenter par défaut de pousser un gros PNG/ZIP en injectant son base64 entier dans un unique appel de connecteur.
-- Si aucune action GitHub n'accepte directement le fichier local ou un contenu binaire de taille sûre, considérer le transfert binaire comme **non fiable dans ce mode de chat** et ne pas prétendre qu'il a été effectué.
+sans étape intermédiaire.
 
-## 3. Méthode autorisée si le binaire est petit
+## 2. Pourquoi le relais base64 plante
 
-La méthode Git object est acceptable uniquement si la charge utile reste raisonnable et peut être transmise intégralement.
+Pour envoyer un binaire local vers GitHub, il faudrait :
 
-Procédure obligatoire dans ChatGPT :
-1. vérifier la taille réelle du fichier local ;
-2. encoder **un seul fichier binaire par appel** en base64 ;
-3. appeler `create_blob(encoding="base64")` pour ce seul fichier ;
-4. noter immédiatement le SHA du blob ;
-5. répéter fichier par fichier ; ne jamais regrouper plusieurs gros base64 dans le même appel ;
-6. une fois tous les blobs créés, créer **un seul tree** contenant l'ensemble des chemins ;
-7. créer **un seul commit** ;
-8. revérifier le HEAD juste avant `update_ref` ;
-9. déplacer `master` uniquement en fast-forward ;
-10. relire plusieurs fichiers créés et vérifier leurs blob SHA.
+1. lire le fichier dans le container ;
+2. l'encoder en base64 ;
+3. faire sortir cette chaîne du container ;
+4. la faire transiter par le contexte / les arguments d'outil ;
+5. la réinjecter dans le connecteur GitHub ;
+6. appeler `create_blob(encoding="base64")`.
 
-Retour d'expérience validé le 28/09/2026 : des PNG d'environ 4–5 Ko passent correctement avec cette granularité. Le regroupement de plusieurs base64 dans un seul appel est à éviter même si la somme paraît petite.
+Ce relais est intrinsèquement fragile :
 
-## 4. Cas où il faut s'arrêter
+- le base64 grossit les données d'environ 33 % ;
+- les sorties d'outils et le contexte ont des limites de taille ;
+- une chaîne longue peut être tronquée avant d'arriver au connecteur ;
+- un lot de plusieurs images multiplie très vite la taille transportée ;
+- même si un petit fichier peut parfois passer, cela ne constitue pas un chemin de transfert fiable.
 
-S'arrêter avant mutation si :
-- le base64 est volumineux ;
-- le connecteur tronque ou refuse la charge ;
-- le fichier local ne peut pas être fourni directement à l'action GitHub ;
-- l'outil ne permet pas de vérifier l'identité binaire après écriture.
+**Conclusion : le modèle ne doit pas utiliser son propre contexte comme bus de transport binaire.**
 
-Dans ce cas, annoncer précisément la limite au lieu de répéter la même tentative.
+## 3. Pourquoi le problème existe aussi dans l'autre sens
 
-## 5. Pourquoi cette règle existe
+Pour rapatrier un fichier GitHub dans le container :
 
-Les échecs répétés de transfert de PNG dans le dossier `images/Scales/` ne venaient pas de GitHub ni du dépôt : ils venaient du pont entre le stockage local ChatGPT et les actions GitHub, qui est excellent pour le texte mais pas conçu comme un téléverseur de fichiers binaires locaux.
+- le connecteur GitHub peut récupérer le contenu ou le blob ;
+- mais il ne peut pas écrire directement dans `/mnt/data` ;
+- le container peut écrire le fichier ;
+- mais il ne peut pas consommer directement le résultat interne du connecteur GitHub sans que les données transitent à nouveau par le contexte.
 
-Cette distinction doit être vérifiée avant toute demande du type :
-- « envoie ces images sur GitHub » ;
-- « récupère ce ZIP depuis GitHub » ;
-- « remplace ces PNG en prod ».
+Le même problème de pont apparaît donc dans les deux sens.
+
+## 4. Chemins fiables
+
+### GitHub → environnement local
+
+Pour un dépôt **public** comme `AlexFCL/piano`, préférer un téléchargement HTTP direct du fichier brut depuis GitHub vers le container. Cette voie contourne le connecteur pour le transport des octets et évite le relais base64 par le contexte.
+
+Le connecteur GitHub reste utile pour :
+- vérifier le dépôt, la branche et le SHA ;
+- trouver le chemin exact ;
+- contrôler l'état Git.
+
+Pour un dépôt privé, n'utiliser un transfert binaire que si l'outil retourne une vraie référence de fichier téléchargeable / matérialisable. Sinon, ne pas prétendre que le fichier a été rapatrié localement.
+
+### Environnement local → GitHub
+
+Avec les actions GitHub actuellement disponibles dans ce chat, il n'existe **pas de primitive native fiable** acceptant directement :
+- un chemin `/mnt/data/...` ;
+- un fichier local ;
+- ou une référence de fichier du container.
+
+`create_blob` n'accepte qu'une chaîne. Par conséquent, l'upload direct d'un lot de PNG depuis `/mnt/data` vers GitHub n'est pas considéré comme fiable par défaut.
+
+## 5. Ce qu'il ne faut plus faire
+
+- Ne pas annoncer « j'envoie les images » avant d'avoir confirmé qu'un vrai canal binaire direct existe.
+- Ne pas encoder 24 PNG puis tenter de transporter leur base64 via les sorties d'outils.
+- Ne pas considérer qu'un SHA GitHub signifie que le fichier existe aussi localement.
+- Ne pas considérer qu'un fichier présent dans `/mnt/data` peut être lu automatiquement par le connecteur GitHub.
+- Ne pas répéter une tentative identique après un échec de sérialisation/troncature.
+- Ne pas qualifier une méthode de « validée » parce qu'un petit fichier isolé a éventuellement réussi une fois.
+
+## 6. Procédure obligatoire avant toute demande binaire
+
+Avant de commencer :
+
+1. identifier le sens du transfert ;
+2. identifier dans quel environnement se trouvent réellement les octets ;
+3. vérifier si l'outil de destination accepte **un fichier/référence de fichier**, et pas seulement une chaîne ;
+4. choisir un canal qui transporte réellement les octets sans passer par le contexte du modèle ;
+5. si ce canal n'existe pas, le dire immédiatement avant mutation.
+
+## 7. Application au projet piano
+
+Pour les PNG de gammes :
+
+- génération locale : container / `/mnt/data` ;
+- état Git : connecteur GitHub ;
+- téléchargement depuis GitHub public vers le container : HTTP brut possible ;
+- upload des PNG locaux vers GitHub : **pas de pont binaire natif exposé par les actions GitHub actuelles**.
+
+C'est cette séparation d'environnements — et non GitHub — qui explique les échecs récurrents observés lors des uploads/rapatriements d'images.
