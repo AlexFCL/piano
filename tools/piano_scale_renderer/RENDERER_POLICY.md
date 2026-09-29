@@ -2,6 +2,15 @@
 
 Ce dossier contient le renderer déterministe officiel des images de gammes du projet Application piano.
 
+## Hiérarchie des sources
+
+1. `data/music-theory/tonality-colors.json` — autorité runtime absolue des couleurs.
+2. `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` — ordre de priorité commun à tous les renderers.
+3. `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` — explication fonctionnelle.
+4. Le présent fichier — politique spécifique aux gammes et pentatoniques.
+
+En cas de contradiction, la source située plus haut l'emporte. Si le JSON n'est pas accessible, ne pas générer d'asset et ne substituer aucune couleur.
+
 ## Règle absolue
 Pour toute génération, correction ou remplacement d'une image de gamme, utiliser exclusivement :
 `tools/piano_scale_renderer/`
