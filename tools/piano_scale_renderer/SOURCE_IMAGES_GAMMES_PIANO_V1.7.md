@@ -1,5 +1,16 @@
 # SOURCE IMAGES GAMMES PIANO — V1.7
 
+## Statut colorimétrique et priorité
+
+Ce document conserve la doctrine de géométrie, de masques, de mapping et de validation. Il **n'est pas** une source autonome de couleurs.
+
+Pour toute couleur de gamme :
+1. lire d'abord `data/music-theory/tonality-colors.json` ;
+2. lire `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` ;
+3. utiliser ensuite le présent document pour les règles de rendu non colorimétriques.
+
+En cas de contradiction, le JSON canonique l'emporte. Si le JSON n'est pas accessible, aucune image ne doit être générée et aucune couleur ne doit être substituée.
+
 ## Objet
 Cette version **V1.7** documente la capitalisation issue de l’incident constaté sur certaines gammes (ex. D majeur, Eb majeur), **non pas comme un correctif local**, mais comme une **évolution générale de méthode** destinée à empêcher toute régression future sur **n’importe quelle gamme**.
 
