@@ -107,4 +107,4 @@ Les tests couvrent notamment :
 
 Le renderer vérifie aussi le **SHA-256 exact du template officiel** avant toute génération. Si le template est remplacé ou modifié, la génération s'arrête.
 
-Les anciens fichiers du dossier `golden/` sont des snapshots historiques. Ils ne constituent plus une référence colorimétrique tant qu'ils n'ont pas été régénérés depuis la palette tonique/mode actuelle.
+Le dossier `golden/` ne conserve aucun snapshot binaire historique. Toute future référence de non-régression doit être générée par le renderer courant et validée contre `tonality-colors.json` dans le même commit.
