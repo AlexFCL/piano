@@ -38,6 +38,7 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 | Images de gammes | GitHub `tools/piano_scale_renderer/` + `data/music-theory/tonality-colors.json` | Renderer déterministe ; la couleur doit provenir exclusivement de la paire tonique/mode |
 | Images d'accords | GitHub `tools/piano_chord_renderer/` | **Source canonique exécutable** : renderer + template + tests |
 | Palette tonique/mode | `data/music-theory/tonality-colors.json` | **Source runtime canonique** des couleurs Base/Majeur/Mineur |
+| Hiérarchie des renderers | `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` | Règle de priorité commune : JSON runtime d'abord, puis politique commune, puis documentation spécifique |
 | Spécification fonctionnelle du générateur de gammes | Notion `Spécifications – Générateur de gammes piano` | Intention fonctionnelle ; le code GitHub prévaut pour l'état réel |
 | Anciennes décisions/documentations | Archives V1/V2/V3 | Historique seulement |
 
