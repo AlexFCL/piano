@@ -40,6 +40,10 @@ Ordre obligatoire :
 - aucune couleur active statique dépendant du type physique de touche ne doit être utilisée ;
 - si le JSON canonique est inaccessible, aucune image ne doit être générée et aucune couleur ne doit être substituée.
 
+## Doctrine de rendu
+
+Pour les règles de géométrie, de masques et de validation non colorimétriques : `SOURCE_IMAGES_GAMMES_PIANO_V1.8.md`. Cette source reste subordonnée à `tonality-colors.json` pour toute question de couleur.
+
 ## Séparation fondamentale
 
 `scales.json` sépare explicitement :
