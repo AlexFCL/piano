@@ -1,5 +1,14 @@
 # Politique canonique — rendu des accords piano
 
+## Hiérarchie des sources
+
+1. `data/music-theory/tonality-colors.json` — autorité runtime absolue des couleurs.
+2. `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` — ordre de priorité commun à tous les renderers.
+3. `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` — explication fonctionnelle.
+4. Le présent fichier — politique spécifique au renderer d'accords.
+
+En cas de contradiction, la source située plus haut l'emporte. Si le JSON n'est pas accessible, ne pas générer d'asset et ne substituer aucune couleur.
+
 ## Règle absolue
 
 Toute image d'accord doit dériver du template officiel 711×254, par compositing déterministe.
