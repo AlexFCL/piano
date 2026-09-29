@@ -123,7 +123,7 @@ AlexFCL/piano (master)
 ├── tools/
 │   ├── piano_scale_renderer/
 │       ├── README.md
-│       ├── SOURCE_IMAGES_GAMMES_PIANO_V1.7.md
+│       ├── SOURCE_IMAGES_GAMMES_PIANO_V1.8.md
 │       ├── piano_scale_renderer.py
 │       ├── requirements.txt
 │       ├── scales.json
@@ -399,7 +399,7 @@ Les images finales de gammes ne doivent **jamais** être créées par générati
 
 Contenu canonique :
 
-- `tools/piano_scale_renderer/SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` ;
+- `tools/piano_scale_renderer/SOURCE_IMAGES_GAMMES_PIANO_V1.8.md` ;
 - `tools/piano_scale_renderer/piano_scale_renderer.py` ;
 - `tools/piano_scale_renderer/scales.json` ;
 - `tools/piano_scale_renderer/official_template.png` ;
