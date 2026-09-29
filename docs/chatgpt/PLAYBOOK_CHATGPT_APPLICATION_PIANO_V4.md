@@ -13,6 +13,22 @@ Si le contexte est incomplet, lire d’abord `AlexFCL/piano/CHATGPT_PROJECT_POIN
 4. Ne jamais extrapoler l'architecture d'un autre projet.
 5. Ne jamais recommander une suppression sans le protocole de sécurité.
 
+### Politique de mutation GitHub
+
+Pour toute tâche multi-fichiers, travailler en lecture seule jusqu'à ce que le lot soit prêt. Ne pas pousser chaque fichier séparément.
+
+Procédure :
+1. relever le HEAD de `master` ;
+2. lire/préparer toutes les modifications ;
+3. si l'utilisateur a demandé un contrôle avant publication, attendre son « GO push » ;
+4. créer un arbre Git contenant toutes les modifications ;
+5. créer **un seul commit** ;
+6. revérifier que le HEAD de `master` n'a pas changé ;
+7. déplacer `master` une seule fois ;
+8. vérifier les workflows déclenchés.
+
+Éviter `update_file` répété sur `master` : chaque appel crée un commit et peut relancer GitHub Pages.
+
 ## 2. Routage par domaine
 
 ### UI / accueil / CSS
@@ -33,11 +49,9 @@ CI :
 ### Accords
 Lire :
 - `chords.html`
-- `second_page.html`
-- `js/main.js`
-- `js/second_page_script.js`
-- `css/styles.css`
-- `css/second_page_styles.css`
+- `js/chords_script.js`
+- `css/chords_styles.css`
+- `second_page.html` uniquement si la route de compatibilité est concernée
 
 Attention : le comportement des accords n'est pas le même que celui des gammes.
 Pour produire/corriger une image d'accord, lire d'abord `data/music-theory/tonality-colors.json` puis `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`, et utiliser `tools/piano_chord_renderer/`.
@@ -62,14 +76,11 @@ Si le JSON n'est pas accessible, arrêter la génération : ne jamais substituer
 
 ### Gammes — comportement
 Lire :
-- `scales.html`
 - `scale_training.html`
-- `scale_library.html` si bibliothèque concernée
-- `js/scales_main.js`
 - `js/scales_script.js`
-- `js/scale_library.js` si bibliothèque concernée
 - `css/scales_styles.css`
-- `css/scale_library.css` si bibliothèque concernée
+- `scale_library.html` + `js/scale_library.js` + `css/scale_library.css` si la bibliothèque est concernée
+- `scales.html` uniquement comme route de compatibilité
 
 Consulter Notion si l'intention fonctionnelle doit être arbitrée.
 
@@ -127,13 +138,16 @@ Lire :
 
 1. repository = `AlexFCL/piano` ;
 2. branche = `master` ;
-3. lire HEAD ;
-4. lire les fichiers exacts ;
-5. faire une modification minimale ;
-6. vérifier les régressions visibles ;
-7. commit ;
-8. confirmer SHA et fichiers modifiés ;
-9. mettre à jour V4 si architecture/contrat modifié.
+3. relever le HEAD une fois ;
+4. lire les fichiers exacts et préparer le lot sans mutation ;
+5. vérifier les impacts et les tests à exécuter ;
+6. si un accord de publication est prévu, attendre le « GO push » ;
+7. créer tous les blobs puis **un seul tree + un seul commit** ;
+8. revérifier le HEAD juste avant `update_ref` ;
+9. publier sans force uniquement si le HEAD est inchangé ;
+10. confirmer le SHA et les workflows réellement déclenchés.
+
+Ne pas faire une série de `update_file` sur `master` pour une même tâche.
 
 ## 4. Suppression / nettoyage
 
@@ -162,6 +176,6 @@ Avant de proposer de retirer quoi que ce soit :
 - **État actuel : GitHub**
 - **Architecture/méthode : MASTER V4**
 - **Conservation : MANIFEST V4**
-- **Images : GitHub `tools/piano_scale_renderer/` (inclut V1.7 + renderer + template + tests)**
+- **Images : GitHub `tools/piano_scale_renderer/` (inclut V1.8 + renderer + template + tests)**
 - **Intention gammes : Notion**
 - **Historique : V1/V2/V3**

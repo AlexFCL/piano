@@ -15,7 +15,6 @@ on:
       - "js/home.js"
       - "js/category_page.js"
       - "tests/test_categories.py"
-      - ".github/workflows/category-consistency.yml"
   pull_request:
     paths:
       - "data/categories.json"
@@ -29,6 +28,10 @@ on:
       - "js/category_page.js"
       - "tests/test_categories.py"
       - ".github/workflows/category-consistency.yml"
+
+concurrency:
+  group: category-consistency-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

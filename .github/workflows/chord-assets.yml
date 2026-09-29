@@ -5,10 +5,15 @@ on:
     branches:
       - master
     paths:
-      - ".github/workflows/chord-assets.yml"
-      - "tools/piano_chord_renderer/**"
+      - "tools/piano_chord_renderer/piano_chord_renderer.py"
+      - "tools/piano_chord_renderer/official_template.png"
+      - "tools/piano_chord_renderer/requirements.txt"
       - "data/music-theory/tonality-colors.json"
   workflow_dispatch:
+
+concurrency:
+  group: chord-assets-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write

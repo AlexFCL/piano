@@ -2,7 +2,7 @@
 
 **Projet :** Application piano  
 **Statut :** source maître consolidée  
-**Date de consolidation :** 28/09/2026 — accueil piloté par categories.json + contrôles CI de cohérence  
+**Date de consolidation :** 29/09/2026 — audit global architecture, documentation et cadence GitHub/CI  
 **But :** permettre à ChatGPT et au propriétaire du projet de comprendre, modifier et maintenir le projet sans perdre de dépendance importante ni confondre les sources.
 
 ---
@@ -76,7 +76,7 @@ Le HEAD doit toujours être revérifié avant une écriture future ; ne jamais f
 
 ### 2.3 Hébergement
 
-GitHub Pages est activé au niveau du dépôt. Le **mode exact de publication** (branche/dossier de source et URL de publication) n'a pas été vérifié via l'endpoint Pages pendant cette consolidation. Ne pas l'inventer.
+GitHub Pages est actif. Le comportement observé le 29/09/2026 est qu'un push sur `master` déclenche un `pages build and deployment`. Une rafale de petits commits provoque donc une rafale de builds, souvent annulés par les commits suivants. Le **mode exact de source de publication** (branche/dossier configuré côté Pages) n'est pas documenté ici.
 
 ---
 
@@ -87,11 +87,11 @@ GitHub Pages est activé au niveau du dépôt. Le **mode exact de publication** 
 Le dépôt contient actuellement :
 
 - 10 pages HTML ;
-- 5 fichiers CSS ;
-- 9 scripts JavaScript ;
-- 5 fichiers JSON de données ;
+- 6 fichiers CSS ;
+- 10 scripts JavaScript ;
+- 8 fichiers JSON de données ;
 - 102 images d'accords ;
-- 24 images de gammes ;
+- 48 images de gammes (24 classiques + 24 pentatoniques) ;
 - des assets/template historiques à la racine.
 
 ### 3.2 Arborescence logique
@@ -116,10 +116,12 @@ AlexFCL/piano (master)
 │   └── workflows/
 │       ├── scale-consistency.yml
 │       ├── category-consistency.yml
+│       ├── renderer-palette-source.yml
 │       └── chord-assets.yml
 ├── tests/
 │   ├── test_scale_consistency.py
-│   └── test_categories.py
+│   ├── test_categories.py
+│   └── test_renderer_palette_source.py
 ├── tools/
 │   ├── piano_scale_renderer/
 │       ├── README.md
@@ -148,12 +150,14 @@ AlexFCL/piano (master)
 │       └── INSTRUCTIONS_MISE_A_JOUR_APPLICATION_PIANO_V4.md
 ├── css/
 │   ├── styles.css
+│   ├── chords_styles.css
 │   ├── second_page_styles.css
 │   ├── scales_styles.css
 │   ├── scale_library.css
 │   └── library_styles.css
 ├── js/
 │   ├── home.js
+│   ├── chords_script.js
 │   ├── main.js
 │   ├── second_page_script.js
 │   ├── scales_main.js
@@ -172,8 +176,8 @@ AlexFCL/piano (master)
 │       ├── scales.json
 │       └── tonality-colors.json
 └── images/
-    ├── Chords/   # 102 JPG
-    └── Scales/   # 24 PNG
+    ├── Chords/   # 102 PNG
+    └── Scales/   # 48 PNG : 24 classiques + 24 pentatoniques
 ```
 
 ---
@@ -205,69 +209,54 @@ Ordre actuel :
 
 ### 4.2 Accords
 
-Flux :
+Flux runtime actuel :
 
 ```text
-chords.html
-→ js/main.js
-→ second_page.html?updateTime=X
-→ js/second_page_script.js
-→ images/Chords/*-majeur-*.png / *-mineur-*.png
+index.html
+→ data/categories.json
+→ chords.html
+→ js/chords_script.js
+→ images/Chords/<tonique>-<majeur|mineur>-<fond|1er|2eme>.png
 ```
 
-Comportement observé :
+`second_page.html` est conservée comme route de compatibilité, mais la page d'exercice courante est `chords.html`.
 
-- `updateTime` doit être ≥ 1 seconde ;
-- une note est tirée parmi 17 graphies ;
-- majeur/mineur est tiré ;
-- une position/fondamentale-renversement est tirée ;
-- cette position est affichée dans la consigne sous le nom de l'accord ;
-- les libellés sont `fond.`, `1er (tonique haut)` et `2ème (tierce haut)` ;
-- le nom de l'image suit la convention lisible `<tonique>-<majeur|mineur>-<fond|1er|2eme>.png` ;
-- exemples : `C-majeur-fond.png`, `Eb-mineur-1er.png`, `F#-majeur-2eme.png` ;
-- `#` est encodé dans l'URL côté navigateur afin que les fichiers diésés restent adressables ;
-- 102 PNG générés correspondent à `17 × 2 × 3` combinaisons ;
-- un nouveau tirage est fait toutes les `updateTime` secondes.
+Comportement actuel :
+- temps de réponse réglable directement sur la page, minimum 1 s ;
+- filtres Majeur/Mineur multi-sélectionnables avec au moins une option active ;
+- filtres Fondamental/1er/2e renversement multi-sélectionnables avec au moins une option active ;
+- changement de filtre ou de durée appliqué au tour suivant ;
+- consigne = accord + position ;
+- réponse affichée pendant 3 s ;
+- répétition immédiate évitée lorsqu'il existe plusieurs choix.
 
-Décision du 28/09/2026 : le renversement doit être visible dans la question afin que la consigne corresponde exactement à l'image attendue.
-
-Renderer canonique des accords : `tools/piano_chord_renderer/`. Il utilise le template 711×254, la logique des trois positions existantes, des libellés théoriques sur les touches et la palette runtime `data/music-theory/tonality-colors.json`.
+Renderer canonique : `tools/piano_chord_renderer/`. Palette runtime : `data/music-theory/tonality-colors.json`.
 
 ### 4.3 Gammes — entraînement visuel
 
-Flux :
+Deux parcours sont distincts :
 
 ```text
-scales.html
-→ js/scales_main.js
-→ scale_training.html?updateTime=X
-→ js/scales_script.js
-→ images/Scales/*.png
-```
-
-Comportement observé :
-
-1. `updateTime` doit être ≥ 1 seconde ;
-2. une gamme est tirée parmi 24 entrées ;
-3. le nom est affiché immédiatement ;
-4. l'image est cachée pendant `updateTime` ;
-5. l'image est révélée pendant 3 secondes ;
-6. une nouvelle gamme est tirée ;
-7. le même index n'est pas proposé deux fois de suite ;
-8. l'image est préchargée avant révélation ;
-9. si `updateTime` est absent/invalide dans l'URL, la valeur de repli est 5 s.
-
-Pool : 12 majeures + 12 mineures naturelles.
-
-Bibliothèque visuelle complémentaire :
-
-```text
-scale_library.html
+index.html
+→ scale_library.html
 → js/scale_library.js
 → images/Scales/*.png
 ```
 
-Elle présente actuellement les mêmes 24 gammes sous forme de bibliothèque consultable : 12 majeures + 12 mineures naturelles.
+et :
+
+```text
+scale_library.html
+→ scale_training.html
+→ js/scales_script.js
+→ images/Scales/*.png
+```
+
+`scales.html` reste une route de compatibilité qui redirige vers `scale_training.html`.
+
+L'entraînement propose actuellement 12 majeures + 12 mineures naturelles, avec temps de réponse réglable (minimum 1 s), filtres Majeur/Mineur, réponse affichée 3 s et évitement de la répétition immédiate.
+
+Le dépôt contient aussi 24 PNG pentatoniques produits par le renderer. Leur présence dans `images/Scales/` ne signifie pas que l'onglet Pentatoniques de la bibliothèque est déjà activé.
 
 ### 4.3.1 Palette transversale tonique / mode — accords + gammes
 
@@ -517,12 +506,13 @@ La duplication des titres/descriptions/routes entre `index.html` et le JSON a do
 
 ### 8.6 Tests applicatifs
 
-Trois ensembles de tests automatisés existent désormais :
+Cinq ensembles de contrôles automatisés existent désormais :
 
 - renderer de gammes : tests dédiés au rendu déterministe, à la géométrie et à la palette tonique/mode ;
 - renderer d'accords : tests couvrant les 102 combinaisons, la palette tonique/mode, les trois positions de Do majeur et les orthographes enharmoniques ;
 - cohérence applicative des gammes : 5 tests dans `tests/test_scale_consistency.py`, exécutés par GitHub Actions ;
-- cohérence des catégories : 3 tests dans `tests/test_categories.py`, exécutés par GitHub Actions.
+- cohérence des catégories : tests dans `tests/test_categories.py`, exécutés par GitHub Actions ;
+- politique de source de palette : `tests/test_renderer_palette_source.py`, exécuté par `.github/workflows/renderer-palette-source.yml`.
 
 Ces contrôles ne remplacent pas une recette navigateur : aucune suite E2E/UI automatisée n'est actuellement documentée.
 
@@ -565,21 +555,24 @@ Une source plus récente ne peut remplacer une source d'un autre type que si son
 
 ### 10.2 Modification GitHub
 
-1. vérifier `AlexFCL/piano` ;
-2. vérifier `master` ;
-3. relever le HEAD ;
-4. lire les fichiers exacts ;
-5. modifier uniquement ce qui est nécessaire ;
-6. vérifier les impacts ;
-7. créer le commit ;
-8. confirmer le SHA du commit ;
-9. mettre à jour la documentation si l'architecture ou le contrat change.
+1. vérifier `AlexFCL/piano` / `master` et relever le HEAD ;
+2. travailler en lecture seule pendant l'audit et la préparation ;
+3. préparer toutes les modifications du lot avant publication ;
+4. si l'utilisateur souhaite contrôler la publication, attendre son « GO push » ;
+5. créer les blobs et un arbre Git unique ;
+6. créer **un seul commit** pour la tâche ;
+7. revérifier que le HEAD de `master` est toujours celui relevé au départ ;
+8. déplacer `master` une seule fois, sans force ;
+9. vérifier les workflows réellement déclenchés ;
+10. mettre à jour la documentation si l'architecture ou le contrat change.
+
+Éviter une série de `update_file` sur `master` : chaque commit intermédiaire peut déclencher GitHub Pages et les CI.
 
 ### 10.3 Nouvelle image de gamme / correction
 
 1. ne pas utiliser de modèle d'image ;
 2. récupérer `tools/piano_scale_renderer/` depuis GitHub ;
-3. lire `README.md`, la V1.7 et vérifier la définition dans `scales.json` ;
+3. lire d'abord `data/music-theory/tonality-colors.json`, puis `RENDERERS_SOURCE_OF_TRUTH_V1.md`, `README.md`, la V1.8 et vérifier la définition dans `scales.json` ;
 4. générer ;
 5. lancer les tests ;
 6. lire `validation-report.json` ;

@@ -14,6 +14,19 @@ Ce fichier doit permettre à une future conversation de retrouver immédiatement
 2. `docs/chatgpt/APPLICATION_PIANO_MASTER_V4.md` si davantage de contexte est nécessaire
 3. `docs/chatgpt/MANIFEST_APPLICATION_PIANO_V4.md` avant toute suppression, archivage ou nettoyage
 
+## Politique de mutation GitHub — éviter les pushs multiples
+
+Pour une tâche qui peut modifier plusieurs fichiers :
+
+1. travailler d'abord en **lecture seule** : relever le HEAD de `master`, lire les sources utiles et préparer tout le lot ;
+2. ne pas utiliser `update_file` fichier par fichier sur `master` ;
+3. présenter le lot de changements avant publication lorsqu'un accord utilisateur est attendu ;
+4. après accord explicite (par exemple « GO push »), créer les blobs et un arbre Git, puis **un seul commit** ;
+5. revérifier le HEAD de `master` juste avant publication ; si le HEAD a changé, ne pas forcer et réconcilier d'abord ;
+6. déplacer `master` **une seule fois**, puis vérifier les CI pertinentes.
+
+But : une tâche cohérente = un commit cohérent = un seul déclenchement GitHub Pages. Un second push automatique n'est acceptable que lorsqu'un workflow de génération d'assets produit réellement des fichiers différents.
+
 ## PRIORITÉ ABSOLUE — couleurs et renderers
 
 Pour **toute** génération, correction, vérification ou remplacement d'image d'accord, de gamme ou de pentatonique :

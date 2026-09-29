@@ -3,17 +3,17 @@
 **Mise à jour :** le renderer de gammes est désormais destiné à être versionné dans `tools/piano_scale_renderer/` ; le ZIP devient un backup historique.
 Ce document ne donne pas un ordre de correction. Il sépare ce qui est observé de ce qui est à décider.
 
-## OBSERVÉ — PNG de gammes
+## HISTORIQUE — ancienne comparaison des PNG de gammes
 
-20/24 fichiers `images/Scales/` correspondent au renderer fourni.
+L'ancien constat « 20/24 fichiers correspondent au renderer fourni » provenait d'un renderer/snapshot antérieur et **ne doit plus être utilisé pour juger la conformité actuelle**.
 
-Non identiques :
-- `D-majeur.png`
-- `E-majeur.png`
-- `Eb-majeur.png`
-- `F-majeur.png`
+État structurel vérifié au 29/09/2026 :
+- `images/Scales/` contient 48 PNG ;
+- 24 correspondent aux gammes classiques (12 majeures + 12 mineures naturelles) ;
+- 24 correspondent aux pentatoniques ;
+- la présence des pentatoniques dans les assets ne signifie pas qu'elles sont déjà exposées dans la bibliothèque UI.
 
-**Décision requise avant action :** faut-il remplacer les quatre assets GitHub par les sorties canoniques actuelles ?
+Pour contrôler la conformité colorimétrique, il faut régénérer avec le renderer courant et `data/music-theory/tonality-colors.json`, puis comparer les sorties aux assets live.
 
 ## RÉSOLU — nomenclature mineure
 
@@ -34,7 +34,7 @@ Décision du 28/09/2026 :
 - il est désormais affiché dans la consigne sous le nom de l'accord ;
 - libellés : `fond.`, `1er (tonique haut)`, `2ème (tierce haut)`.
 
-Les 102 fichiers `images/Chords/*.jpg` couvrent toujours exactement les combinaisons `17 × 2 × 3`.
+Les 102 fichiers `images/Chords/*.png` couvrent toujours exactement les combinaisons `17 × 2 × 3`.
 
 ## RÉSOLU — catégories
 
@@ -62,10 +62,14 @@ Notion reste volontairement hors de cette CI : c'est une spécification fonction
 
 ## OBSERVÉ — tests
 
-- renderer : 8 tests automatisés ;
-- cohérence des sources de gammes : 5 tests automatisés, exécutés par GitHub Actions ;
-- cohérence des catégories : 3 tests automatisés, exécutés par GitHub Actions ;
-- navigateur / E2E : aucune suite automatisée documentée.
+Les contrôles automatisés couvrent actuellement :
+- renderer de gammes et pentatoniques ;
+- renderer d'accords ;
+- cohérence des sources de gammes ;
+- cohérence des catégories ;
+- politique commune de source de palette des renderers.
+
+Les nombres exacts de méthodes de test ne sont pas figés ici : ils évoluent avec les suites. Aucune suite navigateur / E2E complète n'est documentée.
 
 ## OBSERVÉ — fichiers legacy
 
@@ -80,6 +84,18 @@ Rôle exact non documenté pour tous. Conserver par défaut.
 
 Les CSS chargent Inter depuis Google Fonts. Fallback système présent.
 
-## OBSERVÉ — GitHub Pages
+## MITIGÉ — GitHub Pages / bruit de CI
 
-`has_pages: true`. Configuration exacte de la source de publication non vérifiée dans cette consolidation.
+GitHub Pages est actif et un push sur `master` déclenche un `pages build and deployment`.
+
+Incident observé le 29/09/2026 : 17 commits en quelques minutes ont déclenché 17 builds Pages, dont la plupart ont été annulés par des commits plus récents, ainsi que plusieurs workflows supplémentaires.
+
+Mesures retenues :
+- préparer les changements en lecture seule ;
+- regrouper une tâche multi-fichiers dans un seul commit ;
+- déplacer `master` une seule fois ;
+- ajouter `concurrency` aux workflows maison pour annuler un run obsolète ;
+- restreindre le workflow lourd de génération des accords aux vrais inputs susceptibles de modifier les PNG ;
+- ne pas déclencher les workflows uniquement parce que leur propre fichier YAML a été édité sur `master`.
+
+Le mode exact de source GitHub Pages reste distinct de ce constat ; ce qui est vérifié ici est le comportement effectif des builds lors des pushs sur `master`.

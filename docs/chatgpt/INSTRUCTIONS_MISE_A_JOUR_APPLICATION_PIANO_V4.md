@@ -4,6 +4,19 @@
 
 Mettre en place la documentation V4 **sans supprimer aucune source importante**.
 
+## Étape 0 — mutations GitHub groupées
+
+Pour toute évolution touchant plusieurs fichiers :
+
+1. auditer et préparer le lot en lecture seule ;
+2. ne pas publier fichier par fichier ;
+3. attendre un « GO push » lorsque l'utilisateur souhaite contrôler la publication ;
+4. créer un seul commit contenant le lot ;
+5. déplacer `master` une seule fois ;
+6. vérifier ensuite les CI et GitHub Pages.
+
+Cette règle évite qu'une série de petites modifications relance GitHub Pages et les workflows à quelques secondes d'intervalle.
+
 ## Étape 1 — conserver le backup hors de ChatGPT
 
 Télécharger et conserver localement :
@@ -26,7 +39,7 @@ Le renderer canonique est :
 
 `AlexFCL/piano` → `master` → `tools/piano_scale_renderer/`
 
-Le dossier contient la V1.7, le script, `scales.json`, le template, les tests et les golden images.
+Le dossier contient la V1.8, le script, `scales.json`, le template, les tests et les golden images.
 
 Le ZIP `piano_corrector_v1(1).zip` est une **sauvegarde historique**. Une future conversation ne doit plus en dépendre pour travailler.
 
@@ -45,7 +58,7 @@ La réponse correcte doit notamment identifier :
 - `AlexFCL/piano` / `master` ;
 - MASTER V4 / MANIFEST V4 / PLAYBOOK V4 ;
 - `tools/piano_scale_renderer/` comme **source canonique exécutable** ;
-- `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` dans ce dossier pour la doctrine ;
+- `SOURCE_IMAGES_GAMMES_PIANO_V1.8.md` dans ce dossier pour la doctrine ;
 - le template 365×254 verrouillé ;
 - le ZIP historique uniquement comme backup.
 

@@ -11,7 +11,6 @@ on:
       - "data/music-theory/scales.json"
       - "images/Scales/**"
       - "tests/test_scale_consistency.py"
-      - ".github/workflows/scale-consistency.yml"
   pull_request:
     paths:
       - "tools/piano_scale_renderer/scales.json"
@@ -21,6 +20,10 @@ on:
       - "images/Scales/**"
       - "tests/test_scale_consistency.py"
       - ".github/workflows/scale-consistency.yml"
+
+concurrency:
+  group: scale-consistency-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
