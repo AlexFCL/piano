@@ -46,8 +46,8 @@ class RendererPaletteSourceTests(unittest.TestCase):
         shared = text.index("docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md", priority)
         self.assertLess(palette, shared)
 
-    def test_scale_historical_source_declares_runtime_precedence(self):
-        text = (ROOT / "tools" / "piano_scale_renderer" / "SOURCE_IMAGES_GAMMES_PIANO_V1.7.md").read_text(encoding="utf-8")
+    def test_scale_source_declares_runtime_precedence(self):
+        text = (ROOT / "tools" / "piano_scale_renderer" / "SOURCE_IMAGES_GAMMES_PIANO_V1.8.md").read_text(encoding="utf-8")
         self.assertIn("## Statut colorimétrique et priorité", text)
         self.assertIn("data/music-theory/tonality-colors.json", text)
         self.assertIn("RENDERERS_SOURCE_OF_TRUTH_V1.md", text)
