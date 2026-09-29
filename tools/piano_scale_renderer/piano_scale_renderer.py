@@ -103,6 +103,11 @@ def scale_identity(scale_name: str) -> tuple[str, str]:
     return root, quality
 
 
+def expected_note_count(scale_name: str) -> int:
+    """Return the canonical number of active notes for the requested scale family."""
+    return 5 if "pentatonique" in scale_name.lower() else 7
+
+
 def detect_geometry(template: Image.Image) -> Geometry:
     rgb = template.convert("RGB")
     width, height = rgb.size
@@ -220,8 +225,11 @@ def render_scale(
     unknown = set(notes) - set(ALL_SLOTS)
     if unknown:
         raise ValueError(f"Slots inconnus: {sorted(unknown)}")
-    if len(notes) != 7:
-        raise ValueError(f"Une gamme doit activer exactement 7 slots, reçu: {len(notes)}")
+    expected = expected_note_count(scale_name)
+    if len(notes) != expected:
+        raise ValueError(
+            f"{scale_name} doit activer exactement {expected} slots, reçu: {len(notes)}"
+        )
 
     colors = load_tonality_colors(colors_path)
     root, quality = scale_identity(scale_name)
@@ -275,7 +283,7 @@ def render_scale(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     image.save(output_path, format="PNG", optimize=False)
 
-    final_report = validate_final(image, template, geom, notes, fill_report, fill_hex)
+    final_report = validate_final(image, template, geom, notes, fill_report, fill_hex, scale_name)
     if validate and not final_report["ok"]:
         output_path.unlink(missing_ok=True)
         raise AssertionError("Validation finale échouée: " + "; ".join(final_report["errors"]))
@@ -364,18 +372,29 @@ def validate_fills(image: Image.Image, template: Image.Image, geom: Geometry, no
     return {"ok": not errors, "errors": errors}
 
 
-def validate_final(image: Image.Image, template: Image.Image, geom: Geometry, notes: Dict[str, str], fill_report: dict, fill_hex: str) -> dict:
+def validate_final(
+    image: Image.Image,
+    template: Image.Image,
+    geom: Geometry,
+    notes: Dict[str, str],
+    fill_report: dict,
+    fill_hex: str,
+    scale_name: str,
+) -> dict:
     errors = list(fill_report.get("errors", []))
+    expected = expected_note_count(scale_name)
     if image.size != (365, 254):
         errors.append(f"Dimensions finales incorrectes: {image.size}")
-    if len(notes) != 7:
-        errors.append(f"Nombre de notes actif incorrect: {len(notes)}")
+    if len(notes) != expected:
+        errors.append(
+            f"Nombre de notes actif incorrect pour {scale_name}: {len(notes)} (attendu {expected})"
+        )
 
     # Verify each label's theoretical text is non-empty and mapped to one unique physical slot.
     labels = list(notes.values())
     if any(not label.strip() for label in labels):
         errors.append("Libellé vide")
-    if len(set(notes.keys())) != 7:
+    if len(set(notes.keys())) != expected:
         errors.append("Slots physiques dupliqués")
 
     return {
@@ -387,6 +406,7 @@ def validate_final(image: Image.Image, template: Image.Image, geom: Geometry, no
         "color": fill_hex,
         "colors": {"active": fill_hex, "text": "#FFFFFF"},
         "template_locked": True,
+        "expected_note_count": expected,
     }
 
 
