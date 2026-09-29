@@ -28,13 +28,17 @@ Le nombre de notes attendu est déterminé par la famille de la gamme. Les penta
 
 ## Palette canonique
 
-La source de vérité des couleurs est `../../data/music-theory/tonality-colors.json`, documentée dans `../../docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
+Ordre obligatoire :
+1. `../../data/music-theory/tonality-colors.json` — autorité runtime absolue ;
+2. `../../docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` — hiérarchie commune à tous les renderers ;
+3. `../../docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` — explication fonctionnelle.
 
 - une gamme majeure utilise la variante `major` de sa tonique ;
 - une gamme mineure utilise la variante `minor` de sa tonique ;
 - toutes les touches actives utilisent la même couleur, indépendamment du fait qu'elles soient blanches ou noires ;
 - les libellés restent blancs ;
-- aucune couleur statique dépendant du type physique de touche ne doit être utilisée.
+- aucune couleur active statique dépendant du type physique de touche ne doit être utilisée ;
+- si le JSON canonique est inaccessible, aucune image ne doit être générée et aucune couleur ne doit être substituée.
 
 ## Séparation fondamentale
 
