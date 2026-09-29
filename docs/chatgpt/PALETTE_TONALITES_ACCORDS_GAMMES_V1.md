@@ -22,7 +22,7 @@ La couleur dépend de la **tonique** et du **mode** :
 - **Base** → identité neutre de la tonique pour un usage sans mode ou futur ;
 - les graphies enharmoniques d'une même ligne partagent la même famille.
 
-## 2. Table canonique
+## 2. Table de lecture documentaire (non autoritaire)
 
 | Tonique | Base | Majeur | Mineur |
 |---|---|---|---|
@@ -50,10 +50,12 @@ La couleur dépend de la **tonique** et du **mode** :
 
 ## 4. Source unique
 
-Ne pas recopier ces couleurs dans plusieurs scripts. La table structurée dans
-`data/music-theory/tonality-colors.json` est la source runtime à consommer.
+Ne pas recopier ces couleurs dans les scripts, renderers ou tests. La table structurée dans
+`data/music-theory/tonality-colors.json` est la seule source runtime à consommer.
 
-Le renderer d'accords `tools/piano_chord_renderer/` utilise directement cette source.
+La table ci-dessus est un miroir documentaire lisible. Si elle diverge du JSON, elle est considérée obsolète et le JSON l'emporte.
+
+Tous les renderers actuels et futurs doivent suivre `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` et lire directement cette source. Les tests doivent eux aussi résoudre les valeurs attendues depuis le JSON, sans figer de valeur hexadécimale de couleur active.
 
 ## 5. Règle de rendu
 
