@@ -1,0 +1,61 @@
+# RENDERERS — SOURCES DE VÉRITÉ — V1
+
+**Projet :** Application piano  
+**Statut :** CANONIQUE — première lecture obligatoire pour toute tâche de rendu d'images  
+**Périmètre :** accords, gammes, pentatoniques et tout futur renderer pédagogique
+
+## 1. Hiérarchie de priorité
+
+Pour toute question de couleur ou toute génération/correction d'asset, appliquer cet ordre sans exception :
+
+1. **Source runtime absolue :** `data/music-theory/tonality-colors.json`
+2. **Routage et priorité des renderers :** le présent document
+3. **Explication fonctionnelle de la palette :** `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
+4. **Politique du renderer concerné :** `tools/<renderer>/RENDERER_POLICY.md`
+5. **README, tests et définitions du renderer concerné**
+6. **Documents historiques, snapshots, archives ZIP et anciens échanges** : informatifs uniquement
+
+En cas de contradiction, la source située plus haut dans cette liste l'emporte.
+
+Si `data/music-theory/tonality-colors.json` est absent, illisible ou inaccessible, **ne pas générer d'image et ne substituer aucune couleur**. Récupérer d'abord l'état courant de `AlexFCL/piano`, branche `master`.
+
+## 2. Règle colorimétrique commune
+
+- La couleur active est résolue exclusivement à partir de la **tonique** et du **mode** via `tonality-colors.json`.
+- Toutes les touches actives d'un même accord ou d'une même gamme utilisent la même couleur tonique/mode, quelle que soit leur nature physique.
+- Les renderers ne doivent définir aucune couleur active statique dépendant du type de touche.
+- Les libellés restent blancs.
+- Une valeur recopiée dans un README, un test, un snapshot ou un ancien document ne devient jamais une source runtime.
+
+## 3. Renderers couverts
+
+### Accords
+- dossier : `tools/piano_chord_renderer/`
+- code : `piano_chord_renderer.py`
+- politique : `RENDERER_POLICY.md`
+
+### Gammes et pentatoniques
+- dossier : `tools/piano_scale_renderer/`
+- code commun : `piano_scale_renderer.py`
+- définitions : `scales.json` et `pentatonic_scales.json`
+- politique : `RENDERER_POLICY.md`
+
+Les pentatoniques ne disposent pas d'un moteur colorimétrique séparé : elles héritent obligatoirement de la même source runtime et du même moteur que les autres gammes.
+
+## 4. Procédure obligatoire avant génération
+
+1. Vérifier le dépôt `AlexFCL/piano` et la branche `master`.
+2. Lire `CHATGPT_PROJECT_POINTER.md`.
+3. Charger **en premier** `data/music-theory/tonality-colors.json`.
+4. Lire le présent document.
+5. Lire la politique, le README, le code et les tests du renderer concerné.
+6. Exécuter les tests du renderer.
+7. Générer les assets uniquement avec le renderer canonique.
+8. Vérifier que la couleur réellement utilisée correspond à la paire tonique/mode du JSON.
+9. Livrer uniquement les sorties validées.
+
+## 5. Règle anti-régression
+
+Une archive, un ZIP, un snapshot `golden/`, une pièce jointe de projet ou un ancien document peut être utile pour l'historique ou la géométrie, mais **ne doit jamais remplacer la palette runtime courante**.
+
+Toute évolution future de palette se fait d'abord dans `data/music-theory/tonality-colors.json`. Les renderers doivent consommer ce fichier, pas recopier ses valeurs.
