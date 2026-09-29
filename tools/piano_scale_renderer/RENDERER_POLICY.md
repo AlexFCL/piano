@@ -37,7 +37,7 @@ Ne jamais produire l'asset final par génération d'image libre, redessin manuel
 - La couleur d'une gamme vient uniquement de la paire tonique/mode.
 - Une touche active blanche et une touche active noire utilisent la même couleur de gamme.
 - La référence fonctionnelle est `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` et la source runtime est `data/music-theory/tonality-colors.json`.
-- Les anciens snapshots `golden/` ne sont pas une référence colorimétrique tant qu'ils n'ont pas été régénérés avec la palette actuelle.
+- Aucun snapshot binaire historique n'est conservé comme référence colorimétrique. Toute future référence doit être générée par le renderer courant et validée contre `tonality-colors.json`.
 
 ## Procédure future ChatGPT
 Pour une demande du type « génère/corrige telle gamme » :
