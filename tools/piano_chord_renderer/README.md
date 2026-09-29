@@ -4,18 +4,18 @@ Ce dossier produit les images d'accords à partir du template 711×254 du projet
 
 ## Sources de vérité
 
-- géométrie : `official_template.png` ;
-- palette tonique/mode : `../../data/music-theory/tonality-colors.json` ;
-- logique de l'application : 17 graphies de tonique × 2 qualités × 3 positions = 102 combinaisons.
+Ordre obligatoire :
+1. palette runtime : `../../data/music-theory/tonality-colors.json` ;
+2. politique commune : `../../docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` ;
+3. explication fonctionnelle : `../../docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` ;
+4. géométrie : `official_template.png` ;
+5. logique de l'application : 17 graphies de tonique × 2 qualités × 3 positions = 102 combinaisons.
 
 ## Palette
 
-La couleur dépend de la tonique et du mode. Par exemple :
+La couleur dépend exclusivement de la tonique et du mode résolus depuis le JSON canonique. Les touches blanches et noires actives utilisent la **même couleur tonique/mode**.
 
-- C majeur → `#B51B1B` ;
-- C mineur → `#EB8080`.
-
-Les touches blanches et noires actives utilisent la **même couleur tonique/mode**. Ce renderer n'utilise aucune couleur dépendant du type physique de touche : seule la paire tonique/mode détermine la couleur.
+Aucune valeur active ne doit être recopiée dans ce README ou définie en dur dans le renderer.
 
 ## Labels
 
