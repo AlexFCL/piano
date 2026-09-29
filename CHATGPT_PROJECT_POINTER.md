@@ -14,18 +14,31 @@ Ce fichier doit permettre à une future conversation de retrouver immédiatement
 2. `docs/chatgpt/APPLICATION_PIANO_MASTER_V4.md` si davantage de contexte est nécessaire
 3. `docs/chatgpt/MANIFEST_APPLICATION_PIANO_V4.md` avant toute suppression, archivage ou nettoyage
 
+## PRIORITÉ ABSOLUE — couleurs et renderers
+
+Pour **toute** génération, correction, vérification ou remplacement d'image d'accord, de gamme ou de pentatonique :
+
+1. lire **en premier** `data/music-theory/tonality-colors.json` ;
+2. lire ensuite `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` ;
+3. seulement après, lire la documentation du renderer concerné.
+
+`data/music-theory/tonality-colors.json` est l'autorité runtime la plus haute pour les couleurs. Une pièce jointe, un ZIP, un snapshot, un ancien document ou un ancien échange ne peut pas la remplacer.
+
+Si le fichier de palette n'est pas visible dans le contexte, il faut le récupérer depuis `AlexFCL/piano`, branche `master`, **avant toute génération**. Ne jamais choisir ou déduire une couleur de remplacement.
+
 ## Renderer canonique des images de gammes
 Chemin obligatoire :
 `tools/piano_scale_renderer/`
 
 Pour toute génération, correction ou remplacement d'un PNG de gamme :
-1. lire d'abord `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`;
-2. utiliser `data/music-theory/tonality-colors.json` comme source runtime des couleurs ;
-3. lire `tools/piano_scale_renderer/README.md` et `tools/piano_scale_renderer/RENDERER_POLICY.md`;
-4. récupérer le renderer, le template, les définitions et les tests depuis ce dossier ;
-5. exécuter les tests ;
-6. exécuter `piano_scale_renderer.py` ;
-7. utiliser uniquement la sortie validée.
+1. lire d'abord `data/music-theory/tonality-colors.json` ;
+2. lire `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` ;
+3. lire `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` ;
+4. lire `tools/piano_scale_renderer/README.md` et `tools/piano_scale_renderer/RENDERER_POLICY.md`;
+5. récupérer le renderer, le template, les définitions et les tests depuis ce dossier ;
+6. exécuter les tests ;
+7. exécuter `piano_scale_renderer.py` ;
+8. utiliser uniquement la sortie validée.
 
 Règle verrouillée : toutes les touches actives d'une même gamme utilisent la même couleur tonique/mode. Une ancienne règle de couleur dépendant du type physique de touche est obsolète et ne doit jamais être réintroduite.
 
