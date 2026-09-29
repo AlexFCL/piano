@@ -40,12 +40,18 @@ Lire :
 - `css/second_page_styles.css`
 
 Attention : le comportement des accords n'est pas le même que celui des gammes.
-Pour produire/corriger une image d'accord, utiliser `tools/piano_chord_renderer/`.
+Pour produire/corriger une image d'accord, lire d'abord `data/music-theory/tonality-colors.json` puis `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`, et utiliser `tools/piano_chord_renderer/`.
 
 ### Palette accords + gammes
 
-- Hiérarchie obligatoire : `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`
-- Référence : `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
+Ordre de lecture obligatoire pour toute production d'image :
+1. `data/music-theory/tonality-colors.json` — **source runtime absolue, à lire en premier** ;
+2. `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` — hiérarchie commune à tous les renderers ;
+3. `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` — explication fonctionnelle ;
+4. politique/README/tests du renderer concerné.
+
+Si le JSON n'est pas accessible, arrêter la génération : ne jamais substituer une couleur depuis la mémoire, un ZIP, un snapshot ou un ancien document.
+
 - Tonique = famille chromatique.
 - Majeur = variante `major`.
 - Mineur = variante `minor`.
@@ -71,9 +77,10 @@ Consulter Notion si l'intention fonctionnelle doit être arbitrée.
 
 **Chemin canonique obligatoire :** `AlexFCL/piano` → `master` → `tools/piano_scale_renderer/`.
 
-Lire/récupérer :
-- `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
+Lire/récupérer dans cet ordre :
 - `data/music-theory/tonality-colors.json`
+- `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`
+- `docs/chatgpt/PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`
 - `README.md`
 - `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md`
 - `piano_scale_renderer.py`
