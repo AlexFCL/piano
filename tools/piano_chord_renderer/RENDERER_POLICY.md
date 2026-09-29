@@ -34,3 +34,7 @@ Toute image d'accord doit dériver du template officiel 711×254, par compositin
 - libellé théorique distinct du slot physique ;
 - aucune génération visuelle libre ;
 - aucune couleur ne doit être dérivée du fait qu'une touche soit blanche ou noire.
+
+## Tests et palette
+
+Les tests de ce renderer doivent résoudre leurs couleurs attendues depuis `data/music-theory/tonality-colors.json`. Aucune valeur hexadécimale de couleur active ne doit être figée dans les tests. La politique commune `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` s'applique intégralement.
