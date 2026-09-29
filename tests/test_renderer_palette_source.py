@@ -30,7 +30,7 @@ class RendererPaletteSourceTests(unittest.TestCase):
             source = next(renderer.glob("piano_*_renderer.py")).read_text(encoding="utf-8")
             self.assertIn("tonality-colors.json", source, renderer.name)
             self.assertIn("load_tonality_colors", source, renderer.name)
-            self.assertIn("scale_identity" if "scale" in renderer.name else "chord_identity", source, renderer.name)
+            self.assertIn("fill_hex = colors[root][quality]", source, renderer.name)
 
     def test_all_renderer_docs_point_to_shared_policy_and_runtime_palette(self):
         for renderer in RENDERERS:
