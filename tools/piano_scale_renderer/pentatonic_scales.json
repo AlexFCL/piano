@@ -1,0 +1,27 @@
+{
+  "C pentatonique majeure": {"filename":"C-pentatonique-majeure.png","notes":{"C":"C","D":"D","E":"E","G":"G","A":"A"}},
+  "Db pentatonique majeure": {"filename":"Db-pentatonique-majeure.png","notes":{"C#":"Db","D#":"Eb","F":"F","G#":"Ab","A#":"Bb"}},
+  "D pentatonique majeure": {"filename":"D-pentatonique-majeure.png","notes":{"D":"D","E":"E","F#":"F#","A":"A","B":"B"}},
+  "Eb pentatonique majeure": {"filename":"Eb-pentatonique-majeure.png","notes":{"C":"C","D#":"Eb","F":"F","G":"G","A#":"Bb"}},
+  "E pentatonique majeure": {"filename":"E-pentatonique-majeure.png","notes":{"C#":"C#","E":"E","F#":"F#","G#":"G#","B":"B"}},
+  "F pentatonique majeure": {"filename":"F-pentatonique-majeure.png","notes":{"C":"C","D":"D","F":"F","G":"G","A":"A"}},
+  "F# pentatonique majeure": {"filename":"Fd-pentatonique-majeure.png","notes":{"C#":"C#","D#":"D#","F#":"F#","G#":"G#","A#":"A#"}},
+  "G pentatonique majeure": {"filename":"G-pentatonique-majeure.png","notes":{"D":"D","E":"E","G":"G","A":"A","B":"B"}},
+  "Ab pentatonique majeure": {"filename":"Ab-pentatonique-majeure.png","notes":{"C":"C","D#":"Eb","F":"F","G#":"Ab","A#":"Bb"}},
+  "A pentatonique majeure": {"filename":"A-pentatonique-majeure.png","notes":{"C#":"C#","E":"E","F#":"F#","A":"A","B":"B"}},
+  "Bb pentatonique majeure": {"filename":"Bb-pentatonique-majeure.png","notes":{"C":"C","D":"D","F":"F","G":"G","A#":"Bb"}},
+  "B pentatonique majeure": {"filename":"B-pentatonique-majeure.png","notes":{"C#":"C#","D#":"D#","F#":"F#","G#":"G#","B":"B"}},
+
+  "C pentatonique mineure": {"filename":"C-pentatonique-mineure.png","notes":{"C":"C","D#":"Eb","F":"F","G":"G","A#":"Bb"}},
+  "C# pentatonique mineure": {"filename":"Cd-pentatonique-mineure.png","notes":{"C#":"C#","E":"E","F#":"F#","G#":"G#","B":"B"}},
+  "D pentatonique mineure": {"filename":"D-pentatonique-mineure.png","notes":{"C":"C","D":"D","F":"F","G":"G","A":"A"}},
+  "Eb pentatonique mineure": {"filename":"Eb-pentatonique-mineure.png","notes":{"C#":"Db","D#":"Eb","F#":"Gb","G#":"Ab","A#":"Bb"}},
+  "E pentatonique mineure": {"filename":"E-pentatonique-mineure.png","notes":{"D":"D","E":"E","G":"G","A":"A","B":"B"}},
+  "F pentatonique mineure": {"filename":"F-pentatonique-mineure.png","notes":{"C":"C","D#":"Eb","F":"F","G#":"Ab","A#":"Bb"}},
+  "F# pentatonique mineure": {"filename":"Fd-pentatonique-mineure.png","notes":{"C#":"C#","E":"E","F#":"F#","A":"A","B":"B"}},
+  "G pentatonique mineure": {"filename":"G-pentatonique-mineure.png","notes":{"C":"C","D":"D","F":"F","G":"G","A#":"Bb"}},
+  "G# pentatonique mineure": {"filename":"Gd-pentatonique-mineure.png","notes":{"C#":"C#","D#":"D#","F#":"F#","G#":"G#","B":"B"}},
+  "A pentatonique mineure": {"filename":"A-pentatonique-mineure.png","notes":{"C":"C","D":"D","E":"E","G":"G","A":"A"}},
+  "Bb pentatonique mineure": {"filename":"Bb-pentatonique-mineure.png","notes":{"C#":"Db","D#":"Eb","F":"F","G#":"Ab","A#":"Bb"}},
+  "B pentatonique mineure": {"filename":"B-pentatonique-mineure.png","notes":{"D":"D","E":"E","F#":"F#","A":"A","B":"B"}}
+}
