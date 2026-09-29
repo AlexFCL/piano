@@ -49,3 +49,7 @@ Pour une demande du type « génère/corrige telle gamme » :
 6. si demandé, mettre à jour `images/Scales/` dans un commit séparé ou explicitement documenté.
 
 Le ZIP historique du correcteur n'est qu'un backup. GitHub est la source canonique exécutable.
+
+## Tests et palette
+
+Les tests de ce renderer doivent résoudre leurs couleurs attendues depuis `data/music-theory/tonality-colors.json`. Aucune valeur hexadécimale de couleur active ne doit être figée dans les tests. La politique commune `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` s'applique intégralement.
