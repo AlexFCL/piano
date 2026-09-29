@@ -37,7 +37,8 @@ Il n'existe pas une source unique pour tout. Utiliser la source adaptée au suje
 | Dépendances / conservation | `MANIFEST_APPLICATION_PIANO_V4.md` | Décide ce qui doit être conservé |
 | Images de gammes | GitHub `tools/piano_scale_renderer/` + `data/music-theory/tonality-colors.json` | Renderer déterministe ; la couleur doit provenir exclusivement de la paire tonique/mode |
 | Images d'accords | GitHub `tools/piano_chord_renderer/` | **Source canonique exécutable** : renderer + template + tests |
-| Palette tonique/mode | `data/music-theory/tonality-colors.json` | **Source runtime canonique** des couleurs Base/Majeur/Mineur |
+| Palette tonique/mode | `data/music-theory/tonality-colors.json` | **Source runtime absolue** des couleurs Base/Majeur/Mineur ; à lire avant toute génération |
+| Politique commune des renderers | `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` | Hiérarchie obligatoire pour tous les renderers ; interdit toute substitution si le JSON n'est pas lu |
 | Hiérarchie des renderers | `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` | Règle de priorité commune : JSON runtime d'abord, puis politique commune, puis documentation spécifique |
 | Spécification fonctionnelle du générateur de gammes | Notion `Spécifications – Générateur de gammes piano` | Intention fonctionnelle ; le code GitHub prévaut pour l'état réel |
 | Anciennes décisions/documentations | Archives V1/V2/V3 | Historique seulement |
@@ -275,7 +276,7 @@ Source runtime canonique : `data/music-theory/tonality-colors.json`.
 
 Règle : la **tonique** choisit la famille de couleur ; le **mode** choisit la variante. Un accord ou une gamme majeur(e) utilise la couleur **Majeur** correspondante, un accord ou une gamme mineur(e) utilise la couleur **Mineur** correspondante. La couleur **Base** est conservée comme identité neutre / réserve pour les usages futurs.
 
-Les renderers d'accords et de gammes doivent consommer cette source et appliquer une couleur unique tonique/mode à toutes les touches actives, blanches ou noires. Aucune couleur fixe ne doit être choisie selon le type physique de touche.
+Les renderers d'accords et de gammes doivent consommer cette source et appliquer une couleur unique tonique/mode à toutes les touches actives, blanches ou noires. Aucune couleur fixe ne doit être choisie selon le type physique de touche. La hiérarchie commune est définie dans `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`; les tests de renderer doivent également dériver leurs couleurs attendues du JSON et ne pas figer de valeur hexadécimale active.
 
 ### 4.4 Théorie musicale
 
