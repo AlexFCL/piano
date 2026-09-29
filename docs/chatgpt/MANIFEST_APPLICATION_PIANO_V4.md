@@ -22,7 +22,7 @@
 | `PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md` | CANONIQUE | Routage rapide | Déposer / garder |
 | `PALETTE_TONALITES_ACCORDS_GAMMES_V1.md` | CANONIQUE | Référence fonctionnelle de la palette tonique/mode | Déposer / garder |
 | `RENDERERS_SOURCE_OF_TRUTH_V1.md` | CANONIQUE PRIORITAIRE | Hiérarchie commune des sources pour tous les renderers ; impose le JSON runtime comme autorité colorimétrique | Déposer / garder |
-| `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` | RÉFÉRENCE NON COLORIMÉTRIQUE | Doctrine de géométrie/mapping/validation ; ne jamais utiliser comme source de couleur | Garder uniquement pour les règles non colorimétriques |
+| `SOURCE_IMAGES_GAMMES_PIANO_V1.8.md` | RÉFÉRENCE NON COLORIMÉTRIQUE | Doctrine de géométrie/mapping/validation ; ne jamais utiliser comme source de couleur | Garder uniquement pour les règles non colorimétriques |
 | `piano_corrector_v1.zip` | BACKUP HISTORIQUE | Snapshot d'un ancien renderer ; ne jamais l'utiliser comme autorité de couleur ni comme moteur courant | Garder hors GitHub uniquement comme récupération |
 
 `RENDERERS_SOURCE_OF_TRUTH_V1.md` et `data/music-theory/tonality-colors.json` constituent le **socle prioritaire pour tout rendu**. Les trois V4 restent le socle général ChatGPT. Le renderer n’est plus dépendant d’une pièce jointe : il est versionné dans GitHub. Les anciennes documentations peuvent rester présentes ; si elles sont retirées du contexte actif un jour, elles doivent auparavant être sauvegardées hors du projet.
@@ -49,7 +49,7 @@
 | Élément | SHA-256 vérifié | Statut | Décision |
 |---|---|---|---|
 | `piano_corrector_v1(1).zip` | `e2df9057692f550ff936c9f2d2a45d231476cfcde1ede9fe4c233d69a38f9cfd` | BACKUP | Conserver comme snapshot historique ; le moteur canonique est maintenant dans GitHub |
-| `SOURCE_IMAGES_GAMMES_PIANO_V1.7.md` | `4b6590ffac2992405862aafff4b9f5d67acc4f055acf323b669283d8d70485c3` | HISTORIQUE / NON COLORIMÉTRIQUE | Garder seulement comme archive de doctrine ; la copie GitHub actuelle et le JSON runtime priment |
+| `SOURCE_IMAGES_GAMMES_PIANO_V1.8.md` | `4b6590ffac2992405862aafff4b9f5d67acc4f055acf323b669283d8d70485c3` | HISTORIQUE / NON COLORIMÉTRIQUE | Garder seulement comme archive de doctrine ; la copie GitHub actuelle et le JSON runtime priment |
 | `Template2(1).png` | `cbda5265b1be6893010e8da73e1b7ab0c25656984724687f2fd13f79f0fa41a9` | CANONIQUE POUR RENDERER | Garder ou conserver via `official_template.png` du correcteur |
 | `Template(1).png` | `4f395f36d61d0eb9e350db97081a24fc45a8fd3cf8dbd714a0e5bd94aba8f422` | NON DÉTERMINÉ / LEGACY | Conserver |
 | `BACKUP_APPLICATION_PIANO_2026-09-23.zip` | `843c29ceeaa12111ac952e4f6dc8068bf081928d38ef72c1f695e5760371863a` | BACKUP | Conserver hors du contexte actif si possible |
