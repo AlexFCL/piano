@@ -1,28 +1,28 @@
 const scales = [
-    { label: 'C majeur', image: 'images/Scales/C-majeur.png' },
-    { label: 'Db majeur', image: 'images/Scales/Db-majeur.png' },
-    { label: 'D majeur', image: 'images/Scales/D-majeur.png' },
-    { label: 'Eb majeur', image: 'images/Scales/Eb-majeur.png' },
-    { label: 'E majeur', image: 'images/Scales/E-majeur.png' },
-    { label: 'F majeur', image: 'images/Scales/F-majeur.png' },
-    { label: 'F# majeur', image: 'images/Scales/Fd-majeur.png' },
-    { label: 'G majeur', image: 'images/Scales/G-majeur.png' },
-    { label: 'Ab majeur', image: 'images/Scales/Ab-majeur.png' },
-    { label: 'A majeur', image: 'images/Scales/A-majeur.png' },
-    { label: 'Bb majeur', image: 'images/Scales/Bb-majeur.png' },
-    { label: 'B majeur', image: 'images/Scales/B-majeur.png' },
-    { label: 'C mineure naturelle', image: 'images/Scales/C-mineur-naturel.png' },
-    { label: 'C# mineure naturelle', image: 'images/Scales/Cd-mineur-naturel.png' },
-    { label: 'D mineure naturelle', image: 'images/Scales/D-mineur-naturel.png' },
-    { label: 'Eb mineure naturelle', image: 'images/Scales/Eb-mineur-naturel.png' },
-    { label: 'E mineure naturelle', image: 'images/Scales/E-mineur-naturel.png' },
-    { label: 'F mineure naturelle', image: 'images/Scales/F-mineur-naturel.png' },
-    { label: 'F# mineure naturelle', image: 'images/Scales/Fd-mineur-naturel.png' },
-    { label: 'G mineure naturelle', image: 'images/Scales/G-mineur-naturel.png' },
-    { label: 'G# mineure naturelle', image: 'images/Scales/Gd-mineur-naturel.png' },
-    { label: 'A mineure naturelle', image: 'images/Scales/A-mineur-naturel.png' },
-    { label: 'Bb mineure naturelle', image: 'images/Scales/Bb-mineur-naturel.png' },
-    { label: 'B mineure naturelle', image: 'images/Scales/B-mineur-naturel.png' }
+    { root: 'C', type: 'major', label: 'C majeur', image: 'images/Scales/C-majeur.png' },
+    { root: 'Db', type: 'major', label: 'Db majeur', image: 'images/Scales/Db-majeur.png' },
+    { root: 'D', type: 'major', label: 'D majeur', image: 'images/Scales/D-majeur.png' },
+    { root: 'Eb', type: 'major', label: 'Eb majeur', image: 'images/Scales/Eb-majeur.png' },
+    { root: 'E', type: 'major', label: 'E majeur', image: 'images/Scales/E-majeur.png' },
+    { root: 'F', type: 'major', label: 'F majeur', image: 'images/Scales/F-majeur.png' },
+    { root: 'F#', type: 'major', label: 'F# majeur', image: 'images/Scales/Fd-majeur.png' },
+    { root: 'G', type: 'major', label: 'G majeur', image: 'images/Scales/G-majeur.png' },
+    { root: 'Ab', type: 'major', label: 'Ab majeur', image: 'images/Scales/Ab-majeur.png' },
+    { root: 'A', type: 'major', label: 'A majeur', image: 'images/Scales/A-majeur.png' },
+    { root: 'Bb', type: 'major', label: 'Bb majeur', image: 'images/Scales/Bb-majeur.png' },
+    { root: 'B', type: 'major', label: 'B majeur', image: 'images/Scales/B-majeur.png' },
+    { root: 'C', type: 'minor', label: 'C mineure naturelle', image: 'images/Scales/C-mineur-naturel.png' },
+    { root: 'C#', type: 'minor', label: 'C# mineure naturelle', image: 'images/Scales/Cd-mineur-naturel.png' },
+    { root: 'D', type: 'minor', label: 'D mineure naturelle', image: 'images/Scales/D-mineur-naturel.png' },
+    { root: 'Eb', type: 'minor', label: 'Eb mineure naturelle', image: 'images/Scales/Eb-mineur-naturel.png' },
+    { root: 'E', type: 'minor', label: 'E mineure naturelle', image: 'images/Scales/E-mineur-naturel.png' },
+    { root: 'F', type: 'minor', label: 'F mineure naturelle', image: 'images/Scales/F-mineur-naturel.png' },
+    { root: 'F#', type: 'minor', label: 'F# mineure naturelle', image: 'images/Scales/Fd-mineur-naturel.png' },
+    { root: 'G', type: 'minor', label: 'G mineure naturelle', image: 'images/Scales/G-mineur-naturel.png' },
+    { root: 'G#', type: 'minor', label: 'G# mineure naturelle', image: 'images/Scales/Gd-mineur-naturel.png' },
+    { root: 'A', type: 'minor', label: 'A mineure naturelle', image: 'images/Scales/A-mineur-naturel.png' },
+    { root: 'Bb', type: 'minor', label: 'Bb mineure naturelle', image: 'images/Scales/Bb-mineur-naturel.png' },
+    { root: 'B', type: 'minor', label: 'B mineure naturelle', image: 'images/Scales/B-mineur-naturel.png' }
 ];
 
 const answerDuration = 3000;
@@ -37,11 +37,13 @@ const scaleImage = document.getElementById('scale-image');
 const imageError = document.getElementById('image-error');
 const updateTimeInput = document.getElementById('scale-update-time');
 const controlsHint = document.getElementById('scale-controls-hint');
-const filterButtons = [...document.querySelectorAll('[data-scale-filter]')];
+const typeButtons = [...document.querySelectorAll('[data-scale-filter]')];
+const rootButtons = [...document.querySelectorAll('[data-scale-root]')];
 
 let previousImage = '';
 let revealTimer;
 let nextTimer;
+let selectionEmpty = false;
 
 updateTimeInput.value = String(updateTime);
 
@@ -68,9 +70,61 @@ function setButtonState(button, isActive) {
     button.setAttribute('aria-pressed', String(isActive));
 }
 
-filterButtons.forEach((button) => {
+function getActiveTypes() {
+    return typeButtons
+        .filter((button) => button.classList.contains('is-active'))
+        .map((button) => button.dataset.scaleFilter);
+}
+
+function getActiveRoots() {
+    const values = rootButtons
+        .filter((button) => button.classList.contains('is-active'))
+        .map((button) => button.dataset.scaleRoot);
+
+    return values.includes('all') ? null : values;
+}
+
+function buildPool() {
+    const activeTypes = getActiveTypes();
+    const activeRoots = getActiveRoots();
+
+    return scales.filter((scale) =>
+        activeTypes.includes(scale.type) &&
+        (activeRoots === null || activeRoots.includes(scale.root))
+    );
+}
+
+function showEmptySelection() {
+    clearTimeout(revealTimer);
+    clearTimeout(nextTimer);
+    selectionEmpty = true;
+    previousImage = '';
+
+    scaleName.textContent = 'Aucune gamme disponible';
+    phaseLabel.textContent = 'Modifie les filtres';
+    scaleImage.hidden = true;
+    scaleImage.removeAttribute('src');
+    imageError.hidden = true;
+    controlsHint.textContent = 'Cette combinaison de tonique et de type de gamme n’existe pas dans les gammes disponibles.';
+}
+
+function applySelectionChange(message) {
+    if (buildPool().length === 0) {
+        showEmptySelection();
+        return;
+    }
+
+    controlsHint.textContent = message;
+
+    if (selectionEmpty) {
+        selectionEmpty = false;
+        startRound();
+    }
+}
+
+typeButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        const activeButtons = filterButtons.filter((candidate) => candidate.classList.contains('is-active'));
+        const activeButtons = typeButtons.filter((candidate) => candidate.classList.contains('is-active'));
 
         if (button.classList.contains('is-active') && activeButtons.length === 1) {
             controlsHint.textContent = 'Garde au moins un type de gamme actif.';
@@ -78,27 +132,43 @@ filterButtons.forEach((button) => {
         }
 
         setButtonState(button, !button.classList.contains('is-active'));
-        controlsHint.textContent = 'Sélection mise à jour. Elle s’appliquera à la prochaine gamme.';
+        applySelectionChange('Sélection mise à jour. Elle s’appliquera à la prochaine gamme.');
+    });
+});
+
+rootButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const allButton = rootButtons.find((candidate) => candidate.dataset.scaleRoot === 'all');
+
+        if (button.dataset.scaleRoot === 'all') {
+            rootButtons.forEach((candidate) => setButtonState(candidate, candidate === allButton));
+            applySelectionChange('Toutes les toniques sont actives. Le changement s’appliquera à la prochaine gamme.');
+            return;
+        }
+
+        if (allButton && allButton.classList.contains('is-active')) {
+            setButtonState(allButton, false);
+            setButtonState(button, true);
+            applySelectionChange(`Tonique ${button.dataset.scaleRoot} sélectionnée. Le changement s’appliquera à la prochaine gamme.`);
+            return;
+        }
+
+        const activeRoots = rootButtons.filter(
+            (candidate) => candidate.dataset.scaleRoot !== 'all' && candidate.classList.contains('is-active')
+        );
+
+        if (button.classList.contains('is-active') && activeRoots.length === 1) {
+            controlsHint.textContent = 'Garde au moins une tonique active, ou choisis « Toutes ».';
+            return;
+        }
+
+        setButtonState(button, !button.classList.contains('is-active'));
+        applySelectionChange('Sélection des toniques mise à jour. Elle s’appliquera à la prochaine gamme.');
     });
 });
 
 updateTimeInput.addEventListener('input', syncUpdateTime);
 updateTimeInput.addEventListener('change', syncUpdateTime);
-
-function getActiveTypes() {
-    return filterButtons
-        .filter((button) => button.classList.contains('is-active'))
-        .map((button) => button.dataset.scaleFilter);
-}
-
-function getScaleType(scale) {
-    return scale.label.includes('mineure naturelle') ? 'minor' : 'major';
-}
-
-function buildPool() {
-    const activeTypes = getActiveTypes();
-    return scales.filter((scale) => activeTypes.includes(getScaleType(scale)));
-}
 
 function chooseScale() {
     const pool = buildPool();
@@ -124,8 +194,12 @@ function startRound() {
     clearTimeout(nextTimer);
 
     const scale = chooseScale();
-    if (!scale) return;
+    if (!scale) {
+        showEmptySelection();
+        return;
+    }
 
+    selectionEmpty = false;
     const roundDelay = updateTime;
 
     scaleName.textContent = scale.label;
