@@ -173,6 +173,10 @@ a {
     min-width: 0;
 }
 
+.filter-group--roots {
+    grid-column: 1 / -1;
+}
+
 .filter-label {
     display: block;
     margin: 0 0 9px;
@@ -191,6 +195,10 @@ a {
 
 .filter-buttons--three {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.filter-buttons--roots {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .filter-button {
@@ -403,6 +411,10 @@ a {
 
     .filter-buttons--three {
         grid-template-columns: 1fr;
+    }
+
+    .filter-buttons--roots {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .filter-button {
