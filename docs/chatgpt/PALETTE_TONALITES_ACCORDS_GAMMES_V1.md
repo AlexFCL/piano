@@ -60,3 +60,28 @@ Tous les renderers actuels et futurs doivent suivre `docs/chatgpt/RENDERERS_SOUR
 ## 5. Règle de rendu
 
 Lorsqu'un renderer adopte cette palette, toutes les touches actives d'un même accord ou d'une même gamme utilisent la **même couleur tonique/mode**, quelle que soit la nature blanche ou noire de la touche. Les libellés de notes restent blancs.
+
+
+## 6. Extension mnémotechnique — accords maj7
+
+**Décision fonctionnelle du 01/10/2026.**
+
+Pour un accord **maj7 en position fondamentale**, les quatre notes sont :
+`fondamentale – tierce majeure – quinte juste – septième majeure`.
+
+Règle visuelle spécifique :
+- la **fondamentale** utilise la variante `base` de sa tonique dans `data/music-theory/tonality-colors.json` ;
+- les **trois autres notes** utilisent ensemble la variante `minor` de la **tierce majeure**, car ces trois notes forment le triade mineur construit sur cette tierce.
+
+Exemple :
+- `Cmaj7 = C E G B` ;
+- `C` → `base` de C ;
+- `E G B` → `minor` de E, car `E G B = E mineur`.
+
+Cette règle est une **exception mnémotechnique explicitement documentée** à la règle historique « une couleur unique par accord ». Elle ne modifie pas rétroactivement les PNG de triades majeures/mineures existants.
+
+Les deux couleurs doivent toujours être résolues depuis le JSON canonique ; aucune valeur hexadécimale ne doit être figée dans un nouveau renderer.
+
+Le rendu reste déterministe, dérivé du template officiel 711×254, avec placement au plus près du centre permis par les deux octaves du template.
+
+La règle visuelle des **accords min7** n'est pas encore spécifiée dans cette version : ne pas l'inventer.

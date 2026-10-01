@@ -9,6 +9,21 @@ Ce fichier doit permettre à une future conversation de retrouver immédiatement
 - Stack : HTML / CSS / JavaScript statique
 - État réel du code : GitHub
 
+## RÈGLE ZÉRO — routage obligatoire avant toute réponse sur un asset
+
+Pour toute demande contenant ou impliquant **accord, gamme, image piano, couleur, palette, fondamentale, Base, Majeur, Mineur, maj7, min7, renderer ou template** :
+
+1. **ne pas répondre depuis la seule mémoire du chat** ;
+2. ouvrir ce pointeur puis vérifier l'état courant de `AlexFCL/piano` / `master` ;
+3. lire **avant de demander quoi que ce soit à l'utilisateur** :
+   - `data/music-theory/tonality-colors.json` ;
+   - `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md` ;
+   - le renderer canonique concerné ;
+4. ne conclure qu'une règle/couleur est « absente » qu'après cette vérification ;
+5. si une qualité d'accord nouvelle n'est pas encore implémentée, **étendre le pipeline déterministe** plutôt que basculer vers une génération visuelle libre.
+
+But explicite : une information déjà capitalisée dans le projet ne doit jamais être redemandée à l'utilisateur parce qu'elle n'était pas visible dans le fil courant.
+
 ## Première lecture
 1. `docs/chatgpt/PLAYBOOK_CHATGPT_APPLICATION_PIANO_V4.md`
 2. `docs/chatgpt/APPLICATION_PIANO_MASTER_V4.md` si davantage de contexte est nécessaire

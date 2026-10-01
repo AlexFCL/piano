@@ -9,9 +9,11 @@ Si le contexte est incomplet, lire d’abord `AlexFCL/piano/CHATGPT_PROJECT_POIN
 
 1. Identifier le domaine : accueil/UI, accords, gammes fonctionnelles, images de gammes, théorie, basse/rythme, infrastructure/documentation.
 2. Si la demande concerne l'état courant ou une modification : **vérifier GitHub live**.
-3. Si la demande concerne les PNG de gammes : **ouvrir GitHub `tools/piano_scale_renderer/` ; c’est le renderer canonique.**
-4. Ne jamais extrapoler l'architecture d'un autre projet.
-5. Ne jamais recommander une suppression sans le protocole de sécurité.
+3. Si la demande concerne **un PNG d'accord ou de gamme, une couleur, la palette, Base/Majeur/Mineur, maj7/min7, un renderer ou un template** : ouvrir d'abord `CHATGPT_PROJECT_POINTER.md`, puis `data/music-theory/tonality-colors.json` et `docs/chatgpt/RENDERERS_SOURCE_OF_TRUTH_V1.md`, avant toute question à l'utilisateur.
+4. Si la demande concerne les PNG de gammes : ouvrir ensuite GitHub `tools/piano_scale_renderer/` ; c’est le renderer canonique.
+5. Si la demande concerne les PNG d'accords : ouvrir ensuite GitHub `tools/piano_chord_renderer/`.
+6. Ne jamais extrapoler l'architecture d'un autre projet.
+7. Ne jamais recommander une suppression sans le protocole de sécurité.
 
 ### Politique de mutation GitHub
 

@@ -21,8 +21,10 @@ Si `data/music-theory/tonality-colors.json` est absent, illisible ou inaccessibl
 
 ## 2. Règle colorimétrique commune
 
-- La couleur active est résolue exclusivement à partir de la **tonique** et du **mode** via `tonality-colors.json`.
-- Toutes les touches actives d'un même accord ou d'une même gamme utilisent la même couleur tonique/mode, quelle que soit leur nature physique.
+- Toute couleur active est résolue exclusivement depuis `tonality-colors.json`.
+- **Règle par défaut** : toutes les touches actives d'un même accord ou d'une même gamme utilisent la même couleur tonique/mode, quelle que soit leur nature physique.
+- **Exception documentée maj7 (01/10/2026)** : fondamentale = variante `base` de la tonique ; tierce, quinte et septième = variante `minor` de la tierce majeure, conformément à `PALETTE_TONALITES_ACCORDS_GAMMES_V1.md`.
+- Toute autre exception multicolore doit être explicitement spécifiée avant implémentation ; ne jamais l'inférer.
 - Les renderers ne doivent définir aucune couleur active statique dépendant du type de touche.
 - Les libellés restent blancs.
 - Une valeur recopiée dans un README, un test, un snapshot ou un ancien document ne devient jamais une source runtime.
