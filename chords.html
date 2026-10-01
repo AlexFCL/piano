@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercices — Générateur d'accords</title>
-    <link rel="stylesheet" href="css/chords_styles.css?v=20261001-roots">
+    <link rel="stylesheet" href="css/chords_styles.css?v=20261001-layout2">
 </head>
 <body>
     <div class="app-shell">
@@ -38,6 +38,15 @@
                     </div>
                 </div>
 
+                <div class="filter-group filter-group--wide">
+                    <span class="filter-label">Position</span>
+                    <div class="filter-buttons filter-buttons--three" role="group" aria-label="Positions de l'accord">
+                        <button class="filter-button is-active" type="button" data-filter-group="inversion" data-value="fond" aria-pressed="true">Fondamental</button>
+                        <button class="filter-button is-active" type="button" data-filter-group="inversion" data-value="1er" aria-pressed="true">1er renversement</button>
+                        <button class="filter-button is-active" type="button" data-filter-group="inversion" data-value="2eme" aria-pressed="true">2e renversement</button>
+                    </div>
+                </div>
+
                 <div class="filter-group filter-group--roots">
                     <span class="filter-label">Fondamentale</span>
                     <div class="filter-buttons filter-buttons--roots" role="group" aria-label="Fondamentales de l'accord">
@@ -59,15 +68,6 @@
                         <button class="filter-button" type="button" data-filter-group="root" data-value="A#" aria-pressed="false">A#</button>
                         <button class="filter-button" type="button" data-filter-group="root" data-value="Bb" aria-pressed="false">Bb</button>
                         <button class="filter-button" type="button" data-filter-group="root" data-value="B" aria-pressed="false">B</button>
-                    </div>
-                </div>
-
-                <div class="filter-group filter-group--wide">
-                    <span class="filter-label">Position</span>
-                    <div class="filter-buttons filter-buttons--three" role="group" aria-label="Positions de l'accord">
-                        <button class="filter-button is-active" type="button" data-filter-group="inversion" data-value="fond" aria-pressed="true">Fondamental</button>
-                        <button class="filter-button is-active" type="button" data-filter-group="inversion" data-value="1er" aria-pressed="true">1er renversement</button>
-                        <button class="filter-button is-active" type="button" data-filter-group="inversion" data-value="2eme" aria-pressed="true">2e renversement</button>
                     </div>
                 </div>
 
