@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercices — Entraînement aux gammes</title>
-    <link rel="stylesheet" href="css/scales_styles.css?v=20260928-2359">
+    <link rel="stylesheet" href="css/scales_styles.css?v=20261001-roots">
 </head>
 <body class="training-page">
     <div class="app-shell training-shell">
@@ -33,11 +33,32 @@
             </div>
 
             <section class="filter-panel" aria-label="Sélection des gammes">
-                <div class="filter-group">
+                <div class="filter-group filter-group--type">
                     <span class="filter-label">Type de gamme</span>
                     <div class="filter-buttons" role="group" aria-label="Types de gammes">
                         <button class="filter-button is-active" type="button" data-scale-filter="major" aria-pressed="true">Majeur</button>
                         <button class="filter-button is-active" type="button" data-scale-filter="minor" aria-pressed="true">Mineur</button>
+                    </div>
+                </div>
+
+                <div class="filter-group filter-group--roots">
+                    <span class="filter-label">Tonique</span>
+                    <div class="filter-buttons filter-buttons--roots" role="group" aria-label="Toniques des gammes">
+                        <button class="filter-button is-active" type="button" data-scale-root="all" aria-pressed="true">Toutes</button>
+                        <button class="filter-button" type="button" data-scale-root="C" aria-pressed="false">C</button>
+                        <button class="filter-button" type="button" data-scale-root="C#" aria-pressed="false">C#</button>
+                        <button class="filter-button" type="button" data-scale-root="Db" aria-pressed="false">Db</button>
+                        <button class="filter-button" type="button" data-scale-root="D" aria-pressed="false">D</button>
+                        <button class="filter-button" type="button" data-scale-root="Eb" aria-pressed="false">Eb</button>
+                        <button class="filter-button" type="button" data-scale-root="E" aria-pressed="false">E</button>
+                        <button class="filter-button" type="button" data-scale-root="F" aria-pressed="false">F</button>
+                        <button class="filter-button" type="button" data-scale-root="F#" aria-pressed="false">F#</button>
+                        <button class="filter-button" type="button" data-scale-root="G" aria-pressed="false">G</button>
+                        <button class="filter-button" type="button" data-scale-root="G#" aria-pressed="false">G#</button>
+                        <button class="filter-button" type="button" data-scale-root="Ab" aria-pressed="false">Ab</button>
+                        <button class="filter-button" type="button" data-scale-root="A" aria-pressed="false">A</button>
+                        <button class="filter-button" type="button" data-scale-root="Bb" aria-pressed="false">Bb</button>
+                        <button class="filter-button" type="button" data-scale-root="B" aria-pressed="false">B</button>
                     </div>
                 </div>
 
@@ -62,6 +83,6 @@
         </main>
     </div>
 
-    <script src="js/scales_script.js?v=20260928-2357"></script>
+    <script src="js/scales_script.js?v=20261001-roots"></script>
 </body>
 </html>
