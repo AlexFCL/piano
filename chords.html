@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercices — Générateur d'accords</title>
-    <link rel="stylesheet" href="css/chords_styles.css?v=20260928-2351">
+    <link rel="stylesheet" href="css/chords_styles.css?v=20261001-roots">
 </head>
 <body>
     <div class="app-shell">
@@ -35,6 +35,30 @@
                     <div class="filter-buttons" role="group" aria-label="Types d'accords">
                         <button class="filter-button is-active" type="button" data-filter-group="quality" data-value="majeur" aria-pressed="true">Majeur</button>
                         <button class="filter-button is-active" type="button" data-filter-group="quality" data-value="mineur" aria-pressed="true">Mineur</button>
+                    </div>
+                </div>
+
+                <div class="filter-group filter-group--roots">
+                    <span class="filter-label">Fondamentale</span>
+                    <div class="filter-buttons filter-buttons--roots" role="group" aria-label="Fondamentales de l'accord">
+                        <button class="filter-button is-active" type="button" data-filter-group="root" data-value="all" aria-pressed="true">Toutes</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="C" aria-pressed="false">C</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="C#" aria-pressed="false">C#</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="Db" aria-pressed="false">Db</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="D" aria-pressed="false">D</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="D#" aria-pressed="false">D#</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="Eb" aria-pressed="false">Eb</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="E" aria-pressed="false">E</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="F" aria-pressed="false">F</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="F#" aria-pressed="false">F#</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="Gb" aria-pressed="false">Gb</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="G" aria-pressed="false">G</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="G#" aria-pressed="false">G#</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="Ab" aria-pressed="false">Ab</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="A" aria-pressed="false">A</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="A#" aria-pressed="false">A#</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="Bb" aria-pressed="false">Bb</button>
+                        <button class="filter-button" type="button" data-filter-group="root" data-value="B" aria-pressed="false">B</button>
                     </div>
                 </div>
 
@@ -72,6 +96,6 @@
         </main>
     </div>
 
-    <script src="js/chords_script.js?v=20260928-2348"></script>
+    <script src="js/chords_script.js?v=20261001-roots"></script>
 </body>
 </html>
