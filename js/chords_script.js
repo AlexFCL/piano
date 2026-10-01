@@ -78,9 +78,39 @@ function setButtonState(button, isActive) {
 filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const group = button.dataset.filterGroup;
-        const activeInGroup = filterButtons.filter(
-            (candidate) => candidate.dataset.filterGroup === group && candidate.classList.contains("is-active")
+        const buttonsInGroup = filterButtons.filter(
+            (candidate) => candidate.dataset.filterGroup === group
         );
+        const activeInGroup = buttonsInGroup.filter(
+            (candidate) => candidate.classList.contains("is-active")
+        );
+
+        if (group === "root") {
+            const allButton = buttonsInGroup.find((candidate) => candidate.dataset.value === "all");
+
+            if (button.dataset.value === "all") {
+                buttonsInGroup.forEach((candidate) => setButtonState(candidate, candidate === allButton));
+                controlsHint.textContent = "Toutes les fondamentales sont actives. Le changement s'appliquera au prochain accord.";
+                return;
+            }
+
+            if (allButton && allButton.classList.contains("is-active")) {
+                setButtonState(allButton, false);
+                setButtonState(button, true);
+                controlsHint.textContent = "Fondamentale " + button.dataset.value + " sélectionnée. Le changement s'appliquera au prochain accord.";
+                return;
+            }
+
+            const activeRoots = activeInGroup.filter((candidate) => candidate.dataset.value !== "all");
+            if (button.classList.contains("is-active") && activeRoots.length === 1) {
+                controlsHint.textContent = "Garde au moins une fondamentale active, ou choisis « Toutes ».";
+                return;
+            }
+
+            setButtonState(button, !button.classList.contains("is-active"));
+            controlsHint.textContent = "Sélection des fondamentales mise à jour. Elle s'appliquera au prochain accord.";
+            return;
+        }
 
         if (button.classList.contains("is-active") && activeInGroup.length === 1) {
             controlsHint.textContent = "Garde au moins une option active dans chaque catégorie.";
@@ -96,10 +126,12 @@ updateTimeInput.addEventListener("input", syncUpdateTime);
 updateTimeInput.addEventListener("change", syncUpdateTime);
 
 function buildPool() {
+    const activeRootFilters = getActiveValues("root");
+    const activeRoots = activeRootFilters.includes("all") ? roots : activeRootFilters;
     const activeQualities = getActiveValues("quality");
     const activeInversions = getActiveValues("inversion");
 
-    return roots.flatMap((root) =>
+    return activeRoots.flatMap((root) =>
         activeQualities.flatMap((quality) =>
             activeInversions.map((inversion) => ({
                 root,
